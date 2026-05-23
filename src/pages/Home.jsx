@@ -69,23 +69,23 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-950">
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+      <section className="pt-36 pb-24 px-4 sm:px-6 lg:px-12">
         <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 mb-6">
+          <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 dark:text-white mb-6">
             5G NR PRACH Tahlil Tizimi
           </h1>
-          <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto">
             Preambula asosidagi tasodifiy kirish usullarini hisoblash va vizualizatsiya
           </p>
         </div>
       </section>
 
       {/* Statistics Row */}
-      <section className="bg-blue-50 py-12 px-4 sm:px-6 lg:px-8 mb-20">
+      <section className="bg-blue-50 dark:bg-gray-900 py-16 px-4 sm:px-6 lg:px-12 mb-24">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
             {statistics.map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-3xl font-bold text-blue-600 mb-2">
@@ -99,12 +99,12 @@ export default function Home() {
       </section>
 
       {/* Feature Cards */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-24 px-4 sm:px-6 lg:px-12">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-gray-900 mb-16">
+          <h2 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-20">
             Xususiyatlar
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12">
             {features.map((feature) => {
               const Icon = feature.icon;
               return (
@@ -133,7 +133,7 @@ export default function Home() {
       </section>
 
       {/* Zadoff-Chu Sequence Visualizer */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <section className="py-24 px-4 sm:px-6 lg:px-12 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <ZCSequenceVisualizer />
         </div>

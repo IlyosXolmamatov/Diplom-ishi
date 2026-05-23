@@ -216,10 +216,10 @@ export default function Comparison() {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-950">
+    <div className="min-h-screen pt-24 pb-24 px-4 sm:px-6 lg:px-12 bg-gray-50 dark:bg-gray-950">
       <div className="max-w-7xl mx-auto">
         {/* Page Title */}
-        <div className="mb-8 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+        <div className="mb-12 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
           <div>
             <h1 className="text-4xl font-bold text-gray-900 mb-2">
               Barcha RA Usullarining Taqqoslash Dashboardi
@@ -239,7 +239,7 @@ export default function Comparison() {
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-12">
           {summaryCards.map((card, idx) => (
             <div
               key={idx}
@@ -253,7 +253,7 @@ export default function Comparison() {
         </div>
 
         {/* Main Comparison Table */}
-        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-8 overflow-x-auto">
+        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-12 overflow-x-auto">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">Keng Taqqoslash Jadval</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -347,7 +347,7 @@ export default function Comparison() {
         </div>
 
         {/* Improvement Coefficients */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border-2 border-blue-300 p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Taraqqiyot Koeffitsientlari</h3>
             <div className="space-y-3 text-sm">

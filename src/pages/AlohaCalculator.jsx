@@ -68,10 +68,10 @@ export default function AlohaCalculator() {
   );
 
   return (
-    <div className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-950">
+    <div className="min-h-screen pt-24 pb-24 px-4 sm:px-6 lg:px-12 bg-gray-50 dark:bg-gray-950">
       <div className="max-w-7xl mx-auto">
         {/* Page Title */}
-        <div className="mb-8">
+        <div className="mb-12">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
             ALOHA Kalkulyator
           </h1>
@@ -81,7 +81,7 @@ export default function AlohaCalculator() {
         </div>
 
         {/* Control Panel */}
-        <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-8 mb-8">
+        <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-8 mb-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Slider */}
             <div>

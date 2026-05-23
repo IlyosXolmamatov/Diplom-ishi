@@ -44,20 +44,20 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <div className="flex-shrink-0">
-            <div className="text-xl font-bold text-blue-600">
+          <div className="shrink-0">
+            <div className="text-2xl font-bold text-blue-600">
               5G PRACH Analyzer
             </div>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="desktop-nav" style={{ gap: '3rem' }}>
             <NavLink
               to="/"
               className={({ isActive }) =>
-                `px-3 py-2 text-sm font-medium transition-colors ${
+                `px-4 py-3 text-sm font-medium transition-colors ${
                   isActive
                     ? 'text-blue-600 border-b-2 border-blue-600 dark:text-blue-400'
                     : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
@@ -69,7 +69,7 @@ export default function Navbar() {
             <NavLink
               to="/aloha"
               className={({ isActive }) =>
-                `px-3 py-2 text-sm font-medium transition-colors ${
+                `px-4 py-3 text-sm font-medium transition-colors ${
                   isActive
                     ? 'text-blue-600 border-b-2 border-blue-600 dark:text-blue-400'
                     : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
@@ -81,7 +81,7 @@ export default function Navbar() {
             <NavLink
               to="/prach"
               className={({ isActive }) =>
-                `px-3 py-2 text-sm font-medium transition-colors ${
+                `px-4 py-3 text-sm font-medium transition-colors ${
                   isActive
                     ? 'text-blue-600 border-b-2 border-blue-600 dark:text-blue-400'
                     : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
@@ -93,7 +93,7 @@ export default function Navbar() {
             <NavLink
               to="/latency"
               className={({ isActive }) =>
-                `px-3 py-2 text-sm font-medium transition-colors ${
+                `px-4 py-3 text-sm font-medium transition-colors ${
                   isActive
                     ? 'text-blue-600 border-b-2 border-blue-600 dark:text-blue-400'
                     : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
@@ -105,7 +105,7 @@ export default function Navbar() {
             <NavLink
               to="/grantfree"
               className={({ isActive }) =>
-                `px-3 py-2 text-sm font-medium transition-colors ${
+                `px-4 py-3 text-sm font-medium transition-colors ${
                   isActive
                     ? 'text-blue-600 border-b-2 border-blue-600 dark:text-blue-400'
                     : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
@@ -117,7 +117,7 @@ export default function Navbar() {
             <NavLink
               to="/comparison"
               className={({ isActive }) =>
-                `px-3 py-2 text-sm font-medium transition-colors ${
+                `px-4 py-3 text-sm font-medium transition-colors ${
                   isActive
                     ? 'text-blue-600 border-b-2 border-blue-600 dark:text-blue-400'
                     : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
@@ -131,14 +131,14 @@ export default function Navbar() {
           {/* Dark Mode Toggle */}
           <button
             onClick={toggleDarkMode}
-            className="ml-4 p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            className="ml-6 p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
             title="Tungi rejim"
           >
             {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex gap-2 items-center">
+          <div className="mobile-menu" style={{ gap: '1rem', alignItems: 'center', marginLeft: '1.5rem' }}>
             <button
               onClick={toggleMenu}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 focus:outline-none"
@@ -146,6 +146,7 @@ export default function Navbar() {
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
+
         </div>
       </div>
 

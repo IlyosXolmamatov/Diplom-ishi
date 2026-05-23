@@ -16,5 +16,24 @@ body {
   min-height: 100vh;
 }
 
+/* Responsive navbar styles */
+@media (max-width: 767px) {
+  .desktop-nav {
+    display: none !important;
+  }
+  .mobile-menu {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .desktop-nav {
+    display: flex !important;
+  }
+  .mobile-menu {
+    display: none !important;
+  }
+}
+
 
 

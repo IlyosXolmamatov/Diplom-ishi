@@ -94,10 +94,10 @@ export default function LatencyCalculator() {
   }, [scs, prachPeriod, rarWindow, nMsg3, nCR, lambda, T_4step, T_2step, reduction_pct, addEntry]);
 
   return (
-    <div className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-950">
+    <div className="min-h-screen pt-24 pb-24 px-4 sm:px-6 lg:px-12 bg-gray-50 dark:bg-gray-950">
       <div className="max-w-7xl mx-auto">
         {/* Page Title */}
-        <div className="mb-8">
+        <div className="mb-12">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Kechikish va Muvaffaqiyat Tahlili</h1>
           <p className="text-lg text-gray-600 dark:text-gray-400 mb-3">
             4-step va 2-step RACH protseduralarini solishtirish

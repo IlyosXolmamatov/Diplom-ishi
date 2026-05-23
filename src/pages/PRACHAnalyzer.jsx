@@ -99,10 +99,10 @@ export default function PRACHAnalyzer() {
   }, [numUE, numPreamble, pAcb, collisionSelected, throughput, beta, addEntry]);
 
   return (
-    <div className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-950">
+    <div className="min-h-screen pt-24 pb-24 px-4 sm:px-6 lg:px-12 bg-gray-50 dark:bg-gray-950">
       <div className="max-w-7xl mx-auto">
         {/* Page Title */}
-        <div className="mb-8">
+        <div className="mb-12">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">PRACH Tahlil</h1>
           <p className="text-lg text-gray-600 mb-3">
             Kolliziya ehtimoli va otkazuvchanlik hisoblash
@@ -113,7 +113,7 @@ export default function PRACHAnalyzer() {
         </div>
 
         {/* Input Panel */}
-        <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-8 mb-8">
+        <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-8 mb-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* UE Count Input */}
             <div>
@@ -189,7 +189,7 @@ export default function PRACHAnalyzer() {
         </div>
 
         {/* Results Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           <div className="bg-white rounded-lg border border-gray-200 p-6">
             <h3 className="text-sm font-medium text-gray-600 mb-2">Kolliziya (N=64)</h3>
             <p className="text-4xl font-bold text-red-600">{collision64.toFixed(1)}%</p>

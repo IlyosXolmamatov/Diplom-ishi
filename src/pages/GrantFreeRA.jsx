@@ -131,10 +131,10 @@ export default function GrantFreeRA() {
   }, [scenario, numDevices, numRO, p_col_grantfree, energy_saving_pct, addEntry]);
 
   return (
-    <div className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-950">
+    <div className="min-h-screen pt-24 pb-24 px-4 sm:px-6 lg:px-12 bg-gray-50 dark:bg-gray-950">
       <div className="max-w-7xl mx-auto">
         {/* Page Title */}
-        <div className="mb-8">
+        <div className="mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-2">
             Grant-free RA — mMTC va IoT Ssenariylar
           </h1>
@@ -147,7 +147,7 @@ export default function GrantFreeRA() {
         </div>
 
         {/* Scenario Selector */}
-        <div className="mb-8">
+        <div className="mb-12">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">Ssenario tanlang</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {Object.entries(scenarioConfigs).map(([key, conf]) => {
@@ -172,7 +172,7 @@ export default function GrantFreeRA() {
         </div>
 
         {/* Scenario Info Card */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6 mb-8">
+        <div className="bg-white rounded-lg border border-gray-200 p-6 mb-12">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">Ssenario ma'lumotlari</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="bg-gray-50 rounded-lg p-4">
@@ -195,7 +195,7 @@ export default function GrantFreeRA() {
         </div>
 
         {/* Input Controls */}
-        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-8">
+        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-12">
           <h2 className="text-xl font-semibold text-gray-900 mb-6">Parametrlar</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Devices Slider */}
@@ -327,7 +327,7 @@ export default function GrantFreeRA() {
         </div>
 
         {/* Results Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <div className="bg-white rounded-lg border border-gray-200 p-6">
             <h3 className="text-sm font-medium text-gray-600 mb-2">λ per RO</h3>
             <p className="text-4xl font-bold text-blue-600">{lambdaPerRO}</p>
