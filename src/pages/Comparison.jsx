@@ -292,7 +292,7 @@ export default function Comparison() {
         </div>
 
         {/* Throughput Bar Chart */}
-        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-8">
+        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-12">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">Throughput Taqqoslash</h2>
           <ResponsiveContainer width="100%" height={250}>
             <BarChart data={throughputData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
@@ -309,7 +309,7 @@ export default function Comparison() {
         </div>
 
         {/* PRACH Degradation Chart */}
-        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-8">
+        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-12">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">
             PRACH Usullari Degradatsiyasi vs UE Soni
           </h2>
@@ -329,7 +329,7 @@ export default function Comparison() {
         </div>
 
         {/* Radar Chart */}
-        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-8">
+        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-12">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">Umumiy Qiyosiy Taqqoslash (Radar)</h2>
           <ResponsiveContainer width="100%" height={350}>
             <RadarChart data={radarData} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
@@ -390,7 +390,7 @@ export default function Comparison() {
         </div>
 
         {/* ML Detection Section */}
-        <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg border-2 border-indigo-300 p-8 mb-8">
+        <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg border-2 border-indigo-300 p-8 mb-12">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">
             ML asosidagi aniqlash taqqoslashi (Manba [1],[4])
           </h2>

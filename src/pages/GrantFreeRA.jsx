@@ -365,7 +365,7 @@ export default function GrantFreeRA() {
 
         {/* Satellite Section */}
         {scenario === 'satellite' && (
-          <div className="bg-white rounded-lg border border-orange-300 p-8 mb-8">
+          <div className="bg-white rounded-lg border border-orange-300 p-8 mb-12">
             <h2 className="text-2xl font-semibold text-gray-900 mb-6">Satellite NTN (Sun uchun)</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
