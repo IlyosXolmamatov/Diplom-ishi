@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import {
   LineChart,
   Line,
@@ -11,11 +11,14 @@ import {
   ReferenceLine,
   ReferenceDot,
 } from 'recharts';
+import useCalculationHistory from '../hooks/useCalculationHistory';
+import { FormulaButton } from '../components/FormulaModal';
 
 export default function PRACHAnalyzer() {
   const [numUE, setNumUE] = useState(100);
   const [numPreamble, setNumPreamble] = useState(64);
   const [pAcb, setPAcb] = useState(1.0);
+  const { addEntry } = useCalculationHistory();
 
   // Core calculation functions
   const calcCollision = (lambda, N) => {
@@ -84,12 +87,23 @@ export default function PRACHAnalyzer() {
     return 'OVERLOAD';
   };
 
+  // Save calculation to history with debounce
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      addEntry('PRACH Tahlil', 
+        { numUE, numPreamble, pAcb }, 
+        { collision: collisionSelected, throughput: parseFloat(throughput.toFixed(4)), beta: parseFloat(beta.toFixed(2)) }
+      );
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [numUE, numPreamble, pAcb, collisionSelected, throughput, beta, addEntry]);
+
   return (
-    <div className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <div className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-950">
       <div className="max-w-7xl mx-auto">
         {/* Page Title */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">PRACH Tahlil</h1>
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">PRACH Tahlil</h1>
           <p className="text-lg text-gray-600 mb-3">
             Kolliziya ehtimoli va otkazuvchanlik hisoblash
           </p>
@@ -99,11 +113,11 @@ export default function PRACHAnalyzer() {
         </div>
 
         {/* Input Panel */}
-        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-8">
+        <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-8 mb-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* UE Count Input */}
             <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
+              <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 UE soni (M)
               </label>
               <input
@@ -112,20 +126,20 @@ export default function PRACHAnalyzer() {
                 max="2000"
                 value={numUE}
                 onChange={(e) => setNumUE(Math.max(1, Math.min(2000, parseInt(e.target.value) || 1)))}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <p className="text-xs text-gray-500 mt-1">Min: 1, Max: 2000</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Min: 1, Max: 2000</p>
             </div>
 
             {/* Preamble Count Select */}
             <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
+              <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 Preambula soni (N)
               </label>
               <select
                 value={numPreamble}
                 onChange={(e) => setNumPreamble(parseInt(e.target.value))}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value={64}>64</option>
                 <option value={128}>128</option>
@@ -136,7 +150,7 @@ export default function PRACHAnalyzer() {
 
             {/* pAcb Slider */}
             <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
+              <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 ACB ehtimoli: {pAcb.toFixed(2)}
               </label>
               <input
@@ -146,9 +160,9 @@ export default function PRACHAnalyzer() {
                 step="0.01"
                 value={pAcb}
                 onChange={(e) => setPAcb(parseFloat(e.target.value))}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-600"
               />
-              <p className="text-xs text-gray-500 mt-1">0.01 - 1.0</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">0.01 - 1.0</p>
             </div>
 
             {/* Calculated Metrics */}
@@ -514,19 +528,23 @@ export default function PRACHAnalyzer() {
         </div>
 
         {/* Original Explanation */}
-        <div className="bg-blue-50 rounded-lg border border-blue-200 p-8">
-          <h3 className="text-xl font-semibold text-gray-900 mb-4">Formulalar</h3>
+        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800 p-8">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Formulalar</h3>
+            <FormulaButton formulaKey="collision" />
+            <FormulaButton formulaKey="throughput" />
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <p className="text-sm font-semibold text-gray-900 mb-2">Kolliziya ehtimoli:</p>
-              <p className="font-mono text-gray-700">P<sub>c</sub> = 1 - e<sup>-M/N</sup></p>
+              <p className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Kolliziya ehtimoli:</p>
+              <p className="font-mono text-gray-700 dark:text-gray-300">P<sub>c</sub> = 1 - e<sup>-M/N</sup></p>
             </div>
             <div>
-              <p className="text-sm font-semibold text-gray-900 mb-2">Normalangan otkazuvchanlik:</p>
-              <p className="font-mono text-gray-700">S = ρ × e<sup>-ρ</sup>, ρ = M/N</p>
+              <p className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Normalangan otkazuvchanlik:</p>
+              <p className="font-mono text-gray-700 dark:text-gray-300">S = ρ × e<sup>-ρ</sup>, ρ = M/N</p>
             </div>
           </div>
-          <p className="text-sm text-gray-600 mt-4">
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">
             <span className="font-semibold">Izoh:</span> M — UE soni, N — preambula soni
           </p>
         </div>

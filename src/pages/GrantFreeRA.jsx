@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import {
   BarChart,
   Bar,
@@ -10,11 +10,15 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { Zap, Radio, Smartphone, Satellite } from 'lucide-react';
+import BurstTrafficSimulator from '../components/BurstTrafficSimulator';
+import useCalculationHistory from '../hooks/useCalculationHistory';
+import { FormulaButton } from '../components/FormulaModal';
 
 export default function GrantFreeRA() {
   const [scenario, setScenario] = useState('smart_meter');
   const [numDevices, setNumDevices] = useState(500);
   const [numRO, setNumRO] = useState(7);
+  const { addEntry } = useCalculationHistory();
 
   // Scenario configurations
   const scenarioConfigs = {
@@ -115,8 +119,19 @@ export default function GrantFreeRA() {
     },
   ];
 
+  // Save calculation to history with debounce
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      addEntry('Grant-free RA', 
+        { scenario, numDevices, numRO }, 
+        { collision: parseFloat(p_col_grantfree), latency: latency_grantfree, energy_savings: energy_saving_pct }
+      );
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [scenario, numDevices, numRO, p_col_grantfree, energy_saving_pct, addEntry]);
+
   return (
-    <div className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <div className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-950">
       <div className="max-w-7xl mx-auto">
         {/* Page Title */}
         <div className="mb-8">
@@ -430,29 +445,32 @@ export default function GrantFreeRA() {
         </div>
 
         {/* Formula Explanation */}
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg border-2 border-blue-300 p-8">
-          <h3 className="text-2xl font-semibold text-gray-900 mb-6">Grant-free RA Formulalari</h3>
+        <div className="bg-gradient-to-br from-blue-50 dark:from-blue-900/20 to-indigo-50 dark:to-indigo-900/20 rounded-lg border-2 border-blue-300 dark:border-blue-800 p-8">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">Grant-free RA Formulalari</h3>
+            <FormulaButton formulaKey="collision" />
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Load */}
-            <div className="bg-white rounded-lg p-6 border border-blue-200">
-              <p className="text-sm font-semibold text-gray-900 mb-3">Yuklanish:</p>
-              <p className="font-mono text-gray-900 mb-2">λ = Qurilmalar soni / PRACH RO soni</p>
-              <div className="text-xs text-gray-700 space-y-1 mt-3 pt-3 border-t border-gray-200">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
+              <p className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Yuklanish:</p>
+              <p className="font-mono text-gray-900 dark:text-gray-200 mb-2">λ = Qurilmalar soni / PRACH RO soni</p>
+              <div className="text-xs text-gray-700 dark:text-gray-300 space-y-1 mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
                 <div>Qurilmalar = {numDevices}</div>
                 <div>PRACH RO = {numRO}</div>
-                <div className="font-bold text-blue-600 mt-2">λ = {lambdaPerRO}</div>
+                <div className="font-bold text-blue-600 dark:text-blue-400 mt-2">λ = {lambdaPerRO}</div>
               </div>
             </div>
 
             {/* Collision */}
-            <div className="bg-white rounded-lg p-6 border border-blue-200">
-              <p className="text-sm font-semibold text-gray-900 mb-3">Kolliziya ehtimoli:</p>
-              <p className="font-mono text-gray-900 mb-2">P<sub>col</sub> = 1 - e<sup>-λ/N</sup> × 1.4</p>
-              <div className="text-xs text-gray-700 space-y-1 mt-3 pt-3 border-t border-gray-200">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
+              <p className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Kolliziya ehtimoli:</p>
+              <p className="font-mono text-gray-900 dark:text-gray-200 mb-2">P<sub>col</sub> = 1 - e<sup>-λ/N</sup> × 1.4</p>
+              <div className="text-xs text-gray-700 dark:text-gray-300 space-y-1 mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
                 <div>Grant-based: {p_col_grantbased}%</div>
                 <div>Grant-free: {p_col_grantfree}%</div>
-                <div className="font-bold text-green-600 mt-2">
+                <div className="font-bold text-green-600 dark:text-green-400 mt-2">
                   Overhead = 40% → Grant-free {energy_saving_pct}% energiya tejash
                 </div>
               </div>
@@ -484,6 +502,13 @@ export default function GrantFreeRA() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Burst Traffic Simulator */}
+      <div className="py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <BurstTrafficSimulator />
         </div>
       </div>
     </div>

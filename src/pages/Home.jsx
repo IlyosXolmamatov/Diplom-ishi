@@ -7,6 +7,7 @@ import {
   TrendingUp,
   BookOpen,
 } from 'lucide-react';
+import ZCSequenceVisualizer from '../components/ZCSequenceVisualizer';
 
 export default function Home() {
   const features = [
@@ -128,6 +129,13 @@ export default function Home() {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* Zadoff-Chu Sequence Visualizer */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <ZCSequenceVisualizer />
         </div>
       </section>
     </div>

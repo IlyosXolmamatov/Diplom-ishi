@@ -17,6 +17,7 @@ import {
   ResponsiveContainer,
   ReferenceLine,
 } from 'recharts';
+import ExportButton from '../components/ExportButton';
 
 export default function Comparison() {
   const [snr, setSnr] = useState(-5);
@@ -185,24 +186,55 @@ export default function Comparison() {
     };
   }, [snr]);
 
+  // Calculate statistics for summary
+  const avgCollision = useMemo(() => {
+    const collisions = methods.map(m => m.collision);
+    return (collisions.reduce((a, b) => a + b, 0) / collisions.length).toFixed(1);
+  }, [methods]);
+
+  const highSlots = useMemo(() => {
+    return methods.filter(m => m.collision > 50).length;
+  }, [methods]);
+
+  const recommendedACB = useMemo(() => {
+    for (let p = 0.01; p <= 1; p += 0.01) {
+      const maxCollision = Math.max(...methods.map(m => m.collision));
+      const collisionAtP = (1 - Math.exp((-maxCollision * p) / 64)) * 100;
+      if (collisionAtP < 20) {
+        return p.toFixed(2);
+      }
+    }
+    return '1.00';
+  }, [methods]);
+
   // Helper function to get color for cell
   const getCellColor = (label, value) => {
-    if (label === 'Throughput' && value > 80) return 'bg-green-100';
-    if (label === 'Kechikish' && value < 10) return 'bg-green-100';
-    if (label === 'Kolliziya' && value < 40) return 'bg-green-100';
-    return 'bg-white';
+    if (label === 'Throughput' && value > 80) return 'bg-green-100 dark:bg-green-900';
+    if (label === 'Kechikish' && value < 10) return 'bg-green-100 dark:bg-green-900';
+    if (label === 'Kolliziya' && value < 40) return 'bg-green-100 dark:bg-green-900';
+    return 'bg-white dark:bg-gray-900';
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <div className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-950">
       <div className="max-w-7xl mx-auto">
         {/* Page Title */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
-            Barcha RA Usullarining Taqqoslash Dashboardi
-          </h1>
-          <div className="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
-            3GPP TS 38.211 | ML Detection | Rel-17
+        <div className="mb-8 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+          <div>
+            <h1 className="text-4xl font-bold text-gray-900 mb-2">
+              Barcha RA Usullarining Taqqoslash Dashboardi
+            </h1>
+            <div className="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm px-3 py-1 rounded-full">
+              3GPP TS 38.211 | ML Detection | Rel-17
+            </div>
+          </div>
+          <div className="flex gap-2">
+            <ExportButton 
+              snr={snr} 
+              avgCollision={avgCollision} 
+              highSlots={highSlots}
+              recommendedACB={recommendedACB}
+            />
           </div>
         </div>
 

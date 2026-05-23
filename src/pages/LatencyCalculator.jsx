@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import {
   LineChart,
   Line,
@@ -10,6 +10,8 @@ import {
   ResponsiveContainer,
   ReferenceLine,
 } from 'recharts';
+import useCalculationHistory from '../hooks/useCalculationHistory';
+import { FormulaButton } from '../components/FormulaModal';
 
 export default function LatencyCalculator() {
   const [scs, setScs] = useState(15);
@@ -19,6 +21,7 @@ export default function LatencyCalculator() {
   const [nCR, setNCR] = useState(3);
   const [lambda, setLambda] = useState(64);
   const N = 64; // Fixed preamble count
+  const { addEntry } = useCalculationHistory();
 
   // Calculate slot duration based on SCS
   const slotDuration = 1 / (scs / 15); // ms: 15kHz=1ms, 30kHz=0.5ms etc.
@@ -79,13 +82,24 @@ export default function LatencyCalculator() {
     };
   });
 
+  // Save calculation to history with debounce
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      addEntry('Kechikish Hisob', 
+        { scs, prachPeriod, rarWindow, nMsg3, nCR, lambda }, 
+        { T_4step: parseFloat(T_4step.toFixed(2)), T_2step: parseFloat(T_2step.toFixed(2)), reduction_pct }
+      );
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [scs, prachPeriod, rarWindow, nMsg3, nCR, lambda, T_4step, T_2step, reduction_pct, addEntry]);
+
   return (
-    <div className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <div className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-950">
       <div className="max-w-7xl mx-auto">
         {/* Page Title */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Kechikish va Muvaffaqiyat Tahlili</h1>
-          <p className="text-lg text-gray-600 mb-3">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Kechikish va Muvaffaqiyat Tahlili</h1>
+          <p className="text-lg text-gray-600 dark:text-gray-400 mb-3">
             4-step va 2-step RACH protseduralarini solishtirish
           </p>
           <div className="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
@@ -458,25 +472,30 @@ export default function LatencyCalculator() {
         </div>
 
         {/* Formula Explanation */}
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg border-2 border-blue-300 p-8">
-          <h3 className="text-2xl font-semibold text-gray-900 mb-6">
-            Kechikish formulalari
-            <span className="text-sm font-normal text-gray-600 ml-2">(Manba [5])</span>
-          </h3>
+        <div className="bg-gradient-to-br from-blue-50 dark:from-blue-900/20 to-indigo-50 dark:to-indigo-900/20 rounded-lg border-2 border-blue-300 dark:border-blue-800 p-8">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                Kechikish formulalari
+                <span className="text-sm font-normal text-gray-600 dark:text-gray-400 ml-2">(Manba [5])</span>
+              </h3>
+            </div>
+            <FormulaButton formulaKey="latency_4step" />
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* 4-step formula */}
-            <div className="bg-white rounded-lg p-6 border border-blue-200">
-              <p className="text-sm font-semibold text-gray-900 mb-3">4-step RACH:</p>
-              <p className="font-mono text-gray-900 mb-2">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
+              <p className="text-sm font-semibold text-gray-900 dark:text-white mb-3">4-step RACH:</p>
+              <p className="font-mono text-gray-900 dark:text-gray-200 mb-2">
                 T<sub>4step</sub> = T<sub>wait</sub> + T<sub>RAR</sub> + T<sub>Msg3</sub> + T<sub>CR</sub>
               </p>
-              <div className="text-xs text-gray-700 space-y-1 mt-3 pt-3 border-t border-gray-200">
+              <div className="text-xs text-gray-700 dark:text-gray-300 space-y-1 mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
                 <div>T<sub>wait</sub> = PRACH davri / 2 = {T_wait.toFixed(2)} ms</div>
                 <div>T<sub>RAR</sub> = RAR oynasi × slot = {T_RAR.toFixed(2)} ms</div>
                 <div>T<sub>Msg3</sub> = nMsg3 × slot = {T_Msg3.toFixed(2)} ms</div>
                 <div>T<sub>CR</sub> = nCR × slot = {T_CR.toFixed(2)} ms</div>
-                <div className="font-bold text-blue-600 mt-2">
+                <div className="font-bold text-blue-600 dark:text-blue-400 mt-2">
                   Jami: {T_4step.toFixed(2)} ms
                 </div>
               </div>

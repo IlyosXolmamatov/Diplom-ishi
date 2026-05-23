@@ -1,0 +1,106 @@
+/* Dark Mode Styles */
+html.dark {
+  color-scheme: dark;
+  background-color: #030712;
+}
+
+html.dark,
+html.dark body,
+html.dark main,
+html.dark div {
+  background-color: #030712;
+  color: #f3f4f6;
+}
+
+html.dark * {
+  color: #f3f4f6;
+  border-color: #4b5563;
+}
+
+html.dark nav {
+  background-color: #111827 !important;
+  border-color: #1f2937 !important;
+}
+
+html.dark nav a,
+html.dark nav button,
+html.dark nav span {
+  color: #d1d5db !important;
+}
+
+html.dark nav a:hover,
+html.dark nav button:hover,
+html.dark nav span:hover {
+  color: #60a5fa !important;
+}
+
+html.dark input,
+html.dark select,
+html.dark textarea {
+  background-color: #1f2937 !important;
+  border-color: #4b5563 !important;
+  color: #f3f4f6 !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #9ca3af !important;
+}
+
+html.dark label,
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4,
+html.dark h5,
+html.dark h6,
+html.dark p {
+  color: #f3f4f6 !important;
+}
+
+html.dark table {
+  background-color: #1f2937 !important;
+  border-color: #4b5563 !important;
+  color: #f3f4f6 !important;
+}
+
+html.dark table th {
+  background-color: #111827 !important;
+  color: #d1d5db !important;
+}
+
+html.dark table td {
+  border-color: #4b5563 !important;
+}
+
+html.dark button {
+  color: #f3f4f6 !important;
+}
+
+html.dark footer {
+  background-color: #111827 !important;
+  border-color: #1f2937 !important;
+  color: #d1d5db !important;
+}
+
+html.dark svg {
+  color: inherit !important;
+  stroke: inherit !important;
+}
+
+html.dark [class*="bg-white"] {
+  background-color: #1f2937 !important;
+}
+
+html.dark [class*="bg-gray"] {
+  background-color: #111827 !important;
+}
+
+html.dark [class*="text-gray"] {
+  color: #d1d5db !important;
+}
+
+html.dark [class*="border-gray"] {
+  border-color: #4b5563 !important;
+}
+
