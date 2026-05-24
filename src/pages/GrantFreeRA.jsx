@@ -131,10 +131,10 @@ export default function GrantFreeRA() {
   }, [scenario, numDevices, numRO, p_col_grantfree, energy_saving_pct, addEntry]);
 
   return (
-    <div className="min-h-screen pt-24 pb-24 px-4 sm:px-6 lg:px-12 bg-gray-50 dark:bg-gray-950">
+    <div className="min-h-screen pt-32 pb-32 px-6 sm:px-8 lg:px-16 bg-gray-50 dark:bg-gray-950">
       <div className="max-w-7xl mx-auto">
         {/* Page Title */}
-        <div className="mb-12">
+        <div className="mb-16">
           <h1 className="text-4xl font-bold text-gray-900 mb-2">
             Grant-free RA — mMTC va IoT Ssenariylar
           </h1>
@@ -195,9 +195,9 @@ export default function GrantFreeRA() {
         </div>
 
         {/* Input Controls */}
-        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-12">
+        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-16">
           <h2 className="text-xl font-semibold text-gray-900 mb-6">Parametrlar</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Devices Slider */}
             <div>
               <label className="block text-sm font-semibold text-gray-900 mb-2">
@@ -233,10 +233,10 @@ export default function GrantFreeRA() {
         </div>
 
         {/* Comparison Visual */}
-        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-8">
+        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-12">
           <h2 className="text-xl font-semibold text-gray-900 mb-6">Grant-based vs Grant-free</h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Grant-based */}
             <div className="bg-linear-to-br from-gray-50 to-blue-50 rounded-lg border border-gray-300 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Grant-based RA</h3>
@@ -327,7 +327,7 @@ export default function GrantFreeRA() {
         </div>
 
         {/* Results Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           <div className="bg-white rounded-lg border border-gray-200 p-6">
             <h3 className="text-sm font-medium text-gray-600 mb-2">λ per RO</h3>
             <p className="text-4xl font-bold text-blue-600">{lambdaPerRO}</p>
@@ -348,7 +348,7 @@ export default function GrantFreeRA() {
         </div>
 
         {/* Bar Chart */}
-        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-8">
+        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-12">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">Taqqoslash grafigi</h2>
           <ResponsiveContainer width="100%" height={280}>
             <BarChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
@@ -365,10 +365,10 @@ export default function GrantFreeRA() {
 
         {/* Satellite Section */}
         {scenario === 'satellite' && (
-          <div className="bg-white rounded-lg border border-orange-300 p-8 mb-12">
+          <div className="bg-white rounded-lg border border-orange-300 p-10 mb-16">
             <h2 className="text-2xl font-semibold text-gray-900 mb-6">Satellite NTN (Sun uchun)</h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
               <div className="bg-linear-to-br from-blue-50 to-cyan-50 rounded-lg border border-blue-300 p-6">
                 <h3 className="text-sm font-medium text-gray-600 mb-2">LEO kechikish</h3>
                 <p className="text-3xl font-bold text-blue-600">{LEO_delay}</p>
@@ -397,7 +397,7 @@ export default function GrantFreeRA() {
         )}
 
         {/* IoT Scenarios Table */}
-        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-8">
+        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-12">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">IoT Ssenariylar</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">

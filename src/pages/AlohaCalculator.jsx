@@ -68,11 +68,11 @@ export default function AlohaCalculator() {
   );
 
   return (
-    <div className="min-h-screen pt-24 pb-24 px-4 sm:px-6 lg:px-12 bg-gray-50 dark:bg-gray-950">
+    <div className="min-h-screen pt-32 pb-32 px-6 sm:px-8 lg:px-16 bg-gray-50 dark:bg-gray-950">
       <div className="max-w-7xl mx-auto">
         {/* Page Title */}
-        <div className="mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+        <div className="mb-16">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
             ALOHA Kalkulyator
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-400">
@@ -81,7 +81,7 @@ export default function AlohaCalculator() {
         </div>
 
         {/* Control Panel */}
-        <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-8 mb-12">
+        <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-10 mb-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Slider */}
             <div>
@@ -128,7 +128,7 @@ export default function AlohaCalculator() {
         </div>
 
         {/* Results Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
             <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Joriy G</h3>
             <p className="text-4xl font-bold text-blue-600 dark:text-blue-400">{gValue.toFixed(1)}</p>
@@ -156,7 +156,7 @@ export default function AlohaCalculator() {
         </div>
 
         {/* Chart */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-8 mb-8">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-10 mb-16">
           <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
             Otkazuvchanlik Taqqoslashi
           </h2>
@@ -230,7 +230,7 @@ export default function AlohaCalculator() {
         </div>
 
         {/* Formula Explanation */}
-        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800 p-8 mb-8">
+        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800 p-10 mb-12">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Formulalar</h3>
             <FormulaButton formulaKey="aloha_pure" />

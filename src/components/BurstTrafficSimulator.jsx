@@ -121,7 +121,7 @@ export default function BurstTrafficSimulator() {
   }));
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-8">
+    <div className="bg-white rounded-lg border border-gray-200 p-10 mb-16">
       {/* Title */}
       <h2 className="text-3xl font-bold text-gray-900 mb-8">
         IoT Burst Trafik Simulyatsiyasi (Alarm Ssenariysi)

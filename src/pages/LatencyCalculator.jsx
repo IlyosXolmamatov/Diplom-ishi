@@ -94,11 +94,11 @@ export default function LatencyCalculator() {
   }, [scs, prachPeriod, rarWindow, nMsg3, nCR, lambda, T_4step, T_2step, reduction_pct, addEntry]);
 
   return (
-    <div className="min-h-screen pt-24 pb-24 px-4 sm:px-6 lg:px-12 bg-gray-50 dark:bg-gray-950">
+    <div className="min-h-screen pt-32 pb-32 px-6 sm:px-8 lg:px-16 bg-gray-50 dark:bg-gray-950">
       <div className="max-w-7xl mx-auto">
         {/* Page Title */}
-        <div className="mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Kechikish va Muvaffaqiyat Tahlili</h1>
+        <div className="mb-16">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Kechikish va Muvaffaqiyat Tahlili</h1>
           <p className="text-lg text-gray-600 dark:text-gray-400 mb-3">
             4-step va 2-step RACH protseduralarini solishtirish
           </p>
@@ -108,9 +108,9 @@ export default function LatencyCalculator() {
         </div>
 
         {/* Parameters Card */}
-        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-8">
+        <div className="bg-white rounded-lg border border-gray-200 p-12 mb-16">
           <h2 className="text-xl font-semibold text-gray-900 mb-6">Parametrlar</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* SCS Select */}
             <div>
               <label className="block text-sm font-semibold text-gray-900 mb-2">
@@ -212,7 +212,7 @@ export default function LatencyCalculator() {
         </div>
 
         {/* Results Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           <div className="bg-white rounded-lg border border-gray-200 p-6">
             <h3 className="text-sm font-medium text-gray-600 mb-2">4-step kechikish</h3>
             <p className="text-4xl font-bold text-blue-600">{T_4step.toFixed(1)}</p>
@@ -239,7 +239,7 @@ export default function LatencyCalculator() {
         </div>
 
         {/* Timing Diagram */}
-        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-8">
+        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-12">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">Vaqt bloklari</h2>
 
           {/* 4-step diagram */}
@@ -333,7 +333,7 @@ export default function LatencyCalculator() {
         </div>
 
         {/* Latency vs UE Chart */}
-        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-8">
+        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-12">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">Kechikish vs UE soni</h2>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={latencyChartData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
@@ -398,7 +398,7 @@ export default function LatencyCalculator() {
         </div>
 
         {/* Success Rate Table */}
-        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-8">
+        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-12">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">Muvaffaqiyat darajasi (Rel-17)</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -435,7 +435,7 @@ export default function LatencyCalculator() {
         </div>
 
         {/* Comparison Table */}
-        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-8">
+        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-12">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">RA usullari solishtirish</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">

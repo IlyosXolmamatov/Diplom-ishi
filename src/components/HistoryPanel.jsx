@@ -45,7 +45,7 @@ export default function HistoryPanel({ history, onClear }) {
         }`}
       >
         {/* Header */}
-        <div className="sticky top-0 bg-blue-600 dark:bg-blue-900 text-white p-4 flex justify-between items-center">
+        <div className="sticky top-0 bg-blue-600 dark:bg-blue-900 text-white p-6 flex justify-between items-center">
           <h2 className="text-lg font-bold">Hisoblash Tarixi</h2>
           <button
             onClick={() => setIsOpen(false)}

@@ -82,13 +82,13 @@ export default function ZCSequenceVisualizer() {
   const theoreticalThreshold = 1 / Math.sqrt(L_RA);
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-8 mb-8">
+    <div className="bg-white rounded-lg border border-gray-200 p-10 mb-16">
       {/* Title */}
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">
+      <div className="mb-8">
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">
           Zadoff-Chu Ketma-ketligi Vizualizatsiyasi
         </h2>
-        <p className="text-xs text-gray-600">3GPP TS 38.211, Section 6.3.3</p>
+        <p className="text-xs text-gray-600 mb-4">3GPP TS 38.211, Section 6.3.3</p>
         <div className="mt-2 bg-gray-50 rounded p-3 border border-gray-200">
           <p className="text-sm font-mono text-gray-800">
             x<sub>u</sub>(n) = e<sup>-jπun(n+1)/L_RA</sup>

@@ -216,10 +216,10 @@ export default function Comparison() {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-24 px-4 sm:px-6 lg:px-12 bg-gray-50 dark:bg-gray-950">
+    <div className="min-h-screen pt-32 pb-32 px-6 sm:px-8 lg:px-16 bg-gray-50 dark:bg-gray-950">
       <div className="max-w-7xl mx-auto">
         {/* Page Title */}
-        <div className="mb-12 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+        <div className="mb-16 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
           <div>
             <h1 className="text-4xl font-bold text-gray-900 mb-2">
               Barcha RA Usullarining Taqqoslash Dashboardi
@@ -239,7 +239,7 @@ export default function Comparison() {
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-16">
           {summaryCards.map((card, idx) => (
             <div
               key={idx}
@@ -253,7 +253,7 @@ export default function Comparison() {
         </div>
 
         {/* Main Comparison Table */}
-        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-12 overflow-x-auto">
+        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-16 overflow-x-auto">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">Keng Taqqoslash Jadval</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -292,7 +292,7 @@ export default function Comparison() {
         </div>
 
         {/* Throughput Bar Chart */}
-        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-12">
+        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-16">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">Throughput Taqqoslash</h2>
           <ResponsiveContainer width="100%" height={250}>
             <BarChart data={throughputData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
@@ -309,7 +309,7 @@ export default function Comparison() {
         </div>
 
         {/* PRACH Degradation Chart */}
-        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-12">
+        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-16">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">
             PRACH Usullari Degradatsiyasi vs UE Soni
           </h2>
@@ -329,7 +329,7 @@ export default function Comparison() {
         </div>
 
         {/* Radar Chart */}
-        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-12">
+        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-16">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">Umumiy Qiyosiy Taqqoslash (Radar)</h2>
           <ResponsiveContainer width="100%" height={350}>
             <RadarChart data={radarData} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
@@ -347,7 +347,7 @@ export default function Comparison() {
         </div>
 
         {/* Improvement Coefficients */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
           <div className="bg-linear-to-br from-blue-50 to-blue-100 rounded-lg border-2 border-blue-300 p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Taraqqiyot Koeffitsientlari</h3>
             <div className="space-y-3 text-sm">
@@ -390,7 +390,7 @@ export default function Comparison() {
         </div>
 
         {/* ML Detection Section */}
-        <div className="bg-linear-to-r from-indigo-50 to-purple-50 rounded-lg border-2 border-indigo-300 p-8 mb-12">
+        <div className="bg-linear-to-r from-indigo-50 to-purple-50 rounded-lg border-2 border-indigo-300 p-10 mb-16">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">
             ML asosidagi aniqlash taqqoslashi (Manba [1],[4])
           </h2>
@@ -412,7 +412,7 @@ export default function Comparison() {
           </div>
 
           {/* ML Detection Metrics */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
             <div className="bg-white rounded-lg p-4 border border-blue-300">
               <p className="text-xs font-medium text-gray-600 mb-1">PD_MF (Matched Filter)</p>
               <p className="text-3xl font-bold text-blue-600">{mlCurrent.pd_mf}%</p>

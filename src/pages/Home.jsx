@@ -71,7 +71,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950">
       {/* Hero Section */}
-      <section className="pt-36 pb-24 px-4 sm:px-6 lg:px-12">
+      <section className="pt-40 pb-32 px-6 sm:px-8 lg:px-16">
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 dark:text-white mb-6">
             5G NR PRACH Tahlil Tizimi
@@ -83,7 +83,7 @@ export default function Home() {
       </section>
 
       {/* Statistics Row */}
-      <section className="bg-blue-50 dark:bg-gray-900 py-16 px-4 sm:px-6 lg:px-12 mb-24">
+      <section className="bg-blue-50 dark:bg-gray-900 py-20 px-6 sm:px-8 lg:px-16 mb-32">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
             {statistics.map((stat, index) => (
@@ -99,18 +99,18 @@ export default function Home() {
       </section>
 
       {/* Feature Cards */}
-      <section className="py-24 px-4 sm:px-6 lg:px-12">
+      <section className="py-32 px-6 sm:px-8 lg:px-16">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-20">
+          <h2 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-24">
             Xususiyatlar
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-14">
             {features.map((feature) => {
               const Icon = feature.icon;
               return (
                 <div
                   key={feature.id}
-                  className="bg-white border border-gray-200 rounded-lg p-8 hover:shadow-lg transition-shadow"
+                  className="bg-white border border-gray-200 rounded-lg p-10 hover:shadow-lg transition-shadow"
                 >
                   <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mb-4">
                     <Icon className="w-6 h-6 text-blue-600" />
@@ -133,7 +133,7 @@ export default function Home() {
       </section>
 
       {/* Zadoff-Chu Sequence Visualizer */}
-      <section className="py-24 px-4 sm:px-6 lg:px-12 bg-gray-50 dark:bg-gray-900">
+      <section className="py-32 px-6 sm:px-8 lg:px-16 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <ZCSequenceVisualizer />
         </div>

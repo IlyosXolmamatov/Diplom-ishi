@@ -27,7 +27,7 @@ function App() {
     <BrowserRouter>
       <div className="flex flex-col min-h-screen bg-white dark:bg-gray-950">
         <Navbar />
-        <main className="grow pt-20">
+        <main className="grow pt-32 pb-20 bg-white dark:bg-gray-950">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/aloha" element={<AlohaCalculator />} />
