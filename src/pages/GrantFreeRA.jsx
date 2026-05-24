@@ -238,7 +238,7 @@ export default function GrantFreeRA() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Grant-based */}
-            <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-lg border border-gray-300 p-6">
+            <div className="bg-linear-to-br from-gray-50 to-blue-50 rounded-lg border border-gray-300 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Grant-based RA</h3>
 
               {/* Steps */}
@@ -288,12 +288,12 @@ export default function GrantFreeRA() {
                   <div className="text-3xl font-bold text-green-600">8x</div>
                   <div className="text-sm font-semibold text-gray-900">tezroq</div>
                 </div>
-                <div className="w-1 h-20 bg-gradient-to-b from-blue-500 to-green-500 mx-auto rounded-full"></div>
+                <div className="w-1 h-20 bg-linear-to-b from-blue-500 to-green-500 mx-auto rounded-full"></div>
               </div>
             </div>
 
             {/* Grant-free */}
-            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg border border-green-300 p-6">
+            <div className="bg-linear-to-br from-green-50 to-emerald-50 rounded-lg border border-green-300 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Grant-free RA</h3>
 
               {/* Steps */}
@@ -369,19 +369,19 @@ export default function GrantFreeRA() {
             <h2 className="text-2xl font-semibold text-gray-900 mb-6">Satellite NTN (Sun uchun)</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg border border-blue-300 p-6">
+              <div className="bg-linear-to-br from-blue-50 to-cyan-50 rounded-lg border border-blue-300 p-6">
                 <h3 className="text-sm font-medium text-gray-600 mb-2">LEO kechikish</h3>
                 <p className="text-3xl font-bold text-blue-600">{LEO_delay}</p>
                 <p className="text-xs text-gray-500 mt-2">Polar orbit</p>
               </div>
 
-              <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-lg border border-orange-300 p-6">
+              <div className="bg-linear-to-br from-orange-50 to-red-50 rounded-lg border border-orange-300 p-6">
                 <h3 className="text-sm font-medium text-gray-600 mb-2">GEO kechikish</h3>
                 <p className="text-3xl font-bold text-orange-600">{GEO_delay}</p>
                 <p className="text-xs text-gray-500 mt-2">Geostationary</p>
               </div>
 
-              <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg border border-purple-300 p-6">
+              <div className="bg-linear-to-br from-purple-50 to-pink-50 rounded-lg border border-purple-300 p-6">
                 <h3 className="text-sm font-medium text-gray-600 mb-2">Format1 radius</h3>
                 <p className="text-3xl font-bold text-purple-600">{Format1_radius}</p>
                 <p className="text-xs text-gray-500 mt-2">Maximum coverage</p>
@@ -445,7 +445,7 @@ export default function GrantFreeRA() {
         </div>
 
         {/* Formula Explanation */}
-        <div className="bg-gradient-to-br from-blue-50 dark:from-blue-900/20 to-indigo-50 dark:to-indigo-900/20 rounded-lg border-2 border-blue-300 dark:border-blue-800 p-8">
+        <div className="bg-linear-to-br from-blue-50 dark:from-blue-900/20 to-indigo-50 dark:to-indigo-900/20 rounded-lg border-2 border-blue-300 dark:border-blue-800 p-8">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">Grant-free RA Formulalari</h3>
             <FormulaButton formulaKey="collision" />

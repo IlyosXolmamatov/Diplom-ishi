@@ -283,7 +283,7 @@ export default function BurstTrafficSimulator() {
       </div>
 
       {/* Summary Stats */}
-      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-200">
+      <div className="bg-linear-to-r from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-200">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Tahlil Natijalari</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>

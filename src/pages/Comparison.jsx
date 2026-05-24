@@ -243,7 +243,7 @@ export default function Comparison() {
           {summaryCards.map((card, idx) => (
             <div
               key={idx}
-              className={`bg-gradient-to-br ${card.color} rounded-lg border-2 p-4`}
+              className={`bg-linear-to-br ${card.color} rounded-lg border-2 p-4`}
             >
               <p className="text-xs font-medium text-gray-600 mb-1">{card.label}</p>
               <p className="text-lg font-bold text-gray-900 mb-1">{card.value}</p>
@@ -348,7 +348,7 @@ export default function Comparison() {
 
         {/* Improvement Coefficients */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border-2 border-blue-300 p-6">
+          <div className="bg-linear-to-br from-blue-50 to-blue-100 rounded-lg border-2 border-blue-300 p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Taraqqiyot Koeffitsientlari</h3>
             <div className="space-y-3 text-sm">
               <div className="bg-white rounded p-3">
@@ -366,7 +366,7 @@ export default function Comparison() {
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg border-2 border-green-300 p-6">
+          <div className="bg-linear-to-br from-green-50 to-green-100 rounded-lg border-2 border-green-300 p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Asosiy Foydalanish Ssenariylari</h3>
             <ul className="space-y-2 text-sm">
               <li className="flex items-start">
@@ -390,7 +390,7 @@ export default function Comparison() {
         </div>
 
         {/* ML Detection Section */}
-        <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg border-2 border-indigo-300 p-8 mb-12">
+        <div className="bg-linear-to-r from-indigo-50 to-purple-50 rounded-lg border-2 border-indigo-300 p-8 mb-12">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">
             ML asosidagi aniqlash taqqoslashi (Manba [1],[4])
           </h2>

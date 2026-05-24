@@ -164,25 +164,25 @@ export default function ZCSequenceVisualizer() {
 
       {/* Info Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg border border-green-300 p-4">
+        <div className="bg-linear-to-br from-green-50 to-green-100 rounded-lg border border-green-300 p-4">
           <p className="text-xs font-medium text-gray-600 mb-1">Magnitude xossasi</p>
           <p className="text-2xl font-bold text-green-600">1.000</p>
           <p className="text-xs text-gray-600 mt-1">Konstantlik: |x_u(n)| = 1</p>
         </div>
 
-        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-300 p-4">
+        <div className="bg-linear-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-300 p-4">
           <p className="text-xs font-medium text-gray-600 mb-1">Preambula uzunligi</p>
           <p className="text-2xl font-bold text-blue-600">L_RA = {L_RA}</p>
           <p className="text-xs text-gray-600 mt-1">{L_RA === 139 ? 'Qisqa' : 'Uzun'} preambula</p>
         </div>
 
-        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-300 p-4">
+        <div className="bg-linear-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-300 p-4">
           <p className="text-xs font-medium text-gray-600 mb-1">Root indeksi</p>
           <p className="text-2xl font-bold text-blue-600">u = {rootIndex}</p>
           <p className="text-xs text-gray-600 mt-1">ZC ketma-ketlik tariflovchi</p>
         </div>
 
-        <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg border border-orange-300 p-4">
+        <div className="bg-linear-to-br from-orange-50 to-orange-100 rounded-lg border border-orange-300 p-4">
           <p className="text-xs font-medium text-gray-600 mb-1">Maksimal preambula</p>
           <p className="text-2xl font-bold text-orange-600">{Math.floor(L_RA / 13)}</p>
           <p className="text-xs text-gray-600 mt-1">⌊L_RA / 13⌋ = {Math.floor(L_RA / 13)}</p>

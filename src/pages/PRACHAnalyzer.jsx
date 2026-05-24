@@ -412,7 +412,7 @@ export default function PRACHAnalyzer() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* URLLC */}
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border-2 border-blue-300 p-6">
+            <div className="bg-linear-to-br from-blue-50 to-blue-100 rounded-lg border-2 border-blue-300 p-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-blue-900">URLLC</h3>
                 <span className="inline-block bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold">
@@ -434,7 +434,7 @@ export default function PRACHAnalyzer() {
             </div>
 
             {/* eMBB */}
-            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg border-2 border-green-300 p-6">
+            <div className="bg-linear-to-br from-green-50 to-green-100 rounded-lg border-2 border-green-300 p-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-green-900">eMBB</h3>
                 <span className="inline-block bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
@@ -456,7 +456,7 @@ export default function PRACHAnalyzer() {
             </div>
 
             {/* mMTC */}
-            <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg border-2 border-orange-300 p-6">
+            <div className="bg-linear-to-br from-orange-50 to-orange-100 rounded-lg border-2 border-orange-300 p-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-orange-900">mMTC</h3>
                 <span className="inline-block bg-orange-600 text-white px-3 py-1 rounded-full text-xs font-bold">
@@ -480,7 +480,7 @@ export default function PRACHAnalyzer() {
         </div>
 
         {/* Collision Formula Card */}
-        <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-lg border-2 border-purple-300 p-8 mb-8">
+        <div className="bg-linear-to-br from-purple-50 to-indigo-50 rounded-lg border-2 border-purple-300 p-8 mb-8">
           <h3 className="text-2xl font-semibold text-gray-900 mb-6">
             Kolliziya formulasi
             <span className="text-sm font-normal text-gray-600 ml-2">(Manba [8])</span>

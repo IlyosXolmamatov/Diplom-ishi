@@ -472,7 +472,7 @@ export default function LatencyCalculator() {
         </div>
 
         {/* Formula Explanation */}
-        <div className="bg-gradient-to-br from-blue-50 dark:from-blue-900/20 to-indigo-50 dark:to-indigo-900/20 rounded-lg border-2 border-blue-300 dark:border-blue-800 p-8">
+        <div className="bg-linear-to-br from-blue-50 dark:from-blue-900/20 to-indigo-50 dark:to-indigo-900/20 rounded-lg border-2 border-blue-300 dark:border-blue-800 p-8">
           <div className="flex items-center justify-between mb-6">
             <div>
               <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
