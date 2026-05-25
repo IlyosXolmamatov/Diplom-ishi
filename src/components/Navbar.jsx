@@ -10,14 +10,14 @@ export default function Navbar() {
   useEffect(() => {
     // Initialize from localStorage or check HTML element
     const darkMode = localStorage.getItem('darkMode') === 'true' || 
-                     document.documentElement.classList.contains('dark');
+                     document.documentElement.getAttribute('data-theme') === 'dark';
     setIsDark(darkMode);
     
-    // If dark mode should be on, ensure the class is set
+    // If dark mode should be on, ensure the attribute is set
     if (darkMode) {
-      document.documentElement.classList.add('dark');
+      document.documentElement.setAttribute('data-theme', 'dark');
     } else {
-      document.documentElement.classList.remove('dark');
+      document.documentElement.removeAttribute('data-theme');
     }
   }, []);
 
@@ -25,11 +25,11 @@ export default function Navbar() {
     const html = document.documentElement;
     const newDarkState = !isDark;
     
-    // Toggle the class
+    // Toggle the data-theme attribute
     if (newDarkState) {
-      html.classList.add('dark');
+      html.setAttribute('data-theme', 'dark');
     } else {
-      html.classList.remove('dark');
+      html.removeAttribute('data-theme');
     }
     
     // Update state and localStorage
@@ -42,13 +42,13 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 z-50">
+    <nav className="fixed top-0 left-0 right-0 bg-white dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800 z-50 shadow-sm" style={{ backgroundColor: isDark ? '#111827' : '#ffffff', borderBottomColor: isDark ? '#374151' : '#e5e7eb' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="shrink-0">
-            <div className="text-2xl font-bold text-blue-600">
-              5G PRACH Analyzer
+            <div className="text-2xl font-bold" style={{ color: isDark ? '#93c5fd' : '#3b82f6' }}>
+              5G PRACH
             </div>
           </div>
 
@@ -131,7 +131,11 @@ export default function Navbar() {
           {/* Dark Mode Toggle */}
           <button
             onClick={toggleDarkMode}
-            className="ml-6 p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            className="ml-6 p-2 rounded-lg transition-all"
+            style={{
+              backgroundColor: isDark ? '#374151' : '#f3f4f6',
+              color: isDark ? '#93c5fd' : '#3b82f6'
+            }}
             title="Tungi rejim"
           >
             {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}

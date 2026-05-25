@@ -94,11 +94,11 @@ export default function LatencyCalculator() {
   }, [scs, prachPeriod, rarWindow, nMsg3, nCR, lambda, T_4step, T_2step, reduction_pct, addEntry]);
 
   return (
-    <div className="min-h-screen pt-32 pb-32 px-6 sm:px-8 lg:px-16 bg-gray-50 dark:bg-gray-950">
-      <div className="max-w-7xl mx-auto">
+    <div className="page-container">
+      <div className="main-container">
         {/* Page Title */}
-        <div className="mb-16">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Kechikish va Muvaffaqiyat Tahlili</h1>
+        <div className="section">
+          <h1 className="section-title">Kechikish va Muvaffaqiyat Tahlili</h1>
           <p className="text-lg text-gray-600 dark:text-gray-400 mb-3">
             4-step va 2-step RACH protseduralarini solishtirish
           </p>
@@ -108,12 +108,12 @@ export default function LatencyCalculator() {
         </div>
 
         {/* Parameters Card */}
-        <div className="bg-white rounded-lg border border-gray-200 p-12 mb-16">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">Parametrlar</h2>
+        <div className="viz-box mb-16">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Parametrlar</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* SCS Select */}
             <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
+              <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 Subcarrier Spacing (SCS)
               </label>
               <select
@@ -131,7 +131,7 @@ export default function LatencyCalculator() {
 
             {/* PRACH Period Slider */}
             <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
+              <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 PRACH davri: {prachPeriod} ms
               </label>
               <input
@@ -147,7 +147,7 @@ export default function LatencyCalculator() {
 
             {/* RAR Window Slider */}
             <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
+              <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 RAR oynasi: {rarWindow} slot
               </label>
               <input
@@ -163,7 +163,7 @@ export default function LatencyCalculator() {
 
             {/* nMsg3 Input */}
             <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
+              <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 Msg3 slot-lar (nMsg3)
               </label>
               <input
@@ -179,7 +179,7 @@ export default function LatencyCalculator() {
 
             {/* nCR Input */}
             <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
+              <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 Contention Resolution slot-lar (nCR)
               </label>
               <input
@@ -195,7 +195,7 @@ export default function LatencyCalculator() {
 
             {/* Lambda Input */}
             <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
+              <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 UE soni (λ)
               </label>
               <input
@@ -212,40 +212,40 @@ export default function LatencyCalculator() {
         </div>
 
         {/* Results Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h3 className="text-sm font-medium text-gray-600 mb-2">4-step kechikish</h3>
-            <p className="text-4xl font-bold text-blue-600">{T_4step.toFixed(1)}</p>
-            <p className="text-xs text-gray-500 mt-2">ms</p>
+        <div className="viz-grid mb-16">
+          <div className="viz-box">
+            <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">4-step kechikish</h3>
+            <p className="text-4xl font-bold text-blue-600 dark:text-blue-400">{T_4step.toFixed(1)}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">ms</p>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h3 className="text-sm font-medium text-gray-600 mb-2">2-step kechikish</h3>
-            <p className="text-4xl font-bold text-red-600">{T_2step.toFixed(1)}</p>
-            <p className="text-xs text-gray-500 mt-2">ms</p>
+          <div className="viz-box">
+            <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">2-step kechikish</h3>
+            <p className="text-4xl font-bold text-red-600 dark:text-red-400">{T_2step.toFixed(1)}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">ms</p>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h3 className="text-sm font-medium text-gray-600 mb-2">Kamaytirish</h3>
-            <p className="text-4xl font-bold text-green-600">{reduction_pct}</p>
-            <p className="text-xs text-gray-500 mt-2">%</p>
+          <div className="viz-box">
+            <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Kamaytirish</h3>
+            <p className="text-4xl font-bold text-green-600 dark:text-green-400">{reduction_pct}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">%</p>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h3 className="text-sm font-medium text-gray-600 mb-2">Muvaffaqiyat (10 urinish)</h3>
-            <p className="text-4xl font-bold text-purple-600">{p10}</p>
-            <p className="text-xs text-gray-500 mt-2">%</p>
+          <div className="viz-box">
+            <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Muvaffaqiyat (10 urinish)</h3>
+            <p className="text-4xl font-bold text-purple-600 dark:text-purple-400">{p10}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">%</p>
           </div>
         </div>
 
         {/* Timing Diagram */}
-        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-12">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Vaqt bloklari</h2>
+        <div className="viz-box mb-12">
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Vaqt bloklari</h2>
 
           {/* 4-step diagram */}
           <div className="mb-8">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">4-step RACH</h3>
-            <div className="flex items-end gap-1 h-32 bg-gray-50 p-4 rounded-lg border border-gray-200">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">4-step RACH</h3>
+            <div className="flex items-end gap-1 h-32 bg-gray-50 dark:bg-gray-900 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
               {/* T_wait block */}
               <div
                 className="bg-gray-400 rounded flex flex-col items-center justify-end pb-2 text-white text-xs font-bold"
@@ -293,8 +293,8 @@ export default function LatencyCalculator() {
 
           {/* 2-step diagram */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">2-step RACH</h3>
-            <div className="flex items-end gap-1 h-32 bg-gray-50 p-4 rounded-lg border border-gray-200">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">2-step RACH</h3>
+            <div className="flex items-end gap-1 h-32 bg-gray-50 dark:bg-gray-900 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
               {/* T_wait block */}
               <div
                 className="bg-gray-400 rounded flex flex-col items-center justify-end pb-2 text-white text-xs font-bold"
@@ -333,8 +333,8 @@ export default function LatencyCalculator() {
         </div>
 
         {/* Latency vs UE Chart */}
-        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-12">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Kechikish vs UE soni</h2>
+        <div className="viz-box mb-12">
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Kechikish vs UE soni</h2>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={latencyChartData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -398,17 +398,17 @@ export default function LatencyCalculator() {
         </div>
 
         {/* Success Rate Table */}
-        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-12">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Muvaffaqiyat darajasi (Rel-17)</h2>
+        <div className="viz-box mb-12">
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Muvaffaqiyat darajasi (Rel-17)</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-gray-50 border-b border-gray-200">
+              <thead className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
                 <tr>
-                  <th className="px-4 py-3 text-left font-semibold text-gray-900">UE soni</th>
-                  <th className="px-4 py-3 text-left font-semibold text-gray-900">
+                  <th className="px-4 py-3 text-left font-semibold text-gray-900 dark:text-white">UE soni</th>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-900 dark:text-white">
                     P<sub>1</sub> (bir urinish)
                   </th>
-                  <th className="px-4 py-3 text-left font-semibold text-gray-900">
+                  <th className="px-4 py-3 text-left font-semibold text-gray-900 dark:text-white">
                     P<sub>10</sub> (10 urinish)
                   </th>
                 </tr>
@@ -417,16 +417,16 @@ export default function LatencyCalculator() {
                 {successRateData.map((row, idx) => (
                   <tr
                     key={idx}
-                    className={`border-b border-gray-200 ${
-                      row.isActive ? 'bg-blue-50' : 'hover:bg-gray-50'
+                    className={`border-b border-gray-200 dark:border-gray-700 ${
+                      row.isActive ? 'bg-blue-50 dark:bg-blue-900/20' : 'hover:bg-gray-50 dark:hover:bg-gray-900'
                     }`}
                   >
-                    <td className="px-4 py-3 font-semibold text-gray-900">
+                    <td className="px-4 py-3 font-semibold text-gray-900 dark:text-white">
                       {row.ue}
-                      {row.isActive && <span className="text-blue-600 ml-2">✓ Joriy</span>}
+                      {row.isActive && <span className="text-blue-600 dark:text-blue-400 ml-2">✓ Joriy</span>}
                     </td>
-                    <td className="px-4 py-3 text-gray-900">{row.p1}%</td>
-                    <td className="px-4 py-3 font-semibold text-gray-900">{row.p10}%</td>
+                    <td className="px-4 py-3 text-gray-900 dark:text-white">{row.p1}%</td>
+                    <td className="px-4 py-3 font-semibold text-gray-900 dark:text-white">{row.p10}%</td>
                   </tr>
                 ))}
               </tbody>
@@ -435,36 +435,36 @@ export default function LatencyCalculator() {
         </div>
 
         {/* Comparison Table */}
-        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-12">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">RA usullari solishtirish</h2>
+        <div className="viz-box mb-12">
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">RA usullari solishtirish</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-gray-50 border-b border-gray-200">
+              <thead className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
                 <tr>
-                  <th className="px-4 py-3 text-left font-semibold text-gray-900">RA turi</th>
-                  <th className="px-4 py-3 text-left font-semibold text-gray-900">Min kechikish</th>
-                  <th className="px-4 py-3 text-left font-semibold text-gray-900">O'rtacha kechikish</th>
-                  <th className="px-4 py-3 text-left font-semibold text-gray-900">3GPP standart</th>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-900 dark:text-white">RA turi</th>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-900 dark:text-white">Min kechikish</th>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-900 dark:text-white">O'rtacha kechikish</th>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-900 dark:text-white">3GPP standart</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-gray-200 hover:bg-gray-50">
-                  <td className="px-4 py-3 font-semibold text-gray-900">4-step</td>
-                  <td className="px-4 py-3 text-blue-600 font-mono">{(T_4step * 0.85).toFixed(1)} ms</td>
-                  <td className="px-4 py-3 text-blue-600 font-mono">{T_4step.toFixed(1)} ms</td>
-                  <td className="px-4 py-3 text-gray-600">Release 15</td>
+                <tr className="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-900">
+                  <td className="px-4 py-3 font-semibold text-gray-900 dark:text-white">4-step</td>
+                  <td className="px-4 py-3 text-blue-600 dark:text-blue-400 font-mono">{(T_4step * 0.85).toFixed(1)} ms</td>
+                  <td className="px-4 py-3 text-blue-600 dark:text-blue-400 font-mono">{T_4step.toFixed(1)} ms</td>
+                  <td className="px-4 py-3 text-gray-600 dark:text-gray-400">Release 15</td>
                 </tr>
-                <tr className="border-b border-gray-200 hover:bg-gray-50">
-                  <td className="px-4 py-3 font-semibold text-gray-900">2-step</td>
-                  <td className="px-4 py-3 text-red-600 font-mono">{(T_2step * 0.85).toFixed(1)} ms</td>
-                  <td className="px-4 py-3 text-red-600 font-mono">{T_2step.toFixed(1)} ms</td>
-                  <td className="px-4 py-3 text-gray-600">Release 16</td>
+                <tr className="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-900">
+                  <td className="px-4 py-3 font-semibold text-gray-900 dark:text-white">2-step</td>
+                  <td className="px-4 py-3 text-red-600 dark:text-red-400 font-mono">{(T_2step * 0.85).toFixed(1)} ms</td>
+                  <td className="px-4 py-3 text-red-600 dark:text-red-400 font-mono">{T_2step.toFixed(1)} ms</td>
+                  <td className="px-4 py-3 text-gray-600 dark:text-gray-400">Release 16</td>
                 </tr>
-                <tr className="bg-green-50 hover:bg-green-100">
-                  <td className="px-4 py-3 font-semibold text-gray-900">Grant-Free RA</td>
-                  <td className="px-4 py-3 text-green-600 font-mono">1.0 ms</td>
-                  <td className="px-4 py-3 text-green-600 font-mono">2.0 ms</td>
-                  <td className="px-4 py-3 text-gray-600">Release 17</td>
+                <tr className="bg-green-50 dark:bg-green-900/20 hover:bg-green-100 dark:hover:bg-green-900/30">
+                  <td className="px-4 py-3 font-semibold text-gray-900 dark:text-white">Grant-Free RA</td>
+                  <td className="px-4 py-3 text-green-600 dark:text-green-400 font-mono">1.0 ms</td>
+                  <td className="px-4 py-3 text-green-600 dark:text-green-400 font-mono">2.0 ms</td>
+                  <td className="px-4 py-3 text-gray-600 dark:text-gray-400">Release 17</td>
                 </tr>
               </tbody>
             </table>
@@ -472,7 +472,7 @@ export default function LatencyCalculator() {
         </div>
 
         {/* Formula Explanation */}
-        <div className="bg-linear-to-br from-blue-50 dark:from-blue-900/20 to-indigo-50 dark:to-indigo-900/20 rounded-lg border-2 border-blue-300 dark:border-blue-800 p-8">
+        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg border-2 border-blue-300 dark:border-blue-800 p-8">
           <div className="flex items-center justify-between mb-6">
             <div>
               <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
@@ -502,42 +502,42 @@ export default function LatencyCalculator() {
             </div>
 
             {/* 2-step formula */}
-            <div className="bg-white rounded-lg p-6 border border-blue-200">
-              <p className="text-sm font-semibold text-gray-900 mb-3">2-step RACH:</p>
-              <p className="font-mono text-gray-900 mb-2">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
+              <p className="text-sm font-semibold text-gray-900 dark:text-white mb-3">2-step RACH:</p>
+              <p className="font-mono text-gray-900 dark:text-gray-200 mb-2">
                 T<sub>2step</sub> = T<sub>wait</sub> + 0.55×T<sub>RAR</sub> + 0.5×T<sub>CR</sub>
               </p>
-              <div className="text-xs text-gray-700 space-y-1 mt-3 pt-3 border-t border-gray-200">
+              <div className="text-xs text-gray-700 dark:text-gray-300 space-y-1 mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
                 <div>T<sub>wait</sub> = {T_wait.toFixed(2)} ms</div>
                 <div>RAR × 0.55 = {(T_RAR * 0.55).toFixed(2)} ms</div>
                 <div>CR × 0.5 = {(T_CR * 0.5).toFixed(2)} ms</div>
-                <div className="font-bold text-red-600 mt-2">
+                <div className="font-bold text-red-600 dark:text-red-400 mt-2">
                   Jami: {T_2step.toFixed(2)} ms
                 </div>
               </div>
             </div>
 
             {/* Success rate formula */}
-            <div className="bg-white rounded-lg p-6 border border-blue-200">
-              <p className="text-sm font-semibold text-gray-900 mb-3">Bir urinishdagi muvaffaqiyat:</p>
-              <p className="font-mono text-gray-900 mb-2">P<sub>1</sub> = e<sup>-λ/N</sup></p>
-              <div className="text-xs text-gray-700 space-y-1 mt-3 pt-3 border-t border-gray-200">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
+              <p className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Bir urinishdagi muvaffaqiyat:</p>
+              <p className="font-mono text-gray-900 dark:text-gray-200 mb-2">P<sub>1</sub> = e<sup>-λ/N</sup></p>
+              <div className="text-xs text-gray-700 dark:text-gray-300 space-y-1 mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
                 <div>λ = UE soni = {lambda}</div>
                 <div>N = preambula soni = {N}</div>
-                <div className="font-bold text-purple-600 mt-2">
+                <div className="font-bold text-purple-600 dark:text-purple-400 mt-2">
                   P<sub>1</sub> = {(p1 * 100).toFixed(2)}%
                 </div>
               </div>
             </div>
 
             {/* 10 attempts formula */}
-            <div className="bg-white rounded-lg p-6 border border-blue-200">
-              <p className="text-sm font-semibold text-gray-900 mb-3">10 urinishdagi muvaffaqiyat:</p>
-              <p className="font-mono text-gray-900 mb-2">P<sub>10</sub> = (1 - (1-P<sub>1</sub>)<sup>10</sup>) × 100%</p>
-              <div className="text-xs text-gray-700 space-y-1 mt-3 pt-3 border-t border-gray-200">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
+              <p className="text-sm font-semibold text-gray-900 dark:text-white mb-3">10 urinishdagi muvaffaqiyat:</p>
+              <p className="font-mono text-gray-900 dark:text-gray-200 mb-2">P<sub>10</sub> = (1 - (1-P<sub>1</sub>)<sup>10</sup>) × 100%</p>
+              <div className="text-xs text-gray-700 dark:text-gray-300 space-y-1 mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
                 <div>P<sub>1</sub> = {(p1 * 100).toFixed(2)}%</div>
                 <div>Kamayish ehtimoli = {((1 - p1) * 100).toFixed(2)}%</div>
-                <div className="font-bold text-green-600 mt-2">
+                <div className="font-bold text-green-600 dark:text-green-400 mt-2">
                   P<sub>10</sub> = {p10}%
                 </div>
               </div>
@@ -545,12 +545,12 @@ export default function LatencyCalculator() {
           </div>
 
           {/* Slot duration info */}
-          <div className="mt-6 p-4 bg-blue-100 rounded-lg border border-blue-300">
-            <p className="text-sm font-semibold text-gray-900 mb-2">Slot davomiyligi (SCS asosida):</p>
-            <p className="text-xs text-gray-700">
+          <div className="mt-6 p-4 bg-blue-100 dark:bg-blue-900/20 rounded-lg border border-blue-300 dark:border-blue-800">
+            <p className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Slot davomiyligi (SCS asosida):</p>
+            <p className="text-xs text-gray-700 dark:text-gray-300">
               Har bir SCS uchun slot davomiyligi = 1 / (SCS / 15) ms
               <br />
-              Hozirda: 1 / ({scs} / 15) = <span className="font-bold text-blue-600">{slotDuration.toFixed(3)} ms</span>
+              Hozirda: 1 / ({scs} / 15) = <span className="font-bold text-blue-600 dark:text-blue-400">{slotDuration.toFixed(3)} ms</span>
             </p>
           </div>
         </div>

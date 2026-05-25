@@ -68,20 +68,18 @@ export default function AlohaCalculator() {
   );
 
   return (
-    <div className="min-h-screen pt-32 pb-32 px-6 sm:px-8 lg:px-16 bg-gray-50 dark:bg-gray-950">
-      <div className="max-w-7xl mx-auto">
+    <div className="page-container">
+      <div className="main-container">
         {/* Page Title */}
-        <div className="mb-16">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            ALOHA Kalkulyator
-          </h1>
+        <div className="section">
+          <h1 className="section-title">ALOHA Kalkulyator</h1>
           <p className="text-lg text-gray-600 dark:text-gray-400">
             Pure ALOHA va Slotted ALOHA otkazuvchanlik taqqoslashi
           </p>
         </div>
 
         {/* Control Panel */}
-        <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-10 mb-16">
+        <div className="viz-box mb-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Slider */}
             <div>
@@ -128,25 +126,25 @@ export default function AlohaCalculator() {
         </div>
 
         {/* Results Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+        <div className="viz-grid mb-16">
+          <div className="viz-box">
             <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Joriy G</h3>
             <p className="text-4xl font-bold text-blue-600 dark:text-blue-400">{gValue.toFixed(1)}</p>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+          <div className="viz-box">
             <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Pure S(G)</h3>
             <p className="text-4xl font-bold text-blue-500 dark:text-blue-400">{S_pure}</p>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">Max: {(S_pure_max).toFixed(4)} @ G=0.5</p>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+          <div className="viz-box">
             <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Slotted S(G)</h3>
             <p className="text-4xl font-bold text-red-500 dark:text-red-400">{S_slotted}</p>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">Max: {(S_slotted_max).toFixed(4)} @ G=1.0</p>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+          <div className="viz-box">
             <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Farq (Slotted - Pure)</h3>
             <p className="text-4xl font-bold text-green-600 dark:text-green-400">{difference}</p>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
@@ -156,7 +154,7 @@ export default function AlohaCalculator() {
         </div>
 
         {/* Chart */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-10 mb-16">
+        <div className="viz-box mb-16">
           <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
             Otkazuvchanlik Taqqoslashi
           </h2>
@@ -252,8 +250,8 @@ export default function AlohaCalculator() {
         </div>
 
         {/* Data Table */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
-          <div className="px-8 py-6 border-b border-gray-200 dark:border-gray-700">
+        <div className="viz-box">
+          <div className="mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Otkazuvchanlik Jadvali</h3>
           </div>
           <div className="overflow-x-auto">

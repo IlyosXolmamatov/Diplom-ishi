@@ -1,0 +1,237 @@
+/* Professional Dark Theme - Like Cisco Networking Reference */
+
+:root {
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f3f4f6;
+  --color-card-bg: #ffffff;
+  --color-card-border: #e5e7eb;
+  --color-text-primary: #1f2937;
+  --color-text-secondary: #6b7280;
+  --color-accent: #3b82f6;
+  --color-accent-light: #60a5fa;
+  --color-icon-bg: rgba(59, 130, 246, 0.1);
+  --padding-card: 24px;
+  --gap-grid: 16px;
+  --border-radius: 12px;
+  --app-bg: #ffffff;
+  --app-text: #1f2937;
+}
+
+/* Light Mode - Explicit Styling */
+body,
+html {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6 {
+  color: var(--color-text-primary);
+}
+
+body p,
+body span,
+body label,
+body div {
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] {
+  --app-bg: #0a0e27;
+  --app-text: #f3f4f6;
+  --color-bg-primary: #0a0e27;
+  --color-bg-secondary: #111827;
+  --color-card-bg: #1f2937;
+  --color-card-border: #374151;
+  --color-text-primary: #f3f4f6;
+  --color-text-secondary: #d1d5db;
+  --color-accent: #60a5fa;
+  --color-accent-light: #93c5fd;
+  --color-icon-bg: rgba(96, 165, 250, 0.1);
+}
+
+[data-theme="dark"] body,
+[data-theme="dark"] main {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+/* Text colors */
+[data-theme="dark"] {
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] p,
+[data-theme="dark"] span {
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .text-gray-600,
+[data-theme="dark"] .text-gray-500,
+[data-theme="dark"] .text-gray-700 {
+  color: var(--color-text-secondary) !important;
+}
+
+/* Navigation */
+[data-theme="dark"] nav {
+  background-color: var(--color-bg-secondary) !important;
+  border-color: var(--color-card-border) !important;
+}
+
+[data-theme="dark"] nav a,
+[data-theme="dark"] nav button,
+[data-theme="dark"] nav span {
+  color: var(--color-text-primary) !important;
+}
+
+[data-theme="dark"] nav a:hover,
+[data-theme="dark"] nav button:hover {
+  color: var(--color-accent) !important;
+}
+
+/* Cards and containers */
+[data-theme="dark"] .bg-white,
+[data-theme="dark"] .bg-gray-50,
+[data-theme="dark"] .bg-blue-50,
+[data-theme="dark"] .bg-green-50,
+[data-theme="dark"] .bg-purple-50,
+[data-theme="dark"] .bg-indigo-50,
+[data-theme="dark"] .bg-gray-100 {
+  background-color: var(--color-card-bg) !important;
+  border-color: var(--color-card-border) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* Input fields */
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  background-color: var(--color-bg-secondary) !important;
+  border-color: var(--color-card-border) !important;
+  color: var(--color-text-primary) !important;
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: var(--color-text-secondary) !important;
+}
+
+[data-theme="dark"] input:focus,
+[data-theme="dark"] select:focus,
+[data-theme="dark"] textarea:focus {
+  border-color: var(--color-accent) !important;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+}
+
+/* Borders */
+[data-theme="dark"] .border-gray-200,
+[data-theme="dark"] .border-gray-300,
+[data-theme="dark"] .border-blue-200,
+[data-theme="dark"] .border-gray-700 {
+  border-color: var(--color-card-border) !important;
+}
+
+/* Labels */
+[data-theme="dark"] label {
+  color: var(--color-text-primary) !important;
+}
+
+/* Tables */
+[data-theme="dark"] table,
+[data-theme="dark"] th,
+[data-theme="dark"] td {
+  color: var(--color-text-primary) !important;
+  border-color: var(--color-card-border) !important;
+}
+
+[data-theme="dark"] th {
+  background-color: var(--color-bg-secondary) !important;
+}
+
+[data-theme="dark"] tr:hover {
+  background-color: rgba(96, 165, 250, 0.05) !important;
+}
+
+/* Buttons */
+[data-theme="dark"] button {
+  color: var(--color-text-primary) !important;
+}
+
+[data-theme="dark"] .bg-blue-600 {
+  background-color: var(--color-accent) !important;
+  color: white !important;
+}
+
+[data-theme="dark"] .bg-blue-600:hover {
+  background-color: var(--color-accent-light) !important;
+}
+
+/* Accent colors */
+[data-theme="dark"] .text-blue-600 {
+  color: var(--color-accent) !important;
+}
+
+[data-theme="dark"] .text-blue-400 {
+  color: var(--color-accent-light) !important;
+}
+
+[data-theme="dark"] .hover\:text-blue-600:hover {
+  color: var(--color-accent) !important;
+}
+
+/* Chart backgrounds */
+[data-theme="dark"] .recharts-wrapper,
+[data-theme="dark"] .recharts-surface {
+  background-color: transparent !important;
+}
+
+/* SVG and icons */
+[data-theme="dark"] svg {
+  color: var(--color-text-primary) !important;
+  stroke: var(--color-text-primary) !important;
+}
+
+[data-theme="dark"] svg.text-blue-600 {
+  color: var(--color-accent) !important;
+  stroke: var(--color-accent) !important;
+}
+
+/* Footer */
+[data-theme="dark"] footer {
+  background-color: var(--color-bg-secondary) !important;
+  border-color: var(--color-card-border) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+/* Scrollbar styling for dark mode */
+[data-theme="dark"] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--color-card-border);
+  border-radius: 4px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}

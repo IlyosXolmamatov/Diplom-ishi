@@ -131,24 +131,22 @@ export default function GrantFreeRA() {
   }, [scenario, numDevices, numRO, p_col_grantfree, energy_saving_pct, addEntry]);
 
   return (
-    <div className="min-h-screen pt-32 pb-32 px-6 sm:px-8 lg:px-16 bg-gray-50 dark:bg-gray-950">
-      <div className="max-w-7xl mx-auto">
+    <div className="page-container">
+      <div className="main-container">
         {/* Page Title */}
-        <div className="mb-16">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
-            Grant-free RA — mMTC va IoT Ssenariylar
-          </h1>
-          <p className="text-lg text-gray-600 mb-3">
+        <div className="section">
+          <h1 className="section-title">Grant-free RA — mMTC va IoT Ssenariylar</h1>
+          <p className="text-lg text-gray-600 dark:text-gray-400 mb-3">
             Qurilmalari ko'p bo'lgan IoT va mMTC txolatlar uchun optimizatsiya
           </p>
-          <div className="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
+          <div className="inline-block bg-blue-100 dark:bg-blue-900/20 text-blue-800 dark:text-blue-400 text-sm px-3 py-1 rounded-full">
             3GPP Rel-17 | mMTC / IoT Scenarios
           </div>
         </div>
 
         {/* Scenario Selector */}
         <div className="mb-12">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Ssenario tanlang</h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Ssenario tanlang</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {Object.entries(scenarioConfigs).map(([key, conf]) => {
               const Icon = conf.icon;
@@ -158,13 +156,13 @@ export default function GrantFreeRA() {
                   onClick={() => setScenario(key)}
                   className={`p-4 rounded-lg border-2 transition-all text-left ${
                     scenario === key
-                      ? 'border-blue-600 bg-blue-50'
-                      : 'border-gray-200 bg-white hover:border-gray-300'
+                      ? 'border-blue-600 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                      : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600'
                   }`}
                 >
-                  <Icon className="w-6 h-6 mb-2 text-blue-600" />
-                  <h3 className="font-semibold text-gray-900">{conf.name}</h3>
-                  <p className="text-xs text-gray-500">{conf.technology}</p>
+                  <Icon className="w-6 h-6 mb-2 text-blue-600 dark:text-blue-400" />
+                  <h3 className="font-semibold text-gray-900 dark:text-white">{conf.name}</h3>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">{conf.technology}</p>
                 </button>
               );
             })}
@@ -172,35 +170,35 @@ export default function GrantFreeRA() {
         </div>
 
         {/* Scenario Info Card */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6 mb-12">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Ssenario ma'lumotlari</h2>
+        <div className="viz-box mb-12">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Ssenario ma'lumotlari</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-gray-50 rounded-lg p-4">
-              <p className="text-xs font-medium text-gray-600 mb-1">Texnologiya</p>
-              <p className="text-lg font-bold text-gray-900">{config.technology}</p>
+            <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
+              <p className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Texnologiya</p>
+              <p className="text-lg font-bold text-gray-900 dark:text-white">{config.technology}</p>
             </div>
-            <div className="bg-gray-50 rounded-lg p-4">
-              <p className="text-xs font-medium text-gray-600 mb-1">Preambula formati</p>
-              <p className="text-lg font-bold text-gray-900">{config.format}</p>
+            <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
+              <p className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Preambula formati</p>
+              <p className="text-lg font-bold text-gray-900 dark:text-white">{config.format}</p>
             </div>
-            <div className="bg-gray-50 rounded-lg p-4">
-              <p className="text-xs font-medium text-gray-600 mb-1">Qurilmalar soni</p>
-              <p className="text-lg font-bold text-gray-900">{numDevices}</p>
+            <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
+              <p className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Qurilmalar soni</p>
+              <p className="text-lg font-bold text-gray-900 dark:text-white">{numDevices}</p>
             </div>
-            <div className="bg-gray-50 rounded-lg p-4">
-              <p className="text-xs font-medium text-gray-600 mb-1">PRACH RO soni</p>
-              <p className="text-lg font-bold text-gray-900">{numRO}</p>
+            <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
+              <p className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">PRACH RO soni</p>
+              <p className="text-lg font-bold text-gray-900 dark:text-white">{numRO}</p>
             </div>
           </div>
         </div>
 
         {/* Input Controls */}
-        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-16">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">Parametrlar</h2>
+        <div className="viz-box mb-16">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Parametrlar</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Devices Slider */}
             <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
+              <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 Qurilmalar soni: {numDevices}
               </label>
               <input
@@ -209,14 +207,14 @@ export default function GrantFreeRA() {
                 max="2000"
                 value={numDevices}
                 onChange={(e) => setNumDevices(parseInt(e.target.value))}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-600"
               />
-              <p className="text-xs text-gray-500 mt-1">10-2000 qurilma</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">10-2000 qurilma</p>
             </div>
 
             {/* RO Slider */}
             <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
+              <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 PRACH RO soni: {numRO}
               </label>
               <input
@@ -225,21 +223,21 @@ export default function GrantFreeRA() {
                 max="20"
                 value={numRO}
                 onChange={(e) => setNumRO(parseInt(e.target.value))}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-600"
               />
-              <p className="text-xs text-gray-500 mt-1">1-20 PRACH RO per frame</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">1-20 PRACH RO per frame</p>
             </div>
           </div>
         </div>
 
         {/* Comparison Visual */}
-        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-12">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">Grant-based vs Grant-free</h2>
+        <div className="viz-box mb-12">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Grant-based vs Grant-free</h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Grant-based */}
-            <div className="bg-linear-to-br from-gray-50 to-blue-50 rounded-lg border border-gray-300 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Grant-based RA</h3>
+            <div className="bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-300 dark:border-gray-700 p-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Grant-based RA</h3>
 
               {/* Steps */}
               <div className="space-y-2 mb-6">
@@ -247,7 +245,7 @@ export default function GrantFreeRA() {
                   <div className="flex-1 bg-gray-400 rounded py-2 text-center text-xs font-bold text-white">
                     SR
                   </div>
-                  <span className="text-gray-400">→</span>
+                  <span className="text-gray-400 dark:text-gray-600">→</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="flex-1 bg-blue-500 rounded py-2 text-center text-xs font-bold text-white">

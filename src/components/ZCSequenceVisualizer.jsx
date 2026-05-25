@@ -82,15 +82,15 @@ export default function ZCSequenceVisualizer() {
   const theoreticalThreshold = 1 / Math.sqrt(L_RA);
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-10 mb-16">
+    <div className="viz-box mb-16" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)' }}>
       {/* Title */}
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">
+        <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
           Zadoff-Chu Ketma-ketligi Vizualizatsiyasi
         </h2>
-        <p className="text-xs text-gray-600 mb-4">3GPP TS 38.211, Section 6.3.3</p>
-        <div className="mt-2 bg-gray-50 rounded p-3 border border-gray-200">
-          <p className="text-sm font-mono text-gray-800">
+        <p className="text-xs mb-4" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>3GPP TS 38.211, Section 6.3.3</p>
+        <div className="mt-2 rounded p-3 border" style={{ backgroundColor: 'var(--color-bg-secondary, #f9fafb)', borderColor: 'var(--color-card-border, #e5e7eb)' }}>
+          <p className="text-sm font-mono" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
             x<sub>u</sub>(n) = e<sup>-jπun(n+1)/L_RA</sup>
           </p>
         </div>
@@ -100,8 +100,8 @@ export default function ZCSequenceVisualizer() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         {/* Root Index Slider */}
         <div>
-          <label className="block text-sm font-semibold text-gray-900 mb-2">
-            Root index u: <span className="text-blue-600">{rootIndex}</span>
+          <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
+            Root index u: <span style={{ color: 'var(--color-accent, #3b82f6)' }}>{rootIndex}</span>
           </label>
           <input
             type="range"
@@ -109,18 +109,25 @@ export default function ZCSequenceVisualizer() {
             max="138"
             value={rootIndex}
             onChange={(e) => setRootIndex(parseInt(e.target.value))}
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+            className="w-full h-2 rounded-lg appearance-none cursor-pointer"
+            style={{ accentColor: 'var(--color-accent, #3b82f6)' }}
           />
-          <p className="text-xs text-gray-500 mt-1">1-138 oraliqda</p>
+          <p className="text-xs mt-1" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>1-138 oraliqda</p>
         </div>
 
         {/* L_RA Select */}
         <div>
-          <label className="block text-sm font-semibold text-gray-900 mb-2">L_RA tanlang</label>
+          <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--color-text-primary, #1f2937)' }}>L_RA tanlang</label>
           <select
             value={L_RA}
             onChange={(e) => setL_RA(parseInt(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2"
+            style={{
+              backgroundColor: 'var(--color-card-bg, #ffffff)',
+              color: 'var(--color-text-primary, #1f2937)',
+              borderColor: 'var(--color-card-border, #e5e7eb)',
+              focusRingColor: 'var(--color-accent, #3b82f6)'
+            }}
           >
             <option value={139}>L_RA = 139 (Short preamble)</option>
             <option value={839}>L_RA = 839 (Long preamble)</option>
@@ -129,72 +136,75 @@ export default function ZCSequenceVisualizer() {
 
         {/* Checkboxes */}
         <div>
-          <label className="block text-sm font-semibold text-gray-900 mb-2">Ko'rsatma</label>
+          <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Ko'rsatma</label>
           <div className="space-y-2">
             <label className="flex items-center">
               <input
                 type="checkbox"
                 checked={showMagnitude}
                 onChange={(e) => setShowMagnitude(e.target.checked)}
-                className="w-4 h-4 text-blue-600 rounded"
+                className="w-4 h-4 rounded"
+                style={{ accentColor: 'var(--color-accent, #3b82f6)' }}
               />
-              <span className="ml-2 text-sm text-gray-700">Magnitude</span>
+              <span className="ml-2 text-sm" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Magnitude</span>
             </label>
             <label className="flex items-center">
               <input
                 type="checkbox"
                 checked={showPhase}
                 onChange={(e) => setShowPhase(e.target.checked)}
-                className="w-4 h-4 text-blue-600 rounded"
+                className="w-4 h-4 rounded"
+                style={{ accentColor: 'var(--color-accent, #3b82f6)' }}
               />
-              <span className="ml-2 text-sm text-gray-700">Kompleks tekislik</span>
+              <span className="ml-2 text-sm" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Kompleks tekislik</span>
             </label>
             <label className="flex items-center">
               <input
                 type="checkbox"
                 checked={showCorrelation}
                 onChange={(e) => setShowCorrelation(e.target.checked)}
-                className="w-4 h-4 text-blue-600 rounded"
+                className="w-4 h-4 rounded"
+                style={{ accentColor: 'var(--color-accent, #3b82f6)' }}
               />
-              <span className="ml-2 text-sm text-gray-700">Korrelyatsiya</span>
+              <span className="ml-2 text-sm" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Korrelyatsiya</span>
             </label>
           </div>
         </div>
       </div>
 
       {/* Info Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-        <div className="bg-linear-to-br from-green-50 to-green-100 rounded-lg border border-green-300 p-4">
-          <p className="text-xs font-medium text-gray-600 mb-1">Magnitude xossasi</p>
-          <p className="text-2xl font-bold text-green-600">1.000</p>
-          <p className="text-xs text-gray-600 mt-1">Konstantlik: |x_u(n)| = 1</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="rounded-lg border p-6 viz-box" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: 'var(--color-card-border, #e5e7eb)' }}>
+          <p className="text-xs font-medium mb-3" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>Magnitude xossasi</p>
+          <p className="text-3xl font-bold mb-3" style={{ color: 'var(--color-accent, #3b82f6)' }}>1.000</p>
+          <p className="text-xs" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>Konstantlik: |x_u(n)| = 1</p>
         </div>
 
-        <div className="bg-linear-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-300 p-4">
-          <p className="text-xs font-medium text-gray-600 mb-1">Preambula uzunligi</p>
-          <p className="text-2xl font-bold text-blue-600">L_RA = {L_RA}</p>
-          <p className="text-xs text-gray-600 mt-1">{L_RA === 139 ? 'Qisqa' : 'Uzun'} preambula</p>
+        <div className="rounded-lg border p-6 viz-box" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: 'var(--color-card-border, #e5e7eb)' }}>
+          <p className="text-xs font-medium mb-3" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>Preambula uzunligi</p>
+          <p className="text-3xl font-bold mb-3" style={{ color: 'var(--color-accent, #3b82f6)' }}>L_RA = {L_RA}</p>
+          <p className="text-xs" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>{L_RA === 139 ? 'Qisqa' : 'Uzun'} preambula</p>
         </div>
 
-        <div className="bg-linear-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-300 p-4">
-          <p className="text-xs font-medium text-gray-600 mb-1">Root indeksi</p>
-          <p className="text-2xl font-bold text-blue-600">u = {rootIndex}</p>
-          <p className="text-xs text-gray-600 mt-1">ZC ketma-ketlik tariflovchi</p>
+        <div className="rounded-lg border p-6 viz-box" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: 'var(--color-card-border, #e5e7eb)' }}>
+          <p className="text-xs font-medium mb-3" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>Root indeksi</p>
+          <p className="text-3xl font-bold mb-3" style={{ color: 'var(--color-accent, #3b82f6)' }}>u = {rootIndex}</p>
+          <p className="text-xs" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>ZC ketma-ketlik tariflovchi</p>
         </div>
 
-        <div className="bg-linear-to-br from-orange-50 to-orange-100 rounded-lg border border-orange-300 p-4">
-          <p className="text-xs font-medium text-gray-600 mb-1">Maksimal preambula</p>
-          <p className="text-2xl font-bold text-orange-600">{Math.floor(L_RA / 13)}</p>
-          <p className="text-xs text-gray-600 mt-1">⌊L_RA / 13⌋ = {Math.floor(L_RA / 13)}</p>
+        <div className="rounded-lg border p-6 viz-box" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: 'var(--color-card-border, #e5e7eb)' }}>
+          <p className="text-xs font-medium mb-3" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>Maksimal preambula</p>
+          <p className="text-3xl font-bold mb-3" style={{ color: 'var(--color-accent, #3b82f6)' }}>{Math.floor(L_RA / 13)}</p>
+          <p className="text-xs" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>⌊L_RA / 13⌋ = {Math.floor(L_RA / 13)}</p>
         </div>
       </div>
 
       {/* Charts Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
         {/* Magnitude Chart */}
         {showMagnitude && (
-          <div className="bg-gray-50 rounded-lg border border-gray-200 p-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Magnitude spektri</h3>
+          <div className="viz-box rounded-lg border p-6" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: 'var(--color-card-border, #e5e7eb)' }}>
+            <h3 className="text-lg font-semibold mb-6" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Magnitude spektri</h3>
             <ResponsiveContainer width="100%" height={200}>
               <ComposedChart data={magnitudeData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -210,8 +220,8 @@ export default function ZCSequenceVisualizer() {
 
         {/* Complex Plane Chart */}
         {showPhase && (
-          <div className="bg-gray-50 rounded-lg border border-gray-200 p-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Kompleks tekislik (I/Q)</h3>
+          <div className="viz-box rounded-lg border p-6" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: 'var(--color-card-border, #e5e7eb)' }}>
+            <h3 className="text-lg font-semibold mb-6" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Kompleks tekislik (I/Q)</h3>
             <ResponsiveContainer width="100%" height={200}>
               <ScatterChart
                 margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
@@ -231,8 +241,8 @@ export default function ZCSequenceVisualizer() {
 
         {/* Correlation Chart */}
         {showCorrelation && (
-          <div className="bg-gray-50 rounded-lg border border-gray-200 p-4 lg:col-span-2">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          <div className="viz-box rounded-lg border p-6 lg:col-span-2" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: 'var(--color-card-border, #e5e7eb)' }}>
+            <h3 className="text-lg font-semibold mb-6" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
               O'zaro korrelyatsiya: u={rootIndex} va u={rootIndex + 1}
             </h3>
             <ResponsiveContainer width="100%" height={200}>
@@ -262,15 +272,15 @@ export default function ZCSequenceVisualizer() {
 
         {/* Empty state when no charts selected */}
         {!showMagnitude && !showPhase && !showCorrelation && (
-          <div className="lg:col-span-2 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300 p-8 text-center">
-            <p className="text-gray-600">Grafikni ko'rsatish uchun yuqorida checkbox-larni belgilang</p>
+          <div className="lg:col-span-2 rounded-lg border-2 border-dashed p-8 text-center" style={{ backgroundColor: 'var(--color-bg-secondary, #f9fafb)', borderColor: 'var(--color-card-border, #e5e7eb)' }}>
+            <p style={{ color: 'var(--color-text-secondary, #6b7280)' }}>Grafikni ko'rsatish uchun yuqorida checkbox-larni belgilang</p>
           </div>
         )}
       </div>
 
       {/* Information Box */}
-      <div className="mt-8 bg-blue-50 border-l-4 border-blue-600 p-4 rounded">
-        <p className="text-sm text-gray-800">
+      <div className="border-l-4 p-6 rounded" style={{ backgroundColor: 'var(--color-bg-secondary, #f9fafb)', borderLeftColor: 'var(--color-accent, #3b82f6)' }}>
+        <p className="text-sm" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
           <span className="font-semibold">Zadoff-Chu ketma-ketliklari</span> — bu 3GPP 5G standartida PRACH (Physical Random Access Channel) preambulalarini yaratishda ishlatiladigan
           pseudotasodifiy ketma-ketliklar. Ularning asosiy xossasi: barcha elementlarining magnitude 1 ga teng va turli root indekslari
           uchun past o'zaro korrelyatsiyaga ega.

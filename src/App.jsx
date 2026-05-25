@@ -19,15 +19,15 @@ function App() {
     // Initialize dark mode from localStorage
     const darkMode = localStorage.getItem('darkMode');
     if (darkMode === 'true') {
-      document.documentElement.classList.add('dark');
+      document.documentElement.setAttribute('data-theme', 'dark');
     }
   }, []);
 
   return (
     <BrowserRouter>
-      <div className="flex flex-col min-h-screen bg-white dark:bg-gray-950">
+      <div className="flex flex-col min-h-screen bg-white" style={{ backgroundColor: 'var(--app-bg, #ffffff)' }}>
         <Navbar />
-        <main className="grow pt-32 pb-20 bg-white dark:bg-gray-950">
+        <main className="grow pt-48 pb-20" style={{ backgroundColor: 'var(--app-bg, #ffffff)' }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/aloha" element={<AlohaCalculator />} />

@@ -69,29 +69,27 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--app-bg, #ffffff)' }}>
       {/* Hero Section */}
-      <section className="pt-40 pb-32 px-6 sm:px-8 lg:px-16">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+      <section className="page-container pt-20 pb-32" style={{ marginTop: '80px' }}>
+        <div className="main-container text-center">
+          <h1 className="text-5xl sm:text-6xl font-bold mb-6" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
             5G NR PRACH Tahlil Tizimi
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto">
+          <p className="text-xl mb-12 max-w-3xl mx-auto" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>
             Preambula asosidagi tasodifiy kirish usullarini hisoblash va vizualizatsiya
           </p>
         </div>
       </section>
 
       {/* Statistics Row */}
-      <section className="bg-blue-50 dark:bg-gray-900 py-20 px-6 sm:px-8 lg:px-16 mb-32">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+      <section className="py-20 mb-32 page-container" style={{ backgroundColor: 'var(--color-bg-secondary, #f3f4f6)' }}>
+        <div className="main-container">
+          <div className="info-grid">
             {statistics.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-gray-600">{stat.label}</div>
+              <div key={index} className="info-box">
+                <div className="info-value">{stat.value}</div>
+                <div className="info-label">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -99,32 +97,33 @@ export default function Home() {
       </section>
 
       {/* Feature Cards */}
-      <section className="py-32 px-6 sm:px-8 lg:px-16">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-24">
+      <section className="section page-container py-32">
+        <div className="main-container">
+          <h2 className="section-title text-center" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
             Xususiyatlar
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-14">
+          <div className="feature-grid">
             {features.map((feature) => {
               const Icon = feature.icon;
               return (
-                <div
-                  key={feature.id}
-                  className="bg-white border border-gray-200 rounded-lg p-10 hover:shadow-lg transition-shadow"
-                >
-                  <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mb-4">
-                    <Icon className="w-6 h-6 text-blue-600" />
+                <div key={feature.id} className="feature-card" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)' }}>
+                  <div className="icon-container">
+                    <Icon className="w-6 h-6" style={{ color: 'var(--color-accent, #3b82f6)' }} />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-600 mb-6">{feature.description}</p>
-                  <Link
-                    to={feature.link}
-                    className="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors"
-                  >
-                    {feature.buttonText}
-                  </Link>
+                  <div className="content-wrapper">
+                    <h3 className="card-title" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
+                      {feature.title}
+                    </h3>
+                    <p className="card-description" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>
+                      {feature.description}
+                    </p>
+                    <Link
+                      to={feature.link}
+                      className="card-button mt-auto"
+                    >
+                      {feature.buttonText}
+                    </Link>
+                  </div>
                 </div>
               );
             })}
@@ -133,8 +132,8 @@ export default function Home() {
       </section>
 
       {/* Zadoff-Chu Sequence Visualizer */}
-      <section className="py-32 px-6 sm:px-8 lg:px-16 bg-gray-50 dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto">
+      <section className="section page-container py-32" style={{ backgroundColor: 'var(--color-bg-secondary, #f3f4f6)' }}>
+        <div className="main-container">
           <ZCSequenceVisualizer />
         </div>
       </section>

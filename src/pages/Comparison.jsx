@@ -216,15 +216,13 @@ export default function Comparison() {
   };
 
   return (
-    <div className="min-h-screen pt-32 pb-32 px-6 sm:px-8 lg:px-16 bg-gray-50 dark:bg-gray-950">
-      <div className="max-w-7xl mx-auto">
+    <div className="page-container">
+      <div className="main-container">
         {/* Page Title */}
-        <div className="mb-16 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+        <div className="section mb-16 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
           <div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">
-              Barcha RA Usullarining Taqqoslash Dashboardi
-            </h1>
-            <div className="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm px-3 py-1 rounded-full">
+            <h1 className="section-title" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Barcha RA Usullarining Taqqoslash Dashboardi</h1>
+            <div className="inline-block text-sm px-3 py-1 rounded-full" style={{ backgroundColor: 'var(--color-icon-bg, rgba(59, 130, 246, 0.1))', color: 'var(--color-accent, #3b82f6)' }}>
               3GPP TS 38.211 | ML Detection | Rel-17
             </div>
           </div>
@@ -243,33 +241,34 @@ export default function Comparison() {
           {summaryCards.map((card, idx) => (
             <div
               key={idx}
-              className={`bg-linear-to-br ${card.color} rounded-lg border-2 p-4`}
+              className="rounded-lg border-2 p-4 viz-box"
+              style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: 'var(--color-card-border, #e5e7eb)' }}
             >
-              <p className="text-xs font-medium text-gray-600 mb-1">{card.label}</p>
-              <p className="text-lg font-bold text-gray-900 mb-1">{card.value}</p>
-              <p className="text-2xl font-bold text-blue-600">{card.metric}</p>
+              <p className="text-xs font-medium mb-1" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>{card.label}</p>
+              <p className="text-lg font-bold mb-1" style={{ color: 'var(--color-text-primary, #1f2937)' }}>{card.value}</p>
+              <p className="text-2xl font-bold" style={{ color: 'var(--color-accent, #3b82f6)' }}>{card.metric}</p>
             </div>
           ))}
         </div>
 
         {/* Main Comparison Table */}
-        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-16 overflow-x-auto">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Keng Taqqoslash Jadval</h2>
+        <div className="viz-box mb-16 overflow-x-auto" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)' }}>
+          <h2 className="text-2xl font-semibold mb-6" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Keng Taqqoslash Jadval</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-gray-50 border-b-2 border-gray-200">
+              <thead style={{ backgroundColor: 'var(--color-bg-secondary, #f3f4f6)', borderBottomColor: 'var(--color-card-border, #e5e7eb)' }} className="border-b-2">
                 <tr>
-                  <th className="px-4 py-3 text-left font-semibold text-gray-900">Usul</th>
-                  <th className="px-4 py-3 text-center font-semibold text-gray-900">Throughput (%)</th>
-                  <th className="px-4 py-3 text-center font-semibold text-gray-900">Kechikish (ms)</th>
-                  <th className="px-4 py-3 text-center font-semibold text-gray-900">Kolliziya (%)</th>
-                  <th className="px-4 py-3 text-center font-semibold text-gray-900">Energiya (rel)</th>
-                  <th className="px-4 py-3 text-center font-semibold text-gray-900">Standart</th>
+                  <th className="px-4 py-3 text-left font-semibold" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Usul</th>
+                  <th className="px-4 py-3 text-center font-semibold" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Throughput (%)</th>
+                  <th className="px-4 py-3 text-center font-semibold" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Kechikish (ms)</th>
+                  <th className="px-4 py-3 text-center font-semibold" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Kolliziya (%)</th>
+                  <th className="px-4 py-3 text-center font-semibold" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Energiya (rel)</th>
+                  <th className="px-4 py-3 text-center font-semibold" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Standart</th>
                 </tr>
               </thead>
               <tbody>
                 {methods.map((method, idx) => (
-                  <tr key={idx} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                  <tr key={idx} style={{ backgroundColor: idx % 2 === 0 ? 'var(--color-card-bg, #ffffff)' : 'var(--color-bg-secondary, #f9fafb)', borderBottomColor: 'var(--color-card-border, #e5e7eb)' }} className="border-b">
                     <td className="px-4 py-3 font-semibold" style={{ color: method.color }}>
                       {method.name}
                     </td>
@@ -282,8 +281,8 @@ export default function Comparison() {
                     <td className={`px-4 py-3 text-center ${getCellColor('Kolliziya', method.collision)}`}>
                       {method.collision}
                     </td>
-                    <td className="px-4 py-3 text-center">{method.energy}</td>
-                    <td className="px-4 py-3 text-center text-xs font-semibold">{method.standard}</td>
+                    <td className="px-4 py-3 text-center" style={{ color: 'var(--color-text-primary, #1f2937)' }}>{method.energy}</td>
+                    <td className="px-4 py-3 text-center text-xs font-semibold" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>{method.standard}</td>
                   </tr>
                 ))}
               </tbody>
@@ -292,8 +291,8 @@ export default function Comparison() {
         </div>
 
         {/* Throughput Bar Chart */}
-        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-16">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Throughput Taqqoslash</h2>
+        <div className="viz-box mb-16">
+          <h2 className="text-2xl font-semibold mb-6" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Throughput Taqqoslash</h2>
           <ResponsiveContainer width="100%" height={250}>
             <BarChart data={throughputData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -309,8 +308,8 @@ export default function Comparison() {
         </div>
 
         {/* PRACH Degradation Chart */}
-        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-16">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+        <div className="viz-box mb-16">
+          <h2 className="text-2xl font-semibold mb-6" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
             PRACH Usullari Degradatsiyasi vs UE Soni
           </h2>
           <ResponsiveContainer width="100%" height={300}>
@@ -329,8 +328,8 @@ export default function Comparison() {
         </div>
 
         {/* Radar Chart */}
-        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-16">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Umumiy Qiyosiy Taqqoslash (Radar)</h2>
+        <div className="viz-box mb-16">
+          <h2 className="text-2xl font-semibold mb-6" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Umumiy Qiyosiy Taqqoslash (Radar)</h2>
           <ResponsiveContainer width="100%" height={350}>
             <RadarChart data={radarData} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
               <PolarGrid stroke="#e5e7eb" />
@@ -348,56 +347,56 @@ export default function Comparison() {
 
         {/* Improvement Coefficients */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
-          <div className="bg-linear-to-br from-blue-50 to-blue-100 rounded-lg border-2 border-blue-300 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Taraqqiyot Koeffitsientlari</h3>
+          <div className="rounded-lg border-2 p-6 viz-box" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: 'var(--color-accent-light, #93c5fd)' }}>
+            <h3 className="text-lg font-semibold mb-4" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Taraqqiyot Koeffitsientlari</h3>
             <div className="space-y-3 text-sm">
-              <div className="bg-white rounded p-3">
-                <p className="font-semibold text-gray-900">5G PRACH / Slotted ALOHA</p>
-                <p className="text-blue-600 font-bold text-lg">K = 90/36.8 = 2.45x</p>
+              <div className="rounded p-3" style={{ backgroundColor: 'var(--color-bg-secondary, #f9fafb)' }}>
+                <p className="font-semibold" style={{ color: 'var(--color-text-primary, #1f2937)' }}>5G PRACH / Slotted ALOHA</p>
+                <p className="font-bold text-lg" style={{ color: 'var(--color-accent, #3b82f6)' }}>K = 90/36.8 = 2.45x</p>
               </div>
-              <div className="bg-white rounded p-3">
-                <p className="font-semibold text-gray-900">2-step / 4-step Kechikish</p>
-                <p className="text-blue-600 font-bold text-lg">Kamayish = 60.6%</p>
+              <div className="rounded p-3" style={{ backgroundColor: 'var(--color-bg-secondary, #f9fafb)' }}>
+                <p className="font-semibold" style={{ color: 'var(--color-text-primary, #1f2937)' }}>2-step / 4-step Kechikish</p>
+                <p className="font-bold text-lg" style={{ color: 'var(--color-accent, #3b82f6)' }}>Kamayish = 60.6%</p>
               </div>
-              <div className="bg-white rounded p-3">
-                <p className="font-semibold text-gray-900">SVM / Klassik PD (SNR=-10dB)</p>
-                <p className="text-blue-600 font-bold text-lg">+3.6%</p>
+              <div className="rounded p-3" style={{ backgroundColor: 'var(--color-bg-secondary, #f9fafb)' }}>
+                <p className="font-semibold" style={{ color: 'var(--color-text-primary, #1f2937)' }}>SVM / Klassik PD (SNR=-10dB)</p>
+                <p className="font-bold text-lg" style={{ color: 'var(--color-accent, #3b82f6)' }}>+3.6%</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-linear-to-br from-green-50 to-green-100 rounded-lg border-2 border-green-300 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Asosiy Foydalanish Ssenariylari</h3>
+          <div className="rounded-lg border-2 p-6 viz-box" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: 'var(--color-accent-light, #93c5fd)' }}>
+            <h3 className="text-lg font-semibold mb-4" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Asosiy Foydalanish Ssenariylari</h3>
             <ul className="space-y-2 text-sm">
               <li className="flex items-start">
-                <span className="text-green-600 font-bold mr-2">→</span>
-                <span><span className="font-semibold">Mobil tarmoq:</span> 2-step PRACH (Rel-16+)</span>
+                <span className="font-bold mr-2" style={{ color: 'var(--color-accent, #3b82f6)' }}>→</span>
+                <span style={{ color: 'var(--color-text-primary, #1f2937)' }}><span className="font-semibold">Mobil tarmoq:</span> 2-step PRACH (Rel-16+)</span>
               </li>
               <li className="flex items-start">
-                <span className="text-green-600 font-bold mr-2">→</span>
-                <span><span className="font-semibold">mMTC:</span> Grant-free RA (Rel-17)</span>
+                <span className="font-bold mr-2" style={{ color: 'var(--color-accent, #3b82f6)' }}>→</span>
+                <span style={{ color: 'var(--color-text-primary, #1f2937)' }}><span className="font-semibold">mMTC:</span> Grant-free RA (Rel-17)</span>
               </li>
               <li className="flex items-start">
-                <span className="text-green-600 font-bold mr-2">→</span>
-                <span><span className="font-semibold">URLLC:</span> SVM+PRACH (Tadqiqot)</span>
+                <span className="font-bold mr-2" style={{ color: 'var(--color-accent, #3b82f6)' }}>→</span>
+                <span style={{ color: 'var(--color-text-primary, #1f2937)' }}><span className="font-semibold">URLLC:</span> SVM+PRACH (Tadqiqot)</span>
               </li>
               <li className="flex items-start">
-                <span className="text-green-600 font-bold mr-2">→</span>
-                <span><span className="font-semibold">Irsiy:</span> Slotted ALOHA (Qisman)</span>
+                <span className="font-bold mr-2" style={{ color: 'var(--color-accent, #3b82f6)' }}>→</span>
+                <span style={{ color: 'var(--color-text-primary, #1f2937)' }}><span className="font-semibold">Irsiy:</span> Slotted ALOHA (Qisman)</span>
               </li>
             </ul>
           </div>
         </div>
 
         {/* ML Detection Section */}
-        <div className="bg-linear-to-r from-indigo-50 to-purple-50 rounded-lg border-2 border-indigo-300 p-10 mb-16">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+        <div className="rounded-lg border-2 p-10 mb-16 viz-box" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: 'var(--color-card-border, #e5e7eb)' }}>
+          <h2 className="text-2xl font-semibold mb-6" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
             ML asosidagi aniqlash taqqoslashi (Manba [1],[4])
           </h2>
 
           {/* SNR Slider */}
           <div className="mb-8">
-            <label className="block text-sm font-semibold text-gray-900 mb-2">
+            <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
               SNR: {snr} dB
             </label>
             <input
@@ -406,28 +405,29 @@ export default function Comparison() {
               max="10"
               value={snr}
               onChange={(e) => setSnr(parseInt(e.target.value))}
-              className="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+              className="w-full h-2 rounded-lg appearance-none cursor-pointer"
+              style={{ accentColor: 'var(--color-accent, #3b82f6)' }}
             />
-            <p className="text-xs text-gray-600 mt-2">-20 dan +10 dB gacha qo'ying</p>
+            <p className="text-xs mt-2" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>-20 dan +10 dB gacha qo'ying</p>
           </div>
 
           {/* ML Detection Metrics */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-            <div className="bg-white rounded-lg p-4 border border-blue-300">
-              <p className="text-xs font-medium text-gray-600 mb-1">PD_MF (Matched Filter)</p>
-              <p className="text-3xl font-bold text-blue-600">{mlCurrent.pd_mf}%</p>
+            <div className="rounded-lg p-4 border viz-box" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: 'var(--color-accent, #3b82f6)' }}>
+              <p className="text-xs font-medium mb-1" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>PD_MF (Matched Filter)</p>
+              <p className="text-3xl font-bold" style={{ color: 'var(--color-accent, #3b82f6)' }}>{mlCurrent.pd_mf}%</p>
             </div>
-            <div className="bg-white rounded-lg p-4 border border-green-300">
-              <p className="text-xs font-medium text-gray-600 mb-1">PD_SVM</p>
-              <p className="text-3xl font-bold text-green-600">{mlCurrent.pd_svm}%</p>
+            <div className="rounded-lg p-4 border viz-box" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: '#4CAF50' }}>
+              <p className="text-xs font-medium mb-1" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>PD_SVM</p>
+              <p className="text-3xl font-bold" style={{ color: '#4CAF50' }}>{mlCurrent.pd_svm}%</p>
             </div>
-            <div className="bg-white rounded-lg p-4 border border-purple-300">
-              <p className="text-xs font-medium text-gray-600 mb-1">PD_Ensemble</p>
-              <p className="text-3xl font-bold text-purple-600">{mlCurrent.pd_ens}%</p>
+            <div className="rounded-lg p-4 border viz-box" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: '#9C27B0' }}>
+              <p className="text-xs font-medium mb-1" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>PD_Ensemble</p>
+              <p className="text-3xl font-bold" style={{ color: '#9C27B0' }}>{mlCurrent.pd_ens}%</p>
             </div>
-            <div className="bg-white rounded-lg p-4 border border-orange-300">
-              <p className="text-xs font-medium text-gray-600 mb-1">Δ(SVM-MF)</p>
-              <p className="text-3xl font-bold text-orange-600">+{mlCurrent.delta}%</p>
+            <div className="rounded-lg p-4 border viz-box" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: '#FF9800' }}>
+              <p className="text-xs font-medium mb-1" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>Δ(SVM-MF)</p>
+              <p className="text-3xl font-bold" style={{ color: '#FF9800' }}>+{mlCurrent.delta}%</p>
             </div>
           </div>
 
@@ -448,40 +448,40 @@ export default function Comparison() {
         </div>
 
         {/* Source References */}
-        <div className="bg-white rounded-lg border border-gray-200 p-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Manbalari va Adabiyotlar</h2>
+        <div className="viz-box rounded-lg border" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: 'var(--color-card-border, #e5e7eb)' }}>
+          <h2 className="text-2xl font-semibold mb-6" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Manbalari va Adabiyotlar</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-            <div className="bg-gray-50 rounded p-4 border-l-4 border-blue-600">
-              <p className="font-semibold text-gray-900">[1] Nature 2023</p>
-              <p className="text-gray-600">ML Detection in PRACH Systems</p>
+            <div className="rounded p-4 border-l-4" style={{ backgroundColor: 'var(--color-bg-secondary, #f9fafb)', borderLeftColor: 'var(--color-accent, #3b82f6)' }}>
+              <p className="font-semibold" style={{ color: 'var(--color-text-primary, #1f2937)' }}>[1] Nature 2023</p>
+              <p style={{ color: 'var(--color-text-secondary, #6b7280)' }}>ML Detection in PRACH Systems</p>
             </div>
-            <div className="bg-gray-50 rounded p-4 border-l-4 border-green-600">
-              <p className="font-semibold text-gray-900">[2] IEEE 5G 2023</p>
-              <p className="text-gray-600">Grant-free Random Access Analysis</p>
+            <div className="rounded p-4 border-l-4" style={{ backgroundColor: 'var(--color-bg-secondary, #f9fafb)', borderLeftColor: '#4CAF50' }}>
+              <p className="font-semibold" style={{ color: 'var(--color-text-primary, #1f2937)' }}>[2] IEEE 5G 2023</p>
+              <p style={{ color: 'var(--color-text-secondary, #6b7280)' }}>Grant-free Random Access Analysis</p>
             </div>
-            <div className="bg-gray-50 rounded p-4 border-l-4 border-purple-600">
-              <p className="font-semibold text-gray-900">[3] 3GPP TR 38.901</p>
-              <p className="text-gray-600">5G Radio Propagation Models</p>
+            <div className="rounded p-4 border-l-4" style={{ backgroundColor: 'var(--color-bg-secondary, #f9fafb)', borderLeftColor: '#9C27B0' }}>
+              <p className="font-semibold" style={{ color: 'var(--color-text-primary, #1f2937)' }}>[3] 3GPP TR 38.901</p>
+              <p style={{ color: 'var(--color-text-secondary, #6b7280)' }}>5G Radio Propagation Models</p>
             </div>
-            <div className="bg-gray-50 rounded p-4 border-l-4 border-orange-600">
-              <p className="font-semibold text-gray-900">[4] arXiv 2023</p>
-              <p className="text-gray-600">SVM-based Preamble Detection</p>
+            <div className="rounded p-4 border-l-4" style={{ backgroundColor: 'var(--color-bg-secondary, #f9fafb)', borderLeftColor: '#FF9800' }}>
+              <p className="font-semibold" style={{ color: 'var(--color-text-primary, #1f2937)' }}>[4] arXiv 2023</p>
+              <p style={{ color: 'var(--color-text-secondary, #6b7280)' }}>SVM-based Preamble Detection</p>
             </div>
-            <div className="bg-gray-50 rounded p-4 border-l-4 border-red-600">
-              <p className="font-semibold text-gray-900">[5] MDPI Electronics 2023</p>
-              <p className="text-gray-600">Throughput Optimization Methods</p>
+            <div className="rounded p-4 border-l-4" style={{ backgroundColor: 'var(--color-bg-secondary, #f9fafb)', borderLeftColor: '#F44336' }}>
+              <p className="font-semibold" style={{ color: 'var(--color-text-primary, #1f2937)' }}>[5] MDPI Electronics 2023</p>
+              <p style={{ color: 'var(--color-text-secondary, #6b7280)' }}>Throughput Optimization Methods</p>
             </div>
-            <div className="bg-gray-50 rounded p-4 border-l-4 border-pink-600">
-              <p className="font-semibold text-gray-900">[6] IEEE ComMag 2023</p>
-              <p className="text-gray-600">2-step RACH Performance</p>
+            <div className="rounded p-4 border-l-4" style={{ backgroundColor: 'var(--color-bg-secondary, #f9fafb)', borderLeftColor: '#EC407A' }}>
+              <p className="font-semibold" style={{ color: 'var(--color-text-primary, #1f2937)' }}>[6] IEEE ComMag 2023</p>
+              <p style={{ color: 'var(--color-text-secondary, #6b7280)' }}>2-step RACH Performance</p>
             </div>
-            <div className="bg-gray-50 rounded p-4 border-l-4 border-cyan-600">
-              <p className="font-semibold text-gray-900">[7] Telecom Review 2023</p>
-              <p className="text-gray-600">3GPP Rel-17 Features</p>
+            <div className="rounded p-4 border-l-4" style={{ backgroundColor: 'var(--color-bg-secondary, #f9fafb)', borderLeftColor: '#00BCD4' }}>
+              <p className="font-semibold" style={{ color: 'var(--color-text-primary, #1f2937)' }}>[7] Telecom Review 2023</p>
+              <p style={{ color: 'var(--color-text-secondary, #6b7280)' }}>3GPP Rel-17 Features</p>
             </div>
-            <div className="bg-gray-50 rounded p-4 border-l-4 border-indigo-600">
-              <p className="font-semibold text-gray-900">[8] ACM SIGCOM 2024</p>
-              <p className="text-gray-600">Comparative RA Analysis</p>
+            <div className="rounded p-4 border-l-4" style={{ backgroundColor: 'var(--color-bg-secondary, #f9fafb)', borderLeftColor: '#3F51B5' }}>
+              <p className="font-semibold" style={{ color: 'var(--color-text-primary, #1f2937)' }}>[8] ACM SIGCOM 2024</p>
+              <p style={{ color: 'var(--color-text-secondary, #6b7280)' }}>Comparative RA Analysis</p>
             </div>
           </div>
         </div>

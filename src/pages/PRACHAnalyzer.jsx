@@ -99,12 +99,12 @@ export default function PRACHAnalyzer() {
   }, [numUE, numPreamble, pAcb, collisionSelected, throughput, beta, addEntry]);
 
   return (
-    <div className="min-h-screen pt-32 pb-32 px-6 sm:px-8 lg:px-16 bg-gray-50 dark:bg-gray-950">
-      <div className="max-w-7xl mx-auto">
+    <div className="page-container min-h-screen">
+      <div className="main-container">
         {/* Page Title */}
-        <div className="mb-16">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">PRACH Tahlil</h1>
-          <p className="text-lg text-gray-600 mb-3">
+        <div className="section mb-32">
+          <h1 className="section-title text-gray-900 dark:text-white">PRACH Tahlil</h1>
+          <p className="text-lg text-gray-600 dark:text-gray-300 mb-3">
             Kolliziya ehtimoli va otkazuvchanlik hisoblash
           </p>
           <div className="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
@@ -113,7 +113,7 @@ export default function PRACHAnalyzer() {
         </div>
 
         {/* Input Panel */}
-        <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-10 mb-16">
+        <div className="viz-box mb-32">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* UE Count Input */}
             <div>
@@ -189,8 +189,8 @@ export default function PRACHAnalyzer() {
         </div>
 
         {/* Results Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="viz-grid mb-32">
+          <div className="viz-box">
             <h3 className="text-sm font-medium text-gray-600 mb-2">Kolliziya (N=64)</h3>
             <p className="text-4xl font-bold text-red-600">{collision64.toFixed(1)}%</p>
           </div>
@@ -214,8 +214,8 @@ export default function PRACHAnalyzer() {
         </div>
 
         {/* Chart 1: Collision Probability */}
-        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-12">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+        <div className="viz-box mb-32">
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
             Kolliziya ehtimoli vs UE soni
           </h2>
           <ResponsiveContainer width="100%" height={300}>
@@ -287,8 +287,8 @@ export default function PRACHAnalyzer() {
         </div>
 
         {/* Chart 2: Throughput */}
-        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-12">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+        <div className="viz-box mb-32">
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
             Normalangan otkazuvchanlik
           </h2>
           <ResponsiveContainer width="100%" height={250}>
@@ -348,8 +348,8 @@ export default function PRACHAnalyzer() {
         </div>
 
         {/* ACB Analysis Table */}
-        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-12">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+        <div className="viz-box mb-32">
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
             ACB Mexanizmi Tahlili (M=500 UE, N=64)
           </h2>
           <div className="overflow-x-auto">
@@ -405,8 +405,8 @@ export default function PRACHAnalyzer() {
         </div>
 
         {/* QoS Preamble Separation */}
-        <div className="bg-white rounded-lg border border-gray-200 p-10 mb-12">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+        <div className="viz-box mb-32">
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
             QoS asosida preambula ajratish
             <span className="text-sm font-normal text-gray-500 ml-2">(Manba [2])</span>
           </h2>
