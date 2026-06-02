@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import {
   BarChart,
   Bar,
+  Cell,
   LineChart,
   Line,
   RadarChart,
@@ -46,7 +47,7 @@ export default function Comparison() {
       color: '#FF9800',
     },
     {
-      name: '4-step PRACH',
+      name: '4-bosqichli PRACH',
       throughput: 85,
       latency: 16.5,
       collision: 36.4,
@@ -56,7 +57,7 @@ export default function Comparison() {
       color: '#2196F3',
     },
     {
-      name: '2-step PRACH',
+      name: '2-bosqichli PRACH',
       throughput: 90,
       latency: 6.5,
       collision: 36.4,
@@ -66,7 +67,7 @@ export default function Comparison() {
       color: '#4CAF50',
     },
     {
-      name: 'Grant-free RA',
+      name: 'Grantsiz RA',
       throughput: 75,
       latency: 2,
       collision: 45,
@@ -90,40 +91,40 @@ export default function Comparison() {
   // Summary cards data
   const summaryCards = [
     {
-      label: 'Eng yuqori throughput',
-      value: '2-step PRACH',
+      label: 'Eng yuqori o\'tkazuvchanlik',
+      value: '2-bosqichli PRACH',
       metric: '90%',
       color: 'from-green-50 to-green-100 border-green-300',
     },
     {
       label: 'Eng past kechikish',
-      value: 'Grant-free RA',
+      value: 'Grantsiz RA',
       metric: '2 ms',
       color: 'from-blue-50 to-blue-100 border-blue-300',
     },
     {
       label: 'Eng past kolliziya',
-      value: '4/2-step PRACH',
+      value: '4/2-bosqichli PRACH',
       metric: '36.4%',
       color: 'from-purple-50 to-purple-100 border-purple-300',
     },
     {
       label: 'Eng kam energiya',
-      value: 'Grant-free RA',
+      value: 'Grantsiz RA',
       metric: '15 rel',
       color: 'from-orange-50 to-orange-100 border-orange-300',
     },
     {
       label: 'Eng yuqori standart',
-      value: '2-step PRACH',
+      value: '2-bosqichli PRACH',
       metric: 'Rel-16',
       color: 'from-pink-50 to-pink-100 border-pink-300',
     },
   ];
 
-  // Throughput bar chart data
+  // O'tkazuvchanlik bar chart data
   const throughputData = methods.map(m => ({
-    name: m.name.split(' ')[0],
+    name: m.name,
     throughput: m.throughput,
     color: m.color,
   }));
@@ -148,7 +149,7 @@ export default function Comparison() {
 
   // Radar chart data (4 main methods)
   const radarData = [
-    { axis: 'Throughput', 'PRACH-4step': 85, 'PRACH-2step': 90, 'GF-RA': 75, 'Slotted': 36.8 },
+    { axis: 'O\'tkazuvchanlik', 'PRACH-4step': 85, 'PRACH-2step': 90, 'GF-RA': 75, 'Slotted': 36.8 },
     { axis: 'Tezlik', 'PRACH-4step': 83.5, 'PRACH-2step': 93.5, 'GF-RA': 98, 'Slotted': 75 },
     { axis: 'Ishonchlilik', 'PRACH-4step': 95, 'PRACH-2step': 95, 'GF-RA': 85, 'Slotted': 65 },
     { axis: 'Energiya', 'PRACH-4step': 50, 'PRACH-2step': 55, 'GF-RA': 85, 'Slotted': 75 },
@@ -246,7 +247,7 @@ export default function Comparison() {
               <thead className="table-header-row">
                 <tr>
                   <th className="table-header-cell">Usul</th>
-                  <th className="table-header-cell">Throughput (%)</th>
+                  <th className="table-header-cell">O'tkazuvchanlik (%)</th>
                   <th className="table-header-cell">Kechikish (ms)</th>
                   <th className="table-header-cell">Kolliziya (%)</th>
                   <th className="table-header-cell">Energiya (rel)</th>
@@ -272,9 +273,9 @@ export default function Comparison() {
           </div>
         </div>
 
-        {/* Throughput Bar Chart */}
+        {/* O'tkazuvchanlik Bar Chart */}
         <div className="chart-container mb-16">
-          <h2 className="chart-title">Throughput Taqqoslash</h2>
+          <h2 className="chart-title">O'tkazuvchanlik Taqqoslash</h2>
           <div className="throughput-chart">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={throughputData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
@@ -283,9 +284,11 @@ export default function Comparison() {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                {throughputData.map((data, idx) => (
-                  <Bar key={idx} dataKey="throughput" fill={data.color} name={data.name} />
-                ))}
+                <Bar dataKey="throughput" name="O'tkazuvchanlik (%)">
+                  {throughputData.map((data, idx) => (
+                    <Cell key={idx} fill={data.color} />
+                  ))}
+                </Bar>
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -302,9 +305,9 @@ export default function Comparison() {
                 <YAxis label={{ value: 'Throughput (%)', angle: -90, position: 'insideLeft' }} />
                 <Tooltip formatter={(value) => `${value.toFixed(1)}%`} />
                 <Legend />
-                <Line type="monotone" dataKey="PRACH-4step" stroke="#2196F3" strokeWidth={2} dot={false} />
-                <Line type="monotone" dataKey="PRACH-2step" stroke="#4CAF50" strokeWidth={2} dot={false} />
-                <Line type="monotone" dataKey="GF-RA" stroke="#9C27B0" strokeWidth={2} dot={false} />
+                <Line type="monotone" dataKey="PRACH-4step" stroke="#2196F3" strokeWidth={2} dot={false} name="4-bosqichli PRACH" />
+                <Line type="monotone" dataKey="PRACH-2step" stroke="#4CAF50" strokeWidth={2} dot={false} name="2-bosqichli PRACH" />
+                <Line type="monotone" dataKey="GF-RA" stroke="#9C27B0" strokeWidth={2} dot={false} name="Grantsiz RA" />
                 <Line type="monotone" dataKey="Slotted" stroke="#FF9800" strokeWidth={2} dot={false} />
               </LineChart>
             </ResponsiveContainer>
@@ -320,9 +323,9 @@ export default function Comparison() {
                 <PolarGrid stroke="#e5e7eb" />
                 <PolarAngleAxis dataKey="axis" />
                 <PolarRadiusAxis angle={90} domain={[0, 100]} />
-                <Radar name="PRACH-4step" dataKey="PRACH-4step" stroke="#2196F3" fill="#2196F3" fillOpacity={0.3} />
-                <Radar name="PRACH-2step" dataKey="PRACH-2step" stroke="#4CAF50" fill="#4CAF50" fillOpacity={0.3} />
-                <Radar name="GF-RA" dataKey="GF-RA" stroke="#9C27B0" fill="#9C27B0" fillOpacity={0.3} />
+                <Radar name="4-bosqichli PRACH" dataKey="PRACH-4step" stroke="#2196F3" fill="#2196F3" fillOpacity={0.3} />
+                <Radar name="2-bosqichli PRACH" dataKey="PRACH-2step" stroke="#4CAF50" fill="#4CAF50" fillOpacity={0.3} />
+                <Radar name="Grantsiz RA" dataKey="GF-RA" stroke="#9C27B0" fill="#9C27B0" fillOpacity={0.3} />
                 <Radar name="Slotted" dataKey="Slotted" stroke="#FF9800" fill="#FF9800" fillOpacity={0.3} />
                 <Legend />
                 <Tooltip />
@@ -356,11 +359,11 @@ export default function Comparison() {
             <ul className="usage-list">
               <li className="usage-item">
                 <span className="usage-arrow">→</span>
-                <span className="usage-text"><span className="usage-bold">Mobil tarmoq:</span> 2-step PRACH (Rel-16+)</span>
+                <span className="usage-text"><span className="usage-bold">Mobil tarmoq:</span> 2-bosqichli PRACH (Rel-16+)</span>
               </li>
               <li className="usage-item">
                 <span className="usage-arrow">→</span>
-                <span className="usage-text"><span className="usage-bold">mMTC:</span> Grant-free RA (Rel-17)</span>
+                <span className="usage-text"><span className="usage-bold">mMTC:</span> Grantsiz RA (Rel-17)</span>
               </li>
               <li className="usage-item">
                 <span className="usage-arrow">→</span>

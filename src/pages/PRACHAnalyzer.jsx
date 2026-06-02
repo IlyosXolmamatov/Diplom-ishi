@@ -272,6 +272,54 @@ export default function PRACHAnalyzer() {
           </ResponsiveContainer>
         </div>
 
+          {/* Collision Formula Card */}
+        <div className="formula-card">
+          <h3 style={{fontSize: '24px', fontWeight: 600, color: '#1f2937', marginBottom: '24px'}}>
+            Kolliziya formulasi
+            <span style={{fontSize: '12px', fontWeight: 400, color: '#6b7280', marginLeft: '8px'}}>(Manba [8])</span>
+          </h3>
+          
+          <div className="formula-grid">
+            {/* Formula */}
+            <div className="formula-section">
+              <div className="formula-box">
+                <p className="formula-label">Asosiy formula:</p>
+                <p className="formula-content">
+                  P<sub>kolliziya</sub> = 1 - e<sup>-λ/N</sup>
+                </p>
+                <p className="formula-description">
+                  <div><span style={{fontWeight: 600}}>λ</span> = UE soni</div>
+                  <div><span style={{fontWeight: 600}}>N</span> = preambula soni</div>
+                  <div><span style={{fontWeight: 600}}>e</span> = Eyler soni (2.718...)</div>
+                </p>
+              </div>
+            </div>
+
+            {/* Worked Example */}
+            <div className="formula-section">
+              <div className="formula-box">
+                <p className="formula-label">Hisoblash namunasi (joriy qiymatlar):</p>
+                <div style={{display: 'flex', flexDirection: 'column', gap: '12px', fontFamily: 'monospace', fontSize: '25px', color: '#1f2937'}}>
+                  <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <span>λ (UE soni):</span>
+                    <span style={{fontWeight: 700, color: '#2563eb'}}>{numUE}</span>
+                  </div>
+                  <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <span>N (preambula soni):</span>
+                    <span style={{fontWeight: 700, color: '#2563eb'}}>{numPreamble}</span>
+                  </div>
+                  <div style={{display: 'flex', justifyContent: 'space-between', paddingTop: '12px', borderTop: '1px solid #d1d5db'}}>
+                    <span>P = 1 - e<sup>-{numUE}/{numPreamble}</sup></span>
+                    <span style={{fontWeight: 700, color: '#dc2626'}}>
+                      {(calcCollision(numUE, numPreamble) * 100).toFixed(2)}%
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Chart 2: Throughput */}
         <div className="viz-box ">
           <h2 className="chart-title">
@@ -332,7 +380,30 @@ export default function PRACHAnalyzer() {
             </LineChart>
           </ResponsiveContainer>
         </div>
-
+{/* Original Explanation */}
+        <div style={{backgroundColor: '#f0f9ff', border: '1px solid #bfdbfe', borderRadius: '12px', padding: '32px', marginBottom: '32px'}}>
+          <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px'}}>
+            <h3 style={{fontSize: '18px', fontWeight: 600, color: '#1f2937'}}>Formulalar</h3>
+            <div style={{display: 'flex', gap: '12px'}}>
+              <FormulaButton formulaKey="collision" />
+              <FormulaButton formulaKey="throughput" />
+            </div>
+          </div>
+          <div style={{display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '32px', marginBottom: '16px'}}>
+            <div>
+              <p style={{fontSize: '12px', fontWeight: 600, color: '#1f2937', marginBottom: '8px'}}>Kolliziya ehtimoli:</p>
+              <p style={{fontFamily: 'monospace', color: '#4b5563'}}>P<sub>c</sub> = 1 - e<sup>-M/N</sup></p>
+            </div>
+            <div>
+              <p style={{fontSize: '12px', fontWeight: 600, color: '#1f2937', marginBottom: '8px'}}>Normalangan otkazuvchanlik:</p>
+              <p style={{fontFamily: 'monospace', color: '#4b5563'}}>S = ρ × e<sup>-ρ</sup>, ρ = M/N</p>
+            </div>
+          </div>
+          <p style={{fontSize: '12px', color: '#6b7280', marginTop: '16px'}}>
+            <span style={{fontWeight: 600}}>Izoh:</span> M — UE soni, N — preambula soni
+          </p>
+        </div>
+        
         {/* ACB Analysis Table */}
         <div className="viz-box mb-32">
           <h2 className="chart-title">
@@ -449,77 +520,9 @@ export default function PRACHAnalyzer() {
           </div>
         </div>
 
-        {/* Collision Formula Card */}
-        <div className="formula-card">
-          <h3 style={{fontSize: '24px', fontWeight: 600, color: '#1f2937', marginBottom: '24px'}}>
-            Kolliziya formulasi
-            <span style={{fontSize: '12px', fontWeight: 400, color: '#6b7280', marginLeft: '8px'}}>(Manba [8])</span>
-          </h3>
-          
-          <div className="formula-grid">
-            {/* Formula */}
-            <div className="formula-section">
-              <div className="formula-box">
-                <p className="formula-label">Asosiy formula:</p>
-                <p className="formula-content">
-                  P<sub>kolliziya</sub> = 1 - e<sup>-λ/N</sup>
-                </p>
-                <p className="formula-description">
-                  <div><span style={{fontWeight: 600}}>λ</span> = UE soni</div>
-                  <div><span style={{fontWeight: 600}}>N</span> = preambula soni</div>
-                  <div><span style={{fontWeight: 600}}>e</span> = Eyler soni (2.718...)</div>
-                </p>
-              </div>
-            </div>
+      
 
-            {/* Worked Example */}
-            <div className="formula-section">
-              <div className="formula-box">
-                <p className="formula-label">Hisoblash namunasi (joriy qiymatlar):</p>
-                <div style={{display: 'flex', flexDirection: 'column', gap: '12px', fontFamily: 'monospace', fontSize: '12px', color: '#1f2937'}}>
-                  <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                    <span>λ (UE soni):</span>
-                    <span style={{fontWeight: 700, color: '#2563eb'}}>{numUE}</span>
-                  </div>
-                  <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                    <span>N (preambula soni):</span>
-                    <span style={{fontWeight: 700, color: '#2563eb'}}>{numPreamble}</span>
-                  </div>
-                  <div style={{display: 'flex', justifyContent: 'space-between', paddingTop: '12px', borderTop: '1px solid #d1d5db'}}>
-                    <span>P = 1 - e<sup>-{numUE}/{numPreamble}</sup></span>
-                    <span style={{fontWeight: 700, color: '#dc2626'}}>
-                      {(calcCollision(numUE, numPreamble) * 100).toFixed(2)}%
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Original Explanation */}
-        <div style={{backgroundColor: '#f0f9ff', border: '1px solid #bfdbfe', borderRadius: '12px', padding: '32px'}}>
-          <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px'}}>
-            <h3 style={{fontSize: '18px', fontWeight: 600, color: '#1f2937'}}>Formulalar</h3>
-            <div style={{display: 'flex', gap: '12px'}}>
-              <FormulaButton formulaKey="collision" />
-              <FormulaButton formulaKey="throughput" />
-            </div>
-          </div>
-          <div style={{display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '32px', marginBottom: '16px'}}>
-            <div>
-              <p style={{fontSize: '12px', fontWeight: 600, color: '#1f2937', marginBottom: '8px'}}>Kolliziya ehtimoli:</p>
-              <p style={{fontFamily: 'monospace', color: '#4b5563'}}>P<sub>c</sub> = 1 - e<sup>-M/N</sup></p>
-            </div>
-            <div>
-              <p style={{fontSize: '12px', fontWeight: 600, color: '#1f2937', marginBottom: '8px'}}>Normalangan otkazuvchanlik:</p>
-              <p style={{fontFamily: 'monospace', color: '#4b5563'}}>S = ρ × e<sup>-ρ</sup>, ρ = M/N</p>
-            </div>
-          </div>
-          <p style={{fontSize: '12px', color: '#6b7280', marginTop: '16px'}}>
-            <span style={{fontWeight: 600}}>Izoh:</span> M — UE soni, N — preambula soni
-          </p>
-        </div>
+        
       </div>
     </div>
   );
