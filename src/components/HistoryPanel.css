@@ -1,235 +1,235 @@
 .history-toggle-btn {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  background-color: #2563eb;
-  color: #ffffff;
-  padding: 12px 16px;
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-  z-index: 40;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s;
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background-color: #2563eb;
+    color: #ffffff;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
 .history-toggle-btn:hover {
-  background-color: #1d4ed8;
+    background-color: #1d4ed8;
 }
 
 [data-theme="dark"] .history-toggle-btn:hover {
-  background-color: #1e40af;
+    background-color: #1e40af;
 }
 
 .history-badge {
-  margin-left: 8px;
-  background-color: #ef4444;
-  color: #ffffff;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 9999px;
-  display: inline-block;
+    margin-left: 8px;
+    background-color: #ef4444;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    display: inline-block;
 }
 
 /* Panel Styles */
 .history-panel {
-  position: fixed;
-  right: 0;
-  top: 0;
-  height: 100vh;
-  width: 320px;
-  background-color: #ffffff;
-  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
-  z-index: 50;
-  transform: translateX(100%);
-  transition: transform 0.3s ease-out;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 320px;
+    background-color: #ffffff;
+    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+    z-index: 50;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-out;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .history-panel.open {
-  transform: translateX(0);
+    transform: translateX(0);
 }
 
 [data-theme="dark"] .history-panel {
-  background-color: #111827;
+    background-color: #111827;
 }
 
 /* Panel Header */
 .history-panel-header {
-  position: sticky;
-  top: 0;
-  background-color: #2563eb;
-  color: #ffffff;
-  padding: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    background-color: #2563eb;
+    color: #ffffff;
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
 }
 
 [data-theme="dark"] .history-panel-header {
-  background-color: #1e3a8a;
+    background-color: #1e3a8a;
 }
 
 .history-panel-title {
-  font-size: 18px;
-  font-weight: 700;
+    font-size: 18px;
+    font-weight: 700;
 }
 
 .history-close-btn {
-  background: none;
-  border: none;
-  color: #ffffff;
-  cursor: pointer;
-  padding: 4px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    background: none;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .history-close-btn:hover {
-  background-color: #1d4ed8;
+    background-color: #1d4ed8;
 }
 
 [data-theme="dark"] .history-close-btn:hover {
-  background-color: #1e40af;
+    background-color: #1e40af;
 }
 
 /* History List */
 .history-list {
-  padding: 16px;
-  flex: 1;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+    padding: 16px;
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .history-empty {
-  color: #9ca3af;
-  text-align: center;
-  padding: 32px 16px;
+    color: #9ca3af;
+    text-align: center;
+    padding: 32px 16px;
 }
 
 [data-theme="dark"] .history-empty {
-  color: #9ca3af;
+    color: #9ca3af;
 }
 
 /* History Entry */
 .history-entry {
-  padding: 12px;
-  background-color: #f3f4f6;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  border-left: 4px solid #2563eb;
+    padding: 12px;
+    background-color: #f3f4f6;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-left: 4px solid #2563eb;
 }
 
 .history-entry:hover {
-  background-color: #eff6ff;
+    background-color: #eff6ff;
 }
 
 [data-theme="dark"] .history-entry {
-  background-color: #1f2937;
+    background-color: #1f2937;
 }
 
 [data-theme="dark"] .history-entry:hover {
-  background-color: #1e3a8a;
+    background-color: #1e3a8a;
 }
 
 .history-entry-title {
-  font-weight: 600;
-  color: #1f2937;
-  font-size: 12px;
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 12px;
 }
 
 [data-theme="dark"] .history-entry-title {
-  color: #f3f4f6;
+    color: #f3f4f6;
 }
 
 .history-entry-time {
-  font-size: 11px;
-  color: #6b7280;
-  margin-top: 4px;
+    font-size: 11px;
+    color: #6b7280;
+    margin-top: 4px;
 }
 
 [data-theme="dark"] .history-entry-time {
-  color: #9ca3af;
+    color: #9ca3af;
 }
 
 .history-entry-inputs {
-  font-size: 11px;
-  color: #4b5563;
-  margin-top: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+    font-size: 11px;
+    color: #4b5563;
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 [data-theme="dark"] .history-entry-inputs {
-  color: #9ca3af;
+    color: #9ca3af;
 }
 
 .history-entry-result {
-  font-size: 11px;
-  color: #15803d;
-  margin-top: 8px;
-  font-weight: 600;
+    font-size: 11px;
+    color: #15803d;
+    margin-top: 8px;
+    font-weight: 600;
 }
 
 [data-theme="dark"] .history-entry-result {
-  color: #4ade80;
+    color: #4ade80;
 }
 
 /* Clear Button */
 .history-clear-section {
-  padding: 16px;
-  border-top: 1px solid #e5e7eb;
-  flex-shrink: 0;
+    padding: 16px;
+    border-top: 1px solid #e5e7eb;
+    flex-shrink: 0;
 }
 
 [data-theme="dark"] .history-clear-section {
-  border-top-color: #374151;
+    border-top-color: #374151;
 }
 
 .history-clear-btn {
-  width: 100%;
-  background-color: #dc2626;
-  color: #ffffff;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  font-weight: 600;
+    width: 100%;
+    background-color: #dc2626;
+    color: #ffffff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-weight: 600;
 }
 
 .history-clear-btn:hover {
-  background-color: #b91c1c;
+    background-color: #b91c1c;
 }
 
 [data-theme="dark"] .history-clear-btn:hover {
-  background-color: #991b1b;
+    background-color: #991b1b;
 }
 
 /* Overlay */
 .history-overlay {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 40;
-  cursor: pointer;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 40;
+    cursor: pointer;
 }

@@ -1,716 +1,716 @@
 /* Page Container */
 .latency-page {
-  padding: 32px 16px;
-  max-width: 1200px;
-  margin: 0 auto;
+    padding: 32px 16px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* Badge and Pill Styles */
 .badge-pill {
-  display: inline-block;
-  background-color: #e0e7ff;
-  color: #3730a3;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
+    display: inline-block;
+    background-color: #e0e7ff;
+    color: #3730a3;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 [data-theme="dark"] .badge-pill {
-  background-color: rgba(55, 48, 163, 0.2);
-  color: #c7d2fe;
+    background-color: rgba(55, 48, 163, 0.2);
+    color: #c7d2fe;
 }
 
 /* Select Field */
 .select-field {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  background-color: #ffffff;
-  color: #111827;
-  font-size: 14px;
-  font-weight: 500;
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #111827;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 [data-theme="dark"] .select-field {
-  background-color: #1f2937;
-  border-color: #374151;
-  color: #f3f4f6;
+    background-color: #1f2937;
+    border-color: #374151;
+    color: #f3f4f6;
 }
 
 .select-field:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 /* Parameter Group */
 .parameter-group {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  margin-bottom: 32px;
-  padding: 24px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-bottom: 32px;
+    padding: 24px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
 }
 
 [data-theme="dark"] .parameter-group {
-  background-color: #1f2937;
-  border-color: #374151;
+    background-color: #1f2937;
+    border-color: #374151;
 }
 
 /* Parameter Input */
 .parameter-input {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .parameter-input label {
-  font-size: 14px;
-  font-weight: 600;
-  color: #111827;
-  display: flex;
-  align-items: center;
-  gap: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
 [data-theme="dark"] .parameter-input label {
-  color: #f3f4f6;
+    color: #f3f4f6;
 }
 
 .parameter-input input,
 .parameter-input select {
-  width: 100%;
-  padding: 8px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  background-color: #ffffff;
-  color: #111827;
-  font-size: 14px;
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #111827;
+    font-size: 14px;
 }
 
 [data-theme="dark"] .parameter-input input,
 [data-theme="dark"] .parameter-input select {
-  background-color: #111827;
-  border-color: #374151;
-  color: #f3f4f6;
+    background-color: #111827;
+    border-color: #374151;
+    color: #f3f4f6;
 }
 
 .parameter-input input:focus,
 .parameter-input select:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .parameter-value {
-  font-size: 18px;
-  font-weight: 700;
-  color: #3b82f6;
+    font-size: 18px;
+    font-weight: 700;
+    color: #3b82f6;
 }
 
 [data-theme="dark"] .parameter-value {
-  color: #60a5fa;
+    color: #60a5fa;
 }
 
 /* Device Slider */
 .device-slider {
-  width: 100%;
-  height: 6px;
-  border-radius: 3px;
-  background: linear-gradient(to right, #fecaca, #fcd34d, #86efac);
-  outline: none;
-  -webkit-appearance: none;
-  appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(to right, #fecaca, #fcd34d, #86efac);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .device-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #3b82f6;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #3b82f6;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .device-slider::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #3b82f6;
-  cursor: pointer;
-  border: none;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #3b82f6;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Metrics Grid */
 .metrics-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-bottom: 32px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
 }
 
 [data-theme="dark"] .metrics-grid {
-  grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .metric-card {
-  padding: 16px;
-  border-radius: 8px;
-  border-left: 4px solid;
-  background-color: #f9fafb;
+    padding: 16px;
+    border-radius: 8px;
+    border-left: 4px solid;
+    background-color: #f9fafb;
 }
 
 [data-theme="dark"] .metric-card {
-  background-color: #111827;
+    background-color: #111827;
 }
 
 .metric-card-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: #6b7280;
-  margin-bottom: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6b7280;
+    margin-bottom: 8px;
 }
 
 [data-theme="dark"] .metric-card-label {
-  color: #9ca3af;
+    color: #9ca3af;
 }
 
 .metric-card-value {
-  font-size: 20px;
-  font-weight: 700;
+    font-size: 20px;
+    font-weight: 700;
 }
 
 .metric-card.blue {
-  border-left-color: #3b82f6;
+    border-left-color: #3b82f6;
 }
 
 .metric-card.blue .metric-card-value {
-  color: #3b82f6;
+    color: #3b82f6;
 }
 
 [data-theme="dark"] .metric-card.blue .metric-card-value {
-  color: #60a5fa;
+    color: #60a5fa;
 }
 
 .metric-card.red {
-  border-left-color: #ef4444;
+    border-left-color: #ef4444;
 }
 
 .metric-card.red .metric-card-value {
-  color: #ef4444;
+    color: #ef4444;
 }
 
 [data-theme="dark"] .metric-card.red .metric-card-value {
-  color: #f87171;
+    color: #f87171;
 }
 
 .metric-card.green {
-  border-left-color: #10b981;
+    border-left-color: #10b981;
 }
 
 .metric-card.green .metric-card-value {
-  color: #10b981;
+    color: #10b981;
 }
 
 [data-theme="dark"] .metric-card.green .metric-card-value {
-  color: #6ee7b7;
+    color: #6ee7b7;
 }
 
 .metric-card.purple {
-  border-left-color: #a855f7;
+    border-left-color: #a855f7;
 }
 
 .metric-card.purple .metric-card-value {
-  color: #a855f7;
+    color: #a855f7;
 }
 
 [data-theme="dark"] .metric-card.purple .metric-card-value {
-  color: #d8b4fe;
+    color: #d8b4fe;
 }
 
 /* Visualization Box */
 .viz-box {
-  padding: 32px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
+    padding: 32px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
 }
 
 [data-theme="dark"] .viz-box {
-  background-color: #1f2937;
-  border-color: #374151;
+    background-color: #1f2937;
+    border-color: #374151;
 }
 
 /* Simulation Title */
 .simulation-title {
-  font-size: 20px;
-  font-weight: 600;
-  color: #111827;
-  margin-bottom: 16px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 16px;
 }
 
 [data-theme="dark"] .simulation-title {
-  color: #f3f4f6;
+    color: #f3f4f6;
 }
 
 /* Comparison Section */
 .comparison-section {
-  margin-top: 64px;
+    margin-top: 64px;
 }
 
 .comparison-section-title {
-  font-size: 20px;
-  font-weight: 600;
-  color: #111827;
-  margin-bottom: 24px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 24px;
 }
 
 [data-theme="dark"] .comparison-section-title {
-  color: #f3f4f6;
+    color: #f3f4f6;
 }
 
 /* Timing Diagram Styles */
 .timing-diagram-container {
-  margin-bottom: 32px;
+    margin-bottom: 32px;
 }
 
 .timing-subtitle {
-  font-size: 16px;
-  font-weight: 600;
-  color: #111827;
-  margin-bottom: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 12px;
 }
 
 [data-theme="dark"] .timing-subtitle {
-  color: #f9fafb;
+    color: #f9fafb;
 }
 
 .timing-diagram {
-  display: flex;
-  align-items: flex-end;
-  gap: 4px;
-  height: 128px;
-  background-color: #f9fafb;
-  padding: 16px;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 128px;
+    background-color: #f9fafb;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
 }
 
 [data-theme="dark"] .timing-diagram {
-  background-color: #111827;
-  border-color: #374151;
+    background-color: #111827;
+    border-color: #374151;
 }
 
 .timing-block {
-  border-radius: 6px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  padding-bottom: 8px;
-  color: #ffffff;
-  font-size: 12px;
-  font-weight: 700;
-  min-width: 40px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 8px;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    min-width: 40px;
 }
 
 .timing-block-wait {
-  background-color: #9ca3af;
+    background-color: #9ca3af;
 }
 
 .timing-block-rar {
-  background-color: #3b82f6;
+    background-color: #3b82f6;
 }
 
 .timing-block-rar-reduced {
-  background-color: #60a5fa;
+    background-color: #60a5fa;
 }
 
 .timing-block-msg3 {
-  background-color: #10b981;
+    background-color: #10b981;
 }
 
 .timing-block-cr {
-  background-color: #f97316;
+    background-color: #f97316;
 }
 
 .timing-block-cr-reduced {
-  background-color: #fdba74;
+    background-color: #fdba74;
 }
 
 .timing-block-value {
-  text-align: center;
+    text-align: center;
 }
 
 .timing-block-label {
-  font-size: 11px;
-  text-align: center;
-  margin-top: 2px;
+    font-size: 11px;
+    text-align: center;
+    margin-top: 2px;
 }
 
 .timing-total-label {
-  margin-left: 16px;
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  font-weight: 700;
-  color: #111827;
+    margin-left: 16px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: #111827;
 }
 
 [data-theme="dark"] .timing-total-label {
-  color: #f9fafb;
+    color: #f9fafb;
 }
 
 /* Table Styles */
 .table-wrapper {
-  overflow-x: auto;
+    overflow-x: auto;
 }
 
 .latency-table {
-  width: 100%;
-  font-size: 14px;
-  border-collapse: collapse;
+    width: 100%;
+    font-size: 14px;
+    border-collapse: collapse;
 }
 
 .latency-table thead {
-  background-color: #f9fafb;
-  border-bottom: 2px solid #d1d5db;
+    background-color: #f9fafb;
+    border-bottom: 2px solid #d1d5db;
 }
 
 [data-theme="dark"] .latency-table thead {
-  background-color: #111827;
-  border-bottom-color: #374151;
+    background-color: #111827;
+    border-bottom-color: #374151;
 }
 
 .latency-table th {
-  padding: 12px 16px;
-  text-align: left;
-  font-weight: 600;
-  color: #111827;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    color: #111827;
 }
 
 [data-theme="dark"] .latency-table th {
-  color: #f3f4f6;
+    color: #f3f4f6;
 }
 
 .latency-table tbody tr {
-  border-bottom: 1px solid #d1d5db;
+    border-bottom: 1px solid #d1d5db;
 }
 
 [data-theme="dark"] .latency-table tbody tr {
-  border-bottom-color: #374151;
+    border-bottom-color: #374151;
 }
 
 .latency-table tbody tr:hover {
-  background-color: #f3f4f6;
+    background-color: #f3f4f6;
 }
 
 [data-theme="dark"] .latency-table tbody tr:hover {
-  background-color: #111827;
+    background-color: #111827;
 }
 
 .latency-table tbody tr.active {
-  background-color: #dbeafe;
+    background-color: #dbeafe;
 }
 
 [data-theme="dark"] .latency-table tbody tr.active {
-  background-color: rgba(59, 130, 246, 0.1);
+    background-color: rgba(59, 130, 246, 0.1);
 }
 
 .latency-table td {
-  padding: 12px 16px;
-  color: #111827;
+    padding: 12px 16px;
+    color: #111827;
 }
 
 [data-theme="dark"] .latency-table td {
-  color: #f3f4f6;
+    color: #f3f4f6;
 }
 
 .current-badge {
-  color: #3b82f6;
-  font-weight: 600;
+    color: #3b82f6;
+    font-weight: 600;
 }
 
 [data-theme="dark"] .current-badge {
-  color: #60a5fa;
+    color: #60a5fa;
 }
 
 /* Formula Section */
 .formula-section {
-  background-color: #eff6ff;
-  border-radius: 8px;
-  border: 2px solid #93c5fd;
-  padding: 32px;
+    background-color: #eff6ff;
+    border-radius: 8px;
+    border: 2px solid #93c5fd;
+    padding: 32px;
 }
 
 [data-theme="dark"] .formula-section {
-  background-color: rgba(30, 58, 138, 0.2);
-  border-color: #1e3a8a;
+    background-color: rgba(30, 58, 138, 0.2);
+    border-color: #1e3a8a;
 }
 
 .formula-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
 }
 
 .formula-header-title {
-  font-size: 24px;
-  font-weight: 600;
-  color: #111827;
+    font-size: 24px;
+    font-weight: 600;
+    color: #111827;
 }
 
 [data-theme="dark"] .formula-header-title {
-  color: #f9fafb;
+    color: #f9fafb;
 }
 
 .formula-header-subtitle {
-  font-size: 14px;
-  font-weight: 400;
-  color: #4b5563;
-  margin-left: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #4b5563;
+    margin-left: 8px;
 }
 
 [data-theme="dark"] .formula-header-subtitle {
-  color: #9ca3af;
+    color: #9ca3af;
 }
 
 .formula-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 24px;
-  margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    margin-bottom: 24px;
 }
 
 .formula-box {
-  background-color: #ffffff;
-  border-radius: 8px;
-  padding: 20px;
-  border: 1px solid #dbeafe;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid #dbeafe;
 }
 
 [data-theme="dark"] .formula-box {
-  background-color: #1f2937;
-  border-color: #1e3a8a;
+    background-color: #1f2937;
+    border-color: #1e3a8a;
 }
 
 .formula-box-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: #111827;
-  margin-bottom: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 12px;
 }
 
 [data-theme="dark"] .formula-box-title {
-  color: #f9fafb;
+    color: #f9fafb;
 }
 
 .formula-text {
-  font-family: monospace;
-  color: #111827;
-  margin-bottom: 8px;
-  font-size: 13px;
+    font-family: monospace;
+    color: #111827;
+    margin-bottom: 8px;
+    font-size: 13px;
 }
 
 [data-theme="dark"] .formula-text {
-  color: #d1d5db;
+    color: #d1d5db;
 }
 
 .formula-details {
-  font-size: 11px;
-  color: #374151;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid #e5e7eb;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+    font-size: 11px;
+    color: #374151;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 [data-theme="dark"] .formula-details {
-  color: #d1d5db;
-  border-top-color: #374151;
+    color: #d1d5db;
+    border-top-color: #374151;
 }
 
 .formula-details-value {
-  font-weight: 700;
-  margin-top: 8px;
-  padding-top: 8px;
-  border-top: 1px solid #e5e7eb;
+    font-weight: 700;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #e5e7eb;
 }
 
 [data-theme="dark"] .formula-details-value {
-  border-top-color: #374151;
+    border-top-color: #374151;
 }
 
 .formula-details-value.blue {
-  color: #2563eb;
+    color: #2563eb;
 }
 
 [data-theme="dark"] .formula-details-value.blue {
-  color: #60a5fa;
+    color: #60a5fa;
 }
 
 .formula-details-value.red {
-  color: #dc2626;
+    color: #dc2626;
 }
 
 [data-theme="dark"] .formula-details-value.red {
-  color: #f87171;
+    color: #f87171;
 }
 
 .formula-details-value.purple {
-  color: #a855f7;
+    color: #a855f7;
 }
 
 [data-theme="dark"] .formula-details-value.purple {
-  color: #d8b4fe;
+    color: #d8b4fe;
 }
 
 .formula-details-value.green {
-  color: #16a34a;
+    color: #16a34a;
 }
 
 [data-theme="dark"] .formula-details-value.green {
-  color: #86efac;
+    color: #86efac;
 }
 
 .formula-info-box {
-  margin-top: 24px;
-  padding: 16px;
-  background-color: #dbeafe;
-  border-radius: 8px;
-  border: 1px solid #93c5fd;
+    margin-top: 24px;
+    padding: 16px;
+    background-color: #dbeafe;
+    border-radius: 8px;
+    border: 1px solid #93c5fd;
 }
 
 [data-theme="dark"] .formula-info-box {
-  background-color: rgba(30, 58, 138, 0.3);
-  border-color: #1e3a8a;
+    background-color: rgba(30, 58, 138, 0.3);
+    border-color: #1e3a8a;
 }
 
 .formula-info-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: #111827;
-  margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 8px;
 }
 
 [data-theme="dark"] .formula-info-title {
-  color: #f9fafb;
+    color: #f9fafb;
 }
 
 .formula-info-text {
-  font-size: 12px;
-  color: #374151;
-  line-height: 1.5;
+    font-size: 12px;
+    color: #374151;
+    line-height: 1.5;
 }
 
 [data-theme="dark"] .formula-info-text {
-  color: #d1d5db;
+    color: #d1d5db;
 }
 
 .formula-info-highlight {
-  font-weight: 700;
-  color: #2563eb;
+    font-weight: 700;
+    color: #2563eb;
 }
 
 [data-theme="dark"] .formula-info-highlight {
-  color: #60a5fa;
+    color: #60a5fa;
 }
 
 /* Chart Section */
 .chart-section {
-  margin-top: 32px;
-  padding: 24px;
-  background-color: #f9fafb;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
+    margin-top: 32px;
+    padding: 24px;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
 }
 
 [data-theme="dark"] .chart-section {
-  background-color: #111827;
-  border-color: #374151;
+    background-color: #111827;
+    border-color: #374151;
 }
 
 .chart-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: #111827;
-  margin-bottom: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 16px;
 }
 
 [data-theme="dark"] .chart-title {
-  color: #f3f4f6;
+    color: #f3f4f6;
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .parameter-group {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-  }
+    .parameter-group {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
 
-  .metrics-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
-  .formula-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    .formula-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 640px) {
-  .parameter-group {
-    grid-template-columns: 1fr;
-    padding: 16px;
-  }
+    .parameter-group {
+        grid-template-columns: 1fr;
+        padding: 16px;
+    }
 
-  .metrics-grid {
-    grid-template-columns: 1fr;
-  }
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
 
-  .formula-grid {
-    grid-template-columns: 1fr;
-  }
+    .formula-grid {
+        grid-template-columns: 1fr;
+    }
 
-  .timing-diagram {
-    height: 96px;
-    gap: 2px;
-  }
+    .timing-diagram {
+        height: 96px;
+        gap: 2px;
+    }
 
-  .timing-block {
-    min-width: 28px;
-    font-size: 10px;
-    padding-bottom: 4px;
-  }
+    .timing-block {
+        min-width: 28px;
+        font-size: 10px;
+        padding-bottom: 4px;
+    }
 
-  .timing-block-label {
-    font-size: 9px;
-  }
+    .timing-block-label {
+        font-size: 9px;
+    }
 
-  .formula-section {
-    padding: 16px;
-  }
+    .formula-section {
+        padding: 16px;
+    }
 
-  .formula-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    .formula-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-  .viz-box {
-    padding: 16px;
-  }
+    .viz-box {
+        padding: 16px;
+    }
 
-  .latency-page {
-    padding: 16px 8px;
-  }
+    .latency-page {
+        padding: 16px 8px;
+    }
 }
