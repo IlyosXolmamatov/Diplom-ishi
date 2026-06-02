@@ -95,9 +95,7 @@ export default function PRACHAnalyzer() {
           <p className="page-subtitle">
             Kolliziya ehtimoli va otkazuvchanlik hisoblash
           </p>
-          <div className="badge-pill">
-            3GPP TS 38.211 | Manba [8]
-          </div>
+         
         </div>
 
         {/* Input Panel */}
@@ -202,7 +200,7 @@ export default function PRACHAnalyzer() {
         </div>
 
         {/* Chart 1: Collision Probability */}
-        <div className="viz-box mb-32">
+        <div className="viz-box">
           <h2 className="chart-title">
             Kolliziya ehtimoli vs UE soni
           </h2>
@@ -275,7 +273,7 @@ export default function PRACHAnalyzer() {
         </div>
 
         {/* Chart 2: Throughput */}
-        <div className="viz-box mb-32">
+        <div className="viz-box ">
           <h2 className="chart-title">
             Normalangan otkazuvchanlik
           </h2>
@@ -464,7 +462,7 @@ export default function PRACHAnalyzer() {
               <div className="formula-box">
                 <p className="formula-label">Asosiy formula:</p>
                 <p className="formula-content">
-                  P<sub>collision</sub> = 1 - e<sup>-λ/N</sup>
+                  P<sub>kolliziya</sub> = 1 - e<sup>-λ/N</sup>
                 </p>
                 <p className="formula-description">
                   <div><span style={{fontWeight: 600}}>λ</span> = UE soni</div>

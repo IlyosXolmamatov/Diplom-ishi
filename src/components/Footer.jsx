@@ -5,8 +5,14 @@ export default function Footer() {
     <footer className="footer-container">
       <div className="footer-content">
         <p className="footer-text">
-          3GPP TS 38.211 | 5G NR PRACH Analyzer | 2025
+          Murojaat uchun: <a href="https://t.me/Ilyosxolmamatov" target="_blank" rel="noopener noreferrer">
+           Telegram: @Ilyosxolmamatov
+          </a>
         </p>
+        <p className="footer-text">
+          Ilyos Xolmamatov tomonidan tayyorlangan 5G PRACH kalkulyatori. Barcha huquqlar himoyalangan. &copy; 2026
+        </p>
+       
       </div>
     </footer>
   );

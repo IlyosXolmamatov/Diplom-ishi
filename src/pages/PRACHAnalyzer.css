@@ -395,10 +395,10 @@
 
 /* Formula Card */
 .formula-card {
-    background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
-    border: 2px solid #a78bfa;
+    background: linear-gradient(135deg, #3e30d8d4 0%, #557be3 50%);
+    border: 2px solid #5c2fe4;
     border-radius: 12px;
-    padding: 40px;
+    padding: 20px;
     margin-bottom: 48px;
 }
 
@@ -432,7 +432,7 @@
 }
 
 .formula-label {
-    font-size: 12px;
+    font-size: 20px;
     font-weight: 600;
     color: var(--color-text-primary, #1f2937);
     margin-bottom: 12px;
@@ -443,7 +443,7 @@
 }
 
 .formula-content {
-    font-size: 18px;
+    font-size: 25px;
     font-weight: 700;
     color: var(--color-text-primary, #1f2937);
     margin-bottom: 16px;

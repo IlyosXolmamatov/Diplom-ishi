@@ -27,7 +27,7 @@ function App() {
     <BrowserRouter>
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'var(--app-bg, #ffffff)' }}>
         <Navbar />
-        <main style={{ flex: 1, paddingTop: '192px', paddingBottom: '80px', backgroundColor: 'var(--app-bg, #ffffff)' }}>
+        <main style={{ flex: 1, paddingTop: '100px', paddingBottom: '80px', backgroundColor: 'var(--app-bg, #ffffff)' }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/aloha" element={<AlohaCalculator />} />
