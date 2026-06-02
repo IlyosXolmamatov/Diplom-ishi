@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { X, HelpCircle } from 'lucide-react';
+import './FormulaModal.css';
 
 const FORMULAS = {
   aloha_pure: {
@@ -96,49 +97,49 @@ export default function FormulaModal({ formulaKey, isOpen, onClose }) {
     <>
       {/* Overlay */}
       <div
-        className="fixed inset-0 bg-black/50 z-40"
+        className="formula-overlay"
         onClick={onClose}
       />
 
       {/* Modal */}
-      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray-900 rounded-lg shadow-2xl z-50 max-w-lg w-full mx-4">
+      <div className="formula-modal">
         {/* Header */}
-        <div className="bg-blue-600 dark:bg-blue-900 text-white p-6 flex justify-between items-start">
+        <div className="formula-modal-header">
           <div>
-            <h2 className="text-2xl font-bold">{formula.title}</h2>
-            <p className="text-blue-100 text-sm mt-1">{formula.description}</p>
+            <h2 className="formula-modal-title">{formula.title}</h2>
+            <p className="formula-modal-description">{formula.description}</p>
           </div>
           <button
             onClick={onClose}
-            className="hover:bg-blue-700 p-1 rounded"
+            className="formula-modal-close-btn"
           >
             <X className="w-6 h-6" />
           </button>
         </div>
 
         {/* Content */}
-        <div className="p-6 space-y-6">
+        <div className="formula-modal-content">
           {/* Formula Display */}
-          <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
-            <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">Formula:</p>
-            <p className="font-mono text-lg text-gray-900 dark:text-white font-semibold">
+          <div className="formula-display">
+            <p className="formula-display-label">Formula:</p>
+            <p className="formula-display-text">
               {formula.formula}
             </p>
           </div>
 
           {/* Variables */}
           <div>
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-3">Variables:</h3>
-            <div className="space-y-2">
+            <h3 className="formula-variables-title">Variables:</h3>
+            <div className="formula-variables-list">
               {formula.variables.map((variable, idx) => (
                 <div
                   key={idx}
-                  className="flex gap-3 p-2 bg-gray-50 dark:bg-gray-800 rounded"
+                  className="formula-variable-item"
                 >
-                  <div className="font-mono font-bold text-blue-600 dark:text-blue-400 min-w-16">
+                  <div className="formula-variable-name">
                     {variable.name}
                   </div>
-                  <div className="text-sm text-gray-700 dark:text-gray-300">
+                  <div className="formula-variable-description">
                     {variable.description}
                   </div>
                 </div>
@@ -149,7 +150,7 @@ export default function FormulaModal({ formulaKey, isOpen, onClose }) {
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-900 dark:hover:bg-blue-800 text-white py-2 rounded-lg font-medium transition-colors"
+            className="formula-close-btn"
           >
             Yopish
           </button>
@@ -166,7 +167,7 @@ export function FormulaButton({ formulaKey, className = '' }) {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className={`p-1 hover:bg-blue-100 dark:hover:bg-blue-900 rounded-full text-blue-600 dark:text-blue-400 transition-colors ${className}`}
+        className={`formula-btn ${className}`}
         title="Formulani ko'rish"
       >
         <HelpCircle className="w-5 h-5" />

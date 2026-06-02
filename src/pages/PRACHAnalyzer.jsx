@@ -13,6 +13,7 @@ import {
 } from 'recharts';
 import useCalculationHistory from '../hooks/useCalculationHistory';
 import { FormulaButton } from '../components/FormulaModal';
+import './PRACHAnalyzer.css';
 
 export default function PRACHAnalyzer() {
   const [numUE, setNumUE] = useState(100);
@@ -68,19 +69,6 @@ export default function PRACHAnalyzer() {
     return data;
   }, []);
 
-  // Determine beta color
-  const getBetaColor = () => {
-    if (beta < 0.5) return 'text-green-600';
-    if (beta < 1) return 'text-yellow-600';
-    return 'text-red-600';
-  };
-
-  const getBetaBgColor = () => {
-    if (beta < 0.5) return 'bg-green-50 border-green-200';
-    if (beta < 1) return 'bg-yellow-50 border-yellow-200';
-    return 'bg-red-50 border-red-200';
-  };
-
   const getBetaLabel = () => {
     if (beta < 0.5) return 'Past yuk';
     if (beta < 1) return 'Ortacha yuk';
@@ -99,25 +87,25 @@ export default function PRACHAnalyzer() {
   }, [numUE, numPreamble, pAcb, collisionSelected, throughput, beta, addEntry]);
 
   return (
-    <div className="page-container min-h-screen">
-      <div className="main-container">
+    <div className="prach-container">
+      <div className="prach-content">
         {/* Page Title */}
-        <div className="section mb-32">
-          <h1 className="section-title text-gray-900 dark:text-white">PRACH Tahlil</h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 mb-3">
+        <div className="page-header mb-32">
+          <h1 className="page-title">PRACH Tahlil</h1>
+          <p className="page-subtitle">
             Kolliziya ehtimoli va otkazuvchanlik hisoblash
           </p>
-          <div className="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
+          <div className="badge-pill">
             3GPP TS 38.211 | Manba [8]
           </div>
         </div>
 
         {/* Input Panel */}
         <div className="viz-box mb-32">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="input-controls">
             {/* UE Count Input */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
+            <div className="control-group">
+              <label className="control-label">
                 UE soni (M)
               </label>
               <input
@@ -126,20 +114,20 @@ export default function PRACHAnalyzer() {
                 max="2000"
                 value={numUE}
                 onChange={(e) => setNumUE(Math.max(1, Math.min(2000, parseInt(e.target.value) || 1)))}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="control-input"
               />
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Min: 1, Max: 2000</p>
+              <p className="parameter-note">Min: 1, Max: 2000</p>
             </div>
 
             {/* Preamble Count Select */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
+            <div className="control-group">
+              <label className="control-label">
                 Preambula soni (N)
               </label>
               <select
                 value={numPreamble}
                 onChange={(e) => setNumPreamble(parseInt(e.target.value))}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="select-field"
               >
                 <option value={64}>64</option>
                 <option value={128}>128</option>
@@ -149,9 +137,9 @@ export default function PRACHAnalyzer() {
             </div>
 
             {/* pAcb Slider */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
-                ACB ehtimoli: {pAcb.toFixed(2)}
+            <div className="control-group">
+              <label className="control-label">
+                ACB ehtimoli: <span className="control-value">{pAcb.toFixed(2)}</span>
               </label>
               <input
                 type="range"
@@ -160,62 +148,62 @@ export default function PRACHAnalyzer() {
                 step="0.01"
                 value={pAcb}
                 onChange={(e) => setPAcb(parseFloat(e.target.value))}
-                className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                className="device-slider"
               />
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">0.01 - 1.0</p>
+              <p className="parameter-note">0.01 - 1.0</p>
             </div>
 
             {/* Calculated Metrics */}
-            <div className={`rounded-lg border-2 p-4 ${getBetaBgColor()}`}>
-              <p className="text-xs font-medium text-gray-600 mb-1">Yuk koeffitsienti β</p>
-              <p className={`text-3xl font-bold ${getBetaColor()}`}>
+            <div className={`beta-status beta-${beta < 0.5 ? 'low' : beta < 1 ? 'medium' : 'high'}`} style={{padding: '16px', borderRadius: '8px'}}>
+              <p className="stat-label">Yuk koeffitsienti β</p>
+              <p style={{fontSize: '28px', fontWeight: 700, color: 'inherit', margin: '4px 0'}}>
                 {beta.toFixed(2)}
               </p>
-              <p className="text-xs text-gray-600 mt-2">{getBetaLabel()}</p>
+              <p className="stat-note" style={{marginTop: '8px'}}>{getBetaLabel()}</p>
             </div>
           </div>
 
           {/* Metrics Row */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 pt-8 border-t border-gray-200">
-            <div>
-              <p className="text-sm text-gray-600">Qabul qilingan UE:</p>
-              <p className="text-2xl font-bold text-blue-600">{admitted} / {numUE}</p>
+          <div className="results-grid mt-8 pt-8">
+            <div className="result-card">
+              <h3 className="result-label">Qabul qilingan UE</h3>
+              <p className="result-value">{admitted} / {numUE}</p>
             </div>
-            <div>
-              <p className="text-sm text-gray-600">Bekor qilingan UE:</p>
-              <p className="text-2xl font-bold text-red-600">{numUE - admitted}</p>
+            <div className="result-card">
+              <h3 className="result-label">Bekor qilingan UE</h3>
+              <p className="result-value" style={{color: '#dc2626'}}>{numUE - admitted}</p>
             </div>
           </div>
         </div>
 
         {/* Results Cards */}
-        <div className="viz-grid mb-32">
-          <div className="viz-box">
-            <h3 className="text-sm font-medium text-gray-600 mb-2">Kolliziya (N=64)</h3>
-            <p className="text-4xl font-bold text-red-600">{collision64.toFixed(1)}%</p>
+        <div className="results-grid mb-32">
+          <div className="result-card">
+            <h3 className="result-label">Kolliziya (N=64)</h3>
+            <p className="result-value" style={{color: '#dc2626'}}>{collision64.toFixed(1)}%</p>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h3 className="text-sm font-medium text-gray-600 mb-2">Kolliziya (N={numPreamble})</h3>
-            <p className="text-4xl font-bold text-blue-600">{collisionSelected.toFixed(1)}%</p>
+          <div className="result-card">
+            <h3 className="result-label">Kolliziya (N={numPreamble})</h3>
+            <p className="result-value">{collisionSelected.toFixed(1)}%</p>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h3 className="text-sm font-medium text-gray-600 mb-2">ACB bilan</h3>
-            <p className="text-4xl font-bold text-green-600">{collisionWithACB.toFixed(1)}%</p>
-            <p className="text-xs text-gray-500 mt-2">Foyda: {(collisionSelected - collisionWithACB).toFixed(1)}%</p>
+          <div className="result-card">
+            <h3 className="result-label">ACB bilan</h3>
+            <p className="result-value" style={{color: '#16a34a'}}>{collisionWithACB.toFixed(1)}%</p>
+            <p className="result-detail">Foyda: {(collisionSelected - collisionWithACB).toFixed(1)}%</p>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h3 className="text-sm font-medium text-gray-600 mb-2">Otkazuvchanlik</h3>
-            <p className="text-4xl font-bold text-purple-600">{throughput.toFixed(4)}</p>
-            <p className="text-xs text-gray-500 mt-2">ρ = {(numUE / numPreamble).toFixed(2)}</p>
+          <div className="result-card">
+            <h3 className="result-label">Otkazuvchanlik</h3>
+            <p className="result-value" style={{color: '#7c3aed'}}>{throughput.toFixed(4)}</p>
+            <p className="result-detail">ρ = {(numUE / numPreamble).toFixed(2)}</p>
           </div>
         </div>
 
         {/* Chart 1: Collision Probability */}
         <div className="viz-box mb-32">
-          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
+          <h2 className="chart-title">
             Kolliziya ehtimoli vs UE soni
           </h2>
           <ResponsiveContainer width="100%" height={300}>
@@ -288,7 +276,7 @@ export default function PRACHAnalyzer() {
 
         {/* Chart 2: Throughput */}
         <div className="viz-box mb-32">
-          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
+          <h2 className="chart-title">
             Normalangan otkazuvchanlik
           </h2>
           <ResponsiveContainer width="100%" height={250}>
@@ -349,18 +337,18 @@ export default function PRACHAnalyzer() {
 
         {/* ACB Analysis Table */}
         <div className="viz-box mb-32">
-          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
+          <h2 className="chart-title">
             ACB Mexanizmi Tahlili (M=500 UE, N=64)
           </h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead className="bg-gray-50 border-b border-gray-200">
+          <div className="table-wrapper">
+            <table className="data-table">
+              <thead>
                 <tr>
-                  <th className="px-4 py-3 text-left font-semibold text-gray-900">p_ACB</th>
-                  <th className="px-4 py-3 text-left font-semibold text-gray-900">Qabul qilingan UE</th>
-                  <th className="px-4 py-3 text-left font-semibold text-gray-900">β koeffitsient</th>
-                  <th className="px-4 py-3 text-left font-semibold text-gray-900">Kolliziya %</th>
-                  <th className="px-4 py-3 text-left font-semibold text-gray-900">Holat</th>
+                  <th>p_ACB</th>
+                  <th>Qabul qilingan UE</th>
+                  <th>β koeffitsient</th>
+                  <th>Kolliziya %</th>
+                  <th>Holat</th>
                 </tr>
               </thead>
               <tbody>
@@ -368,32 +356,16 @@ export default function PRACHAnalyzer() {
                   const admittedUE = Math.round(500 * pVal);
                   const beta = (admittedUE / 64).toFixed(2);
                   const collision = (calcCollision(admittedUE, 64) * 100).toFixed(1);
-                  
-                  let status = '';
-                  let statusColor = '';
-                  if (collision < 20) {
-                    status = "A'lo";
-                    statusColor = 'bg-green-100 text-green-800';
-                  } else if (collision < 50) {
-                    status = 'Yaxshi';
-                    statusColor = 'bg-blue-100 text-blue-800';
-                  } else if (collision < 80) {
-                    status = 'Qabul qilinadi';
-                    statusColor = 'bg-yellow-100 text-yellow-800';
-                  } else {
-                    status = 'Yomon';
-                    statusColor = 'bg-red-100 text-red-800';
-                  }
 
                   return (
-                    <tr key={pVal} className="border-b border-gray-200 hover:bg-gray-50">
-                      <td className="px-4 py-3 font-mono text-gray-900">{pVal.toFixed(2)}</td>
-                      <td className="px-4 py-3 text-gray-900">{admittedUE}</td>
-                      <td className="px-4 py-3 text-gray-900">{beta}</td>
-                      <td className="px-4 py-3 text-gray-900">{collision}%</td>
-                      <td className="px-4 py-3">
-                        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${statusColor}`}>
-                          {status}
+                    <tr key={pVal} className="table-body-row">
+                      <td className="table-body-cell" style={{fontFamily: 'monospace'}}>{pVal.toFixed(2)}</td>
+                      <td className="table-body-cell">{admittedUE}</td>
+                      <td className="table-body-cell">{beta}</td>
+                      <td className="table-body-cell">{collision}%</td>
+                      <td className="table-body-cell">
+                        <span style={{padding: '3px 12px', borderRadius: '9999px', fontSize: '12px', fontWeight: 600, display: 'inline-block'}}>
+                          {collision < 20 ? "A'lo" : collision < 50 ? 'Yaxshi' : collision < 80 ? 'Qabul qilinadi' : 'Yomon'}
                         </span>
                       </td>
                     </tr>
@@ -406,27 +378,27 @@ export default function PRACHAnalyzer() {
 
         {/* QoS Preamble Separation */}
         <div className="viz-box mb-32">
-          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
+          <h2 className="chart-title">
             QoS asosida preambula ajratish
-            <span className="text-sm font-normal text-gray-500 ml-2">(Manba [2])</span>
+            <span style={{fontSize: '12px', fontWeight: 400, color: '#6b7280', marginLeft: '8px'}}>(Manba [2])</span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="qos-grid">
             {/* URLLC */}
-            <div className="bg-linear-to-br from-blue-50 to-blue-100 rounded-lg border-2 border-blue-300 p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-blue-900">URLLC</h3>
-                <span className="inline-block bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+            <div className="qos-card qos-card-urllc">
+              <div className="qos-card-header">
+                <h3 style={{fontSize: '18px', fontWeight: 600, color: '#1e3a8a'}}>URLLC</h3>
+                <span className="qos-badge qos-badge-urllc">
                   QCI 1-4
                 </span>
               </div>
-              <div className="space-y-3">
-                <div>
-                  <p className="text-sm text-gray-600">Preambula soni</p>
-                  <p className="text-2xl font-bold text-blue-900">16</p>
+              <div className="qos-card-content">
+                <div className="qos-card-item">
+                  <p className="qos-card-label">Preambula soni</p>
+                  <p style={{fontSize: '24px', fontWeight: 700, color: '#1e3a8a'}}>16</p>
                 </div>
-                <div className="pt-2 border-t border-blue-300">
-                  <p className="text-sm text-gray-600">Kolliziya (λ=10)</p>
-                  <p className="text-xl font-bold text-blue-700">
+                <div className="qos-card-item qos-card-divider">
+                  <p className="qos-card-label">Kolliziya (λ=10)</p>
+                  <p style={{fontSize: '18px', fontWeight: 700, color: '#1e40af'}}>
                     {(calcCollision(10, 16) * 100).toFixed(1)}%
                   </p>
                 </div>
@@ -434,21 +406,21 @@ export default function PRACHAnalyzer() {
             </div>
 
             {/* eMBB */}
-            <div className="bg-linear-to-br from-green-50 to-green-100 rounded-lg border-2 border-green-300 p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-green-900">eMBB</h3>
-                <span className="inline-block bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+            <div className="qos-card qos-card-embb">
+              <div className="qos-card-header">
+                <h3 style={{fontSize: '18px', fontWeight: 600, color: '#166534'}}>eMBB</h3>
+                <span className="qos-badge qos-badge-embb">
                   QCI 5-7
                 </span>
               </div>
-              <div className="space-y-3">
-                <div>
-                  <p className="text-sm text-gray-600">Preambula soni</p>
-                  <p className="text-2xl font-bold text-green-900">32</p>
+              <div className="qos-card-content">
+                <div className="qos-card-item">
+                  <p className="qos-card-label">Preambula soni</p>
+                  <p style={{fontSize: '24px', fontWeight: 700, color: '#166534'}}>32</p>
                 </div>
-                <div className="pt-2 border-t border-green-300">
-                  <p className="text-sm text-gray-600">Kolliziya (λ=50)</p>
-                  <p className="text-xl font-bold text-green-700">
+                <div className="qos-card-item qos-card-divider">
+                  <p className="qos-card-label">Kolliziya (λ=50)</p>
+                  <p style={{fontSize: '18px', fontWeight: 700, color: '#15803d'}}>
                     {(calcCollision(50, 32) * 100).toFixed(1)}%
                   </p>
                 </div>
@@ -456,21 +428,21 @@ export default function PRACHAnalyzer() {
             </div>
 
             {/* mMTC */}
-            <div className="bg-linear-to-br from-orange-50 to-orange-100 rounded-lg border-2 border-orange-300 p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-orange-900">mMTC</h3>
-                <span className="inline-block bg-orange-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+            <div className="qos-card qos-card-mmtc">
+              <div className="qos-card-header">
+                <h3 style={{fontSize: '18px', fontWeight: 600, color: '#92400e'}}>mMTC</h3>
+                <span className="qos-badge qos-badge-mmtc">
                   QCI 8-9
                 </span>
               </div>
-              <div className="space-y-3">
-                <div>
-                  <p className="text-sm text-gray-600">Preambula soni</p>
-                  <p className="text-2xl font-bold text-orange-900">16</p>
+              <div className="qos-card-content">
+                <div className="qos-card-item">
+                  <p className="qos-card-label">Preambula soni</p>
+                  <p style={{fontSize: '24px', fontWeight: 700, color: '#92400e'}}>16</p>
                 </div>
-                <div className="pt-2 border-t border-orange-300">
-                  <p className="text-sm text-gray-600">Kolliziya (λ=200)</p>
-                  <p className="text-xl font-bold text-orange-700">
+                <div className="qos-card-item qos-card-divider">
+                  <p className="qos-card-label">Kolliziya (λ=200)</p>
+                  <p style={{fontSize: '18px', fontWeight: 700, color: '#b45309'}}>
                     {(calcCollision(200, 16) * 100).toFixed(1)}%
                   </p>
                 </div>
@@ -480,44 +452,44 @@ export default function PRACHAnalyzer() {
         </div>
 
         {/* Collision Formula Card */}
-        <div className="bg-linear-to-br from-purple-50 to-indigo-50 rounded-lg border-2 border-purple-300 p-10 mb-12">
-          <h3 className="text-2xl font-semibold text-gray-900 mb-6">
+        <div className="formula-card">
+          <h3 style={{fontSize: '24px', fontWeight: 600, color: '#1f2937', marginBottom: '24px'}}>
             Kolliziya formulasi
-            <span className="text-sm font-normal text-gray-600 ml-2">(Manba [8])</span>
+            <span style={{fontSize: '12px', fontWeight: 400, color: '#6b7280', marginLeft: '8px'}}>(Manba [8])</span>
           </h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="formula-grid">
             {/* Formula */}
-            <div className="space-y-4">
-              <div className="bg-white rounded-lg p-6 border border-purple-200">
-                <p className="text-sm font-semibold text-gray-900 mb-3">Asosiy formula:</p>
-                <p className="font-mono text-2xl text-gray-900 mb-4 font-bold">
+            <div className="formula-section">
+              <div className="formula-box">
+                <p className="formula-label">Asosiy formula:</p>
+                <p className="formula-content">
                   P<sub>collision</sub> = 1 - e<sup>-λ/N</sup>
                 </p>
-                <p className="text-sm text-gray-700 space-y-2">
-                  <div><span className="font-semibold">λ</span> = UE soni</div>
-                  <div><span className="font-semibold">N</span> = preambula soni</div>
-                  <div><span className="font-semibold">e</span> = Eyler soni (2.718...)</div>
+                <p className="formula-description">
+                  <div><span style={{fontWeight: 600}}>λ</span> = UE soni</div>
+                  <div><span style={{fontWeight: 600}}>N</span> = preambula soni</div>
+                  <div><span style={{fontWeight: 600}}>e</span> = Eyler soni (2.718...)</div>
                 </p>
               </div>
             </div>
 
             {/* Worked Example */}
-            <div className="space-y-4">
-              <div className="bg-white rounded-lg p-6 border border-purple-200">
-                <p className="text-sm font-semibold text-gray-900 mb-3">Hisoblash namunasi (joriy qiymatlar):</p>
-                <div className="space-y-3 font-mono text-sm text-gray-900">
-                  <div className="flex justify-between">
+            <div className="formula-section">
+              <div className="formula-box">
+                <p className="formula-label">Hisoblash namunasi (joriy qiymatlar):</p>
+                <div style={{display: 'flex', flexDirection: 'column', gap: '12px', fontFamily: 'monospace', fontSize: '12px', color: '#1f2937'}}>
+                  <div style={{display: 'flex', justifyContent: 'space-between'}}>
                     <span>λ (UE soni):</span>
-                    <span className="font-bold text-blue-600">{numUE}</span>
+                    <span style={{fontWeight: 700, color: '#2563eb'}}>{numUE}</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div style={{display: 'flex', justifyContent: 'space-between'}}>
                     <span>N (preambula soni):</span>
-                    <span className="font-bold text-blue-600">{numPreamble}</span>
+                    <span style={{fontWeight: 700, color: '#2563eb'}}>{numPreamble}</span>
                   </div>
-                  <div className="flex justify-between pt-2 border-t border-gray-300">
+                  <div style={{display: 'flex', justifyContent: 'space-between', paddingTop: '12px', borderTop: '1px solid #d1d5db'}}>
                     <span>P = 1 - e<sup>-{numUE}/{numPreamble}</sup></span>
-                    <span className="font-bold text-red-600">
+                    <span style={{fontWeight: 700, color: '#dc2626'}}>
                       {(calcCollision(numUE, numPreamble) * 100).toFixed(2)}%
                     </span>
                   </div>
@@ -528,24 +500,26 @@ export default function PRACHAnalyzer() {
         </div>
 
         {/* Original Explanation */}
-        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800 p-8">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Formulalar</h3>
-            <FormulaButton formulaKey="collision" />
-            <FormulaButton formulaKey="throughput" />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <p className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Kolliziya ehtimoli:</p>
-              <p className="font-mono text-gray-700 dark:text-gray-300">P<sub>c</sub> = 1 - e<sup>-M/N</sup></p>
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Normalangan otkazuvchanlik:</p>
-              <p className="font-mono text-gray-700 dark:text-gray-300">S = ρ × e<sup>-ρ</sup>, ρ = M/N</p>
+        <div style={{backgroundColor: '#f0f9ff', border: '1px solid #bfdbfe', borderRadius: '12px', padding: '32px'}}>
+          <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px'}}>
+            <h3 style={{fontSize: '18px', fontWeight: 600, color: '#1f2937'}}>Formulalar</h3>
+            <div style={{display: 'flex', gap: '12px'}}>
+              <FormulaButton formulaKey="collision" />
+              <FormulaButton formulaKey="throughput" />
             </div>
           </div>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">
-            <span className="font-semibold">Izoh:</span> M — UE soni, N — preambula soni
+          <div style={{display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '32px', marginBottom: '16px'}}>
+            <div>
+              <p style={{fontSize: '12px', fontWeight: 600, color: '#1f2937', marginBottom: '8px'}}>Kolliziya ehtimoli:</p>
+              <p style={{fontFamily: 'monospace', color: '#4b5563'}}>P<sub>c</sub> = 1 - e<sup>-M/N</sup></p>
+            </div>
+            <div>
+              <p style={{fontSize: '12px', fontWeight: 600, color: '#1f2937', marginBottom: '8px'}}>Normalangan otkazuvchanlik:</p>
+              <p style={{fontFamily: 'monospace', color: '#4b5563'}}>S = ρ × e<sup>-ρ</sup>, ρ = M/N</p>
+            </div>
+          </div>
+          <p style={{fontSize: '12px', color: '#6b7280', marginTop: '16px'}}>
+            <span style={{fontWeight: 600}}>Izoh:</span> M — UE soni, N — preambula soni
           </p>
         </div>
       </div>

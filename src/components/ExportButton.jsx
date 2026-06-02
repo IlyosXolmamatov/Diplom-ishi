@@ -1,4 +1,5 @@
 import { Download } from 'lucide-react';
+import './ExportButton.css';
 
 export default function ExportButton({ snr, avgCollision, highSlots, recommendedACB }) {
   const handleExport = () => {
@@ -57,7 +58,7 @@ Standart: 5G NR Release 17`;
   return (
     <button
       onClick={handleExport}
-      className="flex items-center gap-2 bg-green-600 hover:bg-green-700 dark:bg-green-900 dark:hover:bg-green-800 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+      className="export-btn"
     >
       <Download className="w-5 h-5" />
       Natijalarni saqlash

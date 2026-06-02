@@ -7,284 +7,364 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
   Line,
   Scatter,
   ReferenceLine,
   Bar,
 } from 'recharts';
+import './ZCSequenceVisualizer.css';
+
+/**
+ * ZC ketma-ketlik generatsiyasi
+ * x_u(n) = exp(-j * pi * u * n * (n+1) / L)
+ */
+const generateZCSequence = (u, L) => {
+  const sequence = [];
+  for (let n = 0; n < L; n++) {
+    const angle = (-Math.PI * u * n * (n + 1)) / L;
+    sequence.push({
+      n,
+      real: Math.cos(angle),
+      imag: Math.sin(angle),
+      magnitude: 1.0,
+    });
+  }
+  return sequence;
+};
+
+/**
+ * Cross-Correlation hisoblash
+ */
+const calculateCrossCorrelation = (seq1, seq2) => {
+  const L = seq1.length;
+  const correlation = [];
+
+  for (let lag = 0; lag < L; lag++) {
+    let sumReal = 0;
+    let sumImag = 0;
+
+    for (let n = 0; n < L; n++) {
+      const idx = (n + lag) % L;
+
+      const a = seq1[n].real;
+      const b = seq1[n].imag;
+      const c = seq2[idx].real;
+      const d = seq2[idx].imag;
+
+      sumReal += (a * c + b * d);
+      sumImag += (b * c - a * d);
+    }
+
+    const magnitude = Math.sqrt(sumReal * sumReal + sumImag * sumImag) / L;
+    correlation.push({ lag, value: magnitude });
+  }
+  return correlation;
+};
+
+/**
+ * InfoCard Component
+ */
+const InfoCard = ({ label, value, unit = '', description = '' }) => (
+  <div className="zc-stat-card">
+    <div className="zc-stat-label">{label}</div>
+    <div className="zc-stat-value">{value}</div>
+    {unit && <div className="zc-stat-unit">{unit}</div>}
+    {description && <div className="zc-stat-description">{description}</div>}
+  </div>
+);
+
+/**
+ * ChartCard Component
+ */
+const ChartCard = ({ title, children }) => (
+  <div className="zc-chart-card">
+    <h3 className="zc-chart-title">{title}</h3>
+    <div className="zc-chart-container">
+      {children}
+    </div>
+  </div>
+);
 
 export default function ZCSequenceVisualizer() {
-  const [rootIndex, setRootIndex] = useState(22);
+  // State
   const [L_RA, setL_RA] = useState(139);
+  const [rootIndex, setRootIndex] = useState(22);
   const [showMagnitude, setShowMagnitude] = useState(true);
   const [showPhase, setShowPhase] = useState(false);
   const [showCorrelation, setShowCorrelation] = useState(false);
 
-  // Generate ZC sequence
-  const generateZC = (u, L) => {
-    const sequence = [];
-    for (let n = 0; n < L; n++) {
-      const angle = (-Math.PI * u * n * (n + 1)) / L;
-      sequence.push({
-        n,
-        real: Math.cos(angle),
-        imag: Math.sin(angle),
-        magnitude: 1.0,
-        phase: angle % (2 * Math.PI),
-      });
-    }
-    return sequence;
-  };
+  // Calculations
+  const maxRootIndex = useMemo(() => L_RA - 1, [L_RA]);
+  const safeRootIndex = Math.min(rootIndex, maxRootIndex);
 
-  // Calculate cross-correlation
-  const crossCorrelation = (seq1, seq2) => {
-    return seq1.map((_, lag) => {
-      let sum = 0;
-      for (let n = 0; n < seq1.length; n++) {
-        const idx = (n + lag) % seq1.length;
-        sum += Math.sqrt(
-          Math.pow(seq1[n].real * seq2[idx].real + seq1[n].imag * seq2[idx].imag, 2) +
-          Math.pow(seq1[n].imag * seq2[idx].real - seq1[n].real * seq2[idx].imag, 2)
-        );
-      }
-      return { lag, value: sum / seq1.length };
-    });
-  };
+  const zcSequence = useMemo(
+    () => generateZCSequence(safeRootIndex, L_RA),
+    [safeRootIndex, L_RA]
+  );
 
-  // Generate current ZC sequence
-  const zcSequence = useMemo(() => generateZC(rootIndex, L_RA), [rootIndex, L_RA]);
-
-  // Generate magnitude chart data (first 50 points)
   const magnitudeData = useMemo(() => {
-    return zcSequence.slice(0, 50).map(item => ({
+    return zcSequence.slice(0, 50).map((item) => ({
       n: item.n,
       magnitude: item.magnitude,
     }));
   }, [zcSequence]);
 
-  // Generate complex plane data
-  const complexPlaneData = useMemo(() => {
-    return zcSequence.map(item => ({
-      real: item.real,
-      imag: item.imag,
-    }));
-  }, [zcSequence]);
+  const complexPlaneData = useMemo(
+    () => zcSequence.map((item) => ({ real: item.real, imag: item.imag })),
+    [zcSequence]
+  );
 
-  // Generate correlation data
   const correlationData = useMemo(() => {
-    const zcSeq1 = generateZC(rootIndex, L_RA);
-    const zcSeq2 = generateZC(rootIndex + 1, L_RA);
-    return crossCorrelation(zcSeq1, zcSeq2);
-  }, [rootIndex, L_RA]);
+    if (!showCorrelation) return [];
+    const nextRoot = safeRootIndex === maxRootIndex ? safeRootIndex - 1 : safeRootIndex + 1;
+    const seq1 = zcSequence;
+    const seq2 = generateZCSequence(nextRoot, L_RA);
+    return calculateCrossCorrelation(seq1, seq2);
+  }, [safeRootIndex, L_RA, showCorrelation, zcSequence, maxRootIndex]);
 
-  const theoreticalThreshold = 1 / Math.sqrt(L_RA);
+  const theoreticalThreshold = useMemo(() => 1 / Math.sqrt(L_RA), [L_RA]);
+  const maxPreambula = Math.floor(L_RA / 13);
+  const L_RALabel = L_RA === 139 ? 'Qisqa (139)' : 'Uzun (839)';
 
   return (
-    <div className="viz-box mb-16" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)' }}>
-      {/* Title */}
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
-          Zadoff-Chu Ketma-ketligi Vizualizatsiyasi
-        </h2>
-        <p className="text-xs mb-4" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>3GPP TS 38.211, Section 6.3.3</p>
-        <div className="mt-2 rounded p-3 border" style={{ backgroundColor: 'var(--color-bg-secondary, #f9fafb)', borderColor: 'var(--color-card-border, #e5e7eb)' }}>
-          <p className="text-sm font-mono" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
-            x<sub>u</sub>(n) = e<sup>-jπun(n+1)/L_RA</sup>
+    <div className="zc-container">
+      <div className="zc-wrapper">
+        {/* Header */}
+        <div className="zc-header">
+          <h1 className="zc-title">Zadoff-Chu Ketma-ketligi</h1>
+          <p className="zc-subtitle">3GPP TS 38.211, Section 6.3.3 — 5G NR PRACH Vizualizatsiyasi</p>
+        </div>
+
+        {/* Formula Block */}
+        <div className="zc-formula-block">
+          <h3 className="zc-formula-title">Matematik Formula</h3>
+          <div className="zc-formula-display">
+            <div className="zc-formula-text">
+              x<sub>u</sub>(n) = e<sup>-j·π·u·n·(n + 1) / L<sub>RA</sub></sup>
+            </div>
+          </div>
+          <div className="zc-formula-params">
+            <div className="zc-formula-param">
+              <div className="zc-formula-param-label">
+                <span style={{ color: '#2563eb' }}>u</span> — Root indeksi
+              </div>
+              <div className="zc-formula-param-value">1 ≤ u ≤ {maxRootIndex}</div>
+            </div>
+            <div className="zc-formula-param">
+              <div className="zc-formula-param-label">
+                <span style={{ color: '#2563eb' }}>n</span> — Element indeksi
+              </div>
+              <div className="zc-formula-param-value">0 ≤ n &lt; L<sub>RA</sub></div>
+            </div>
+            <div className="zc-formula-param">
+              <div className="zc-formula-param-label">
+                L<sub>RA</sub> — Preambula uzunligi
+              </div>
+              <div className="zc-formula-param-value">139 yoki 839</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Control Cards */}
+        <div className="zc-controls-grid">
+          {/* Root Index Card */}
+          <div className="zc-control-card">
+            <label className="zc-control-label">Root Indeksi (u)</label>
+            <div className="zc-slider-display">
+              <div className="zc-slider-value">{safeRootIndex}</div>
+            </div>
+            <input
+              type="range"
+              min={1}
+              max={maxRootIndex}
+              value={safeRootIndex}
+              onChange={(e) => setRootIndex(parseInt(e.target.value, 10))}
+              className="zc-slider"
+            />
+            <div className="zc-slider-range">Diapazon: 1 – {maxRootIndex}</div>
+          </div>
+
+          {/* L_RA Card */}
+          <div className="zc-control-card">
+            <label className="zc-control-label">Preambula Uzunligi</label>
+            <select
+              value={L_RA}
+              onChange={(e) => {
+                const val = parseInt(e.target.value, 10);
+                setL_RA(val);
+                if (safeRootIndex >= val) setRootIndex(val - 1);
+              }}
+              className="zc-select"
+            >
+              <option value={139}>Qisqa (139)</option>
+              <option value={839}>Uzun (839)</option>
+            </select>
+            <div className="zc-select-label">{L_RALabel}</div>
+          </div>
+
+          {/* Checkboxes Card */}
+          <div className="zc-control-card">
+            <label className="zc-control-label">Grafiklarni Tanlang</label>
+            <div className="zc-checkboxes">
+              <label className="zc-checkbox-group">
+                <input
+                  type="checkbox"
+                  checked={showMagnitude}
+                  onChange={(e) => setShowMagnitude(e.target.checked)}
+                />
+                <span className="zc-checkbox-label">Magnitude Spektri</span>
+              </label>
+              <label className="zc-checkbox-group">
+                <input
+                  type="checkbox"
+                  checked={showPhase}
+                  onChange={(e) => setShowPhase(e.target.checked)}
+                />
+                <span className="zc-checkbox-label">Kompleks Tekislik</span>
+              </label>
+              <label className="zc-checkbox-group">
+                <input
+                  type="checkbox"
+                  checked={showCorrelation}
+                  onChange={(e) => setShowCorrelation(e.target.checked)}
+                />
+                <span className="zc-checkbox-label">O'zaro Korrelyatsiya</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        {/* Statistics */}
+        <div className="zc-stats-grid">
+          <InfoCard
+            label="Magnitude"
+            value="1.000"
+            unit="|x_u(n)| = 1"
+            description="Barcha nuqtalar birlik aylanada joylashadi"
+          />
+          <InfoCard
+            label="Preambula Uzunligi"
+            value={L_RA}
+            unit={L_RALabel}
+            description="Qisqa yoki uzun preambula formati"
+          />
+          <InfoCard
+            label="Root Indeksi"
+            value={safeRootIndex}
+            unit={`1 ≤ u ≤ ${maxRootIndex}`}
+            description="Ortogonal bazani yaratuvchi ildiz"
+          />
+          <InfoCard
+            label="Maksimal Preambula"
+            value={maxPreambula}
+            unit={`⌊${L_RA}/13⌋`}
+            description="Bitta root-dan olinadigan preambulalar"
+          />
+        </div>
+
+        {/* Charts */}
+        <div className="zc-charts-grid">
+          {/* Magnitude Spectrum */}
+          {showMagnitude && (
+            <ChartCard title="Magnitude Spektri (Birinchi 50 nuqta)">
+              <ResponsiveContainer width="100%" height={240}>
+                <ComposedChart data={magnitudeData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
+                  <XAxis dataKey="n" tick={{ fontSize: 11 }} />
+                  <YAxis domain={[0, 1.3]} tick={{ fontSize: 11 }} />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: '#ffffff',
+                      border: '1px solid #e5e7eb',
+                      borderRadius: '6px',
+                    }}
+                    formatter={(v) => v.toFixed(3)}
+                  />
+                  <Bar dataKey="magnitude" fill="#3b82f6" radius={[2, 2, 0, 0]} />
+                  <ReferenceLine y={1.0} stroke="#10b981" strokeDasharray="4 4" />
+                </ComposedChart>
+              </ResponsiveContainer>
+            </ChartCard>
+          )}
+
+          {/* Complex Plane */}
+          {showPhase && (
+            <ChartCard title="Kompleks Tekislik (I/Q)">
+              <ResponsiveContainer width="100%" height={240}>
+                <ScatterChart margin={{ top: 10, right: 15, bottom: 10, left: -10 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                  <XAxis dataKey="real" type="number" domain={[-1.3, 1.3]} tick={{ fontSize: 11 }} />
+                  <YAxis dataKey="imag" type="number" domain={[-1.3, 1.3]} tick={{ fontSize: 11 }} />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: '#ffffff',
+                      border: '1px solid #e5e7eb',
+                      borderRadius: '6px',
+                    }}
+                  />
+                  <Scatter name="ZC Nuqtalari" data={complexPlaneData} fill="#8b5cf6" />
+                  <ReferenceLine x={0} stroke="#d1d5db" />
+                  <ReferenceLine y={0} stroke="#d1d5db" />
+                </ScatterChart>
+              </ResponsiveContainer>
+            </ChartCard>
+          )}
+
+          {/* Cross-Correlation */}
+          {showCorrelation && (
+            <ChartCard
+              title={`O'zaro Korrelyatsiya (u=${safeRootIndex} vs u=${
+                safeRootIndex === maxRootIndex ? safeRootIndex - 1 : safeRootIndex + 1
+              })`}
+            >
+              <ResponsiveContainer width="100%" height={240}>
+                <LineChart data={correlationData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
+                  <XAxis dataKey="lag" tick={{ fontSize: 11 }} />
+                  <YAxis tick={{ fontSize: 11 }} domain={[0, Math.max(0.2, theoreticalThreshold * 1.5)]} />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: '#ffffff',
+                      border: '1px solid #e5e7eb',
+                      borderRadius: '6px',
+                    }}
+                    formatter={(v) => v.toFixed(4)}
+                  />
+                  <Line type="monotone" dataKey="value" stroke="#ef4444" dot={false} strokeWidth={2} />
+                  <ReferenceLine
+                    y={theoreticalThreshold}
+                    stroke="#10b981"
+                    strokeDasharray="5 5"
+                    label={{
+                      value: `Chegara: ${theoreticalThreshold.toFixed(4)}`,
+                      fontSize: 10,
+                      fill: '#10b981',
+                      position: 'top',
+                    }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </ChartCard>
+          )}
+        </div>
+
+        {/* Empty State */}
+        {!showMagnitude && !showPhase && !showCorrelation && (
+          <div className="zc-empty-state">
+            <p className="zc-empty-state-text">
+              📊 Grafiklarni ko'rish uchun yuqorida checkbox'larni belgilang
+            </p>
+          </div>
+        )}
+
+        {/* Info Section */}
+        <div className="zc-info-section">
+          <h4 className="zc-info-title">📚 Zadoff-Chu Ketma-ketliklari Haqida</h4>
+          <p className="zc-info-text">
+            Zadoff-Chu ketma-ketliklari 3GPP 5G standartida <strong>PRACH</strong> (Physical Random Access Channel) preambulalarini yaratishda ishlatiladigan pseudotasodifiy ketma-ketliklar. Asosiy xossalari: <strong>barcha elementlarining magnitude 1 ga teng</strong> va <strong>turli root indekslari uchun past o'zaro korrelyatsiyaga ega</strong>.
           </p>
         </div>
-      </div>
-
-      {/* Controls Row */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        {/* Root Index Slider */}
-        <div>
-          <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
-            Root index u: <span style={{ color: 'var(--color-accent, #3b82f6)' }}>{rootIndex}</span>
-          </label>
-          <input
-            type="range"
-            min="1"
-            max="138"
-            value={rootIndex}
-            onChange={(e) => setRootIndex(parseInt(e.target.value))}
-            className="w-full h-2 rounded-lg appearance-none cursor-pointer"
-            style={{ accentColor: 'var(--color-accent, #3b82f6)' }}
-          />
-          <p className="text-xs mt-1" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>1-138 oraliqda</p>
-        </div>
-
-        {/* L_RA Select */}
-        <div>
-          <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--color-text-primary, #1f2937)' }}>L_RA tanlang</label>
-          <select
-            value={L_RA}
-            onChange={(e) => setL_RA(parseInt(e.target.value))}
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2"
-            style={{
-              backgroundColor: 'var(--color-card-bg, #ffffff)',
-              color: 'var(--color-text-primary, #1f2937)',
-              borderColor: 'var(--color-card-border, #e5e7eb)',
-              focusRingColor: 'var(--color-accent, #3b82f6)'
-            }}
-          >
-            <option value={139}>L_RA = 139 (Short preamble)</option>
-            <option value={839}>L_RA = 839 (Long preamble)</option>
-          </select>
-        </div>
-
-        {/* Checkboxes */}
-        <div>
-          <label className="block text-sm font-semibold mb-2" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Ko'rsatma</label>
-          <div className="space-y-2">
-            <label className="flex items-center">
-              <input
-                type="checkbox"
-                checked={showMagnitude}
-                onChange={(e) => setShowMagnitude(e.target.checked)}
-                className="w-4 h-4 rounded"
-                style={{ accentColor: 'var(--color-accent, #3b82f6)' }}
-              />
-              <span className="ml-2 text-sm" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Magnitude</span>
-            </label>
-            <label className="flex items-center">
-              <input
-                type="checkbox"
-                checked={showPhase}
-                onChange={(e) => setShowPhase(e.target.checked)}
-                className="w-4 h-4 rounded"
-                style={{ accentColor: 'var(--color-accent, #3b82f6)' }}
-              />
-              <span className="ml-2 text-sm" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Kompleks tekislik</span>
-            </label>
-            <label className="flex items-center">
-              <input
-                type="checkbox"
-                checked={showCorrelation}
-                onChange={(e) => setShowCorrelation(e.target.checked)}
-                className="w-4 h-4 rounded"
-                style={{ accentColor: 'var(--color-accent, #3b82f6)' }}
-              />
-              <span className="ml-2 text-sm" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Korrelyatsiya</span>
-            </label>
-          </div>
-        </div>
-      </div>
-
-      {/* Info Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-        <div className="rounded-lg border p-6 viz-box" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: 'var(--color-card-border, #e5e7eb)' }}>
-          <p className="text-xs font-medium mb-3" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>Magnitude xossasi</p>
-          <p className="text-3xl font-bold mb-3" style={{ color: 'var(--color-accent, #3b82f6)' }}>1.000</p>
-          <p className="text-xs" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>Konstantlik: |x_u(n)| = 1</p>
-        </div>
-
-        <div className="rounded-lg border p-6 viz-box" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: 'var(--color-card-border, #e5e7eb)' }}>
-          <p className="text-xs font-medium mb-3" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>Preambula uzunligi</p>
-          <p className="text-3xl font-bold mb-3" style={{ color: 'var(--color-accent, #3b82f6)' }}>L_RA = {L_RA}</p>
-          <p className="text-xs" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>{L_RA === 139 ? 'Qisqa' : 'Uzun'} preambula</p>
-        </div>
-
-        <div className="rounded-lg border p-6 viz-box" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: 'var(--color-card-border, #e5e7eb)' }}>
-          <p className="text-xs font-medium mb-3" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>Root indeksi</p>
-          <p className="text-3xl font-bold mb-3" style={{ color: 'var(--color-accent, #3b82f6)' }}>u = {rootIndex}</p>
-          <p className="text-xs" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>ZC ketma-ketlik tariflovchi</p>
-        </div>
-
-        <div className="rounded-lg border p-6 viz-box" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: 'var(--color-card-border, #e5e7eb)' }}>
-          <p className="text-xs font-medium mb-3" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>Maksimal preambula</p>
-          <p className="text-3xl font-bold mb-3" style={{ color: 'var(--color-accent, #3b82f6)' }}>{Math.floor(L_RA / 13)}</p>
-          <p className="text-xs" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>⌊L_RA / 13⌋ = {Math.floor(L_RA / 13)}</p>
-        </div>
-      </div>
-
-      {/* Charts Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-        {/* Magnitude Chart */}
-        {showMagnitude && (
-          <div className="viz-box rounded-lg border p-6" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: 'var(--color-card-border, #e5e7eb)' }}>
-            <h3 className="text-lg font-semibold mb-6" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Magnitude spektri</h3>
-            <ResponsiveContainer width="100%" height={200}>
-              <ComposedChart data={magnitudeData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                <XAxis dataKey="n" />
-                <YAxis domain={[0, 1.2]} />
-                <Tooltip formatter={(value) => value.toFixed(3)} />
-                <Bar dataKey="magnitude" fill="#3b82f6" />
-                <ReferenceLine y={1.0} stroke="#10b981" strokeDasharray="5 5" label="Konstanta = 1.0" />
-              </ComposedChart>
-            </ResponsiveContainer>
-          </div>
-        )}
-
-        {/* Complex Plane Chart */}
-        {showPhase && (
-          <div className="viz-box rounded-lg border p-6" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: 'var(--color-card-border, #e5e7eb)' }}>
-            <h3 className="text-lg font-semibold mb-6" style={{ color: 'var(--color-text-primary, #1f2937)' }}>Kompleks tekislik (I/Q)</h3>
-            <ResponsiveContainer width="100%" height={200}>
-              <ScatterChart
-                margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-                data={complexPlaneData}
-              >
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                <XAxis dataKey="real" type="number" domain={[-1.2, 1.2]} label={{ value: 'Real', position: 'right', offset: 5 }} />
-                <YAxis dataKey="imag" type="number" domain={[-1.2, 1.2]} label={{ value: 'Imaginary', angle: -90, position: 'insideLeft' }} />
-                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                <Scatter name="ZC nuqtalari" data={complexPlaneData} fill="#8b5cf6" />
-                <ReferenceLine x={0} stroke="#ccc" />
-                <ReferenceLine y={0} stroke="#ccc" />
-              </ScatterChart>
-            </ResponsiveContainer>
-          </div>
-        )}
-
-        {/* Correlation Chart */}
-        {showCorrelation && (
-          <div className="viz-box rounded-lg border p-6 lg:col-span-2" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)', borderColor: 'var(--color-card-border, #e5e7eb)' }}>
-            <h3 className="text-lg font-semibold mb-6" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
-              O'zaro korrelyatsiya: u={rootIndex} va u={rootIndex + 1}
-            </h3>
-            <ResponsiveContainer width="100%" height={200}>
-              <LineChart data={correlationData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                <XAxis dataKey="lag" />
-                <YAxis />
-                <Tooltip formatter={(value) => value.toFixed(4)} />
-                <Legend />
-                <Line
-                  type="monotone"
-                  dataKey="value"
-                  stroke="#ef4444"
-                  name="Korrelyatsiya"
-                  isAnimationActive={false}
-                />
-                <ReferenceLine
-                  y={theoreticalThreshold}
-                  stroke="#10b981"
-                  strokeDasharray="5 5"
-                  label={`Teorik chegara: 1/√L_RA = ${theoreticalThreshold.toFixed(4)}`}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        )}
-
-        {/* Empty state when no charts selected */}
-        {!showMagnitude && !showPhase && !showCorrelation && (
-          <div className="lg:col-span-2 rounded-lg border-2 border-dashed p-8 text-center" style={{ backgroundColor: 'var(--color-bg-secondary, #f9fafb)', borderColor: 'var(--color-card-border, #e5e7eb)' }}>
-            <p style={{ color: 'var(--color-text-secondary, #6b7280)' }}>Grafikni ko'rsatish uchun yuqorida checkbox-larni belgilang</p>
-          </div>
-        )}
-      </div>
-
-      {/* Information Box */}
-      <div className="border-l-4 p-6 rounded" style={{ backgroundColor: 'var(--color-bg-secondary, #f9fafb)', borderLeftColor: 'var(--color-accent, #3b82f6)' }}>
-        <p className="text-sm" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
-          <span className="font-semibold">Zadoff-Chu ketma-ketliklari</span> — bu 3GPP 5G standartida PRACH (Physical Random Access Channel) preambulalarini yaratishda ishlatiladigan
-          pseudotasodifiy ketma-ketliklar. Ularning asosiy xossasi: barcha elementlarining magnitude 1 ga teng va turli root indekslari
-          uchun past o'zaro korrelyatsiyaga ega.
-        </p>
       </div>
     </div>
   );

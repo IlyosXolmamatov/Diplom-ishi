@@ -8,6 +8,7 @@ import {
   BookOpen,
 } from 'lucide-react';
 import ZCSequenceVisualizer from '../components/ZCSequenceVisualizer';
+import '../pages/Home.css';
 
 export default function Home() {
   const features = [
@@ -69,22 +70,22 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--app-bg, #ffffff)' }}>
+    <div className="home-container">
       {/* Hero Section */}
-      <section className="page-container pt-20 pb-32" style={{ marginTop: '80px' }}>
-        <div className="main-container text-center">
-          <h1 className="text-5xl sm:text-6xl font-bold mb-6" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
+      <section className="hero-section">
+        <div className="main-container">
+          <h1 className="hero-title">
             5G NR PRACH Tahlil Tizimi
           </h1>
-          <p className="text-xl mb-12 max-w-3xl mx-auto" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>
+          <p className="hero-subtitle">
             Preambula asosidagi tasodifiy kirish usullarini hisoblash va vizualizatsiya
           </p>
         </div>
       </section>
 
       {/* Statistics Row */}
-      <section className="py-20 mb-32 page-container" style={{ backgroundColor: 'var(--color-bg-secondary, #f3f4f6)' }}>
-        <div className="main-container">
+      <section className="statistics-section">
+        <div className="statistics-container">
           <div className="info-grid">
             {statistics.map((stat, index) => (
               <div key={index} className="info-box">
@@ -97,24 +98,24 @@ export default function Home() {
       </section>
 
       {/* Feature Cards */}
-      <section className="section page-container py-32">
-        <div className="main-container">
-          <h2 className="section-title text-center" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
+      <section className="features-section">
+        <div className="features-container">
+          <h2 className="section-title">
             Xususiyatlar
           </h2>
           <div className="feature-grid">
             {features.map((feature) => {
               const Icon = feature.icon;
               return (
-                <div key={feature.id} className="feature-card" style={{ backgroundColor: 'var(--color-card-bg, #ffffff)' }}>
+                <div key={feature.id} className="feature-card">
                   <div className="icon-container">
                     <Icon className="w-6 h-6" style={{ color: 'var(--color-accent, #3b82f6)' }} />
                   </div>
                   <div className="content-wrapper">
-                    <h3 className="card-title" style={{ color: 'var(--color-text-primary, #1f2937)' }}>
+                    <h3 className="card-title">
                       {feature.title}
                     </h3>
-                    <p className="card-description" style={{ color: 'var(--color-text-secondary, #6b7280)' }}>
+                    <p className="card-description">
                       {feature.description}
                     </p>
                     <Link
@@ -132,8 +133,8 @@ export default function Home() {
       </section>
 
       {/* Zadoff-Chu Sequence Visualizer */}
-      <section className="section page-container py-32" style={{ backgroundColor: 'var(--color-bg-secondary, #f3f4f6)' }}>
-        <div className="main-container">
+      <section className="visualizer-section">
+        <div className="visualizer-container">
           <ZCSequenceVisualizer />
         </div>
       </section>

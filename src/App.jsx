@@ -25,15 +25,15 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="flex flex-col min-h-screen bg-white" style={{ backgroundColor: 'var(--app-bg, #ffffff)' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'var(--app-bg, #ffffff)' }}>
         <Navbar />
-        <main className="grow pt-48 pb-20" style={{ backgroundColor: 'var(--app-bg, #ffffff)' }}>
+        <main style={{ flex: 1, paddingTop: '192px', paddingBottom: '80px', backgroundColor: 'var(--app-bg, #ffffff)' }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/aloha" element={<AlohaCalculator />} />
             <Route path="/prach" element={<PRACHAnalyzer />} />
             <Route path="/latency" element={<LatencyCalculator />} />
-            <Route path="/grantfree" element={<GrantFreeRA />} />
+            <Route path="/grant-free" element={<GrantFreeRA />} />
             <Route path="/comparison" element={<Comparison />} />
           </Routes>
         </main>

@@ -11,6 +11,7 @@ import {
   ResponsiveContainer,
   ReferenceLine,
 } from 'recharts';
+import './BurstTrafficSimulator.css';
 
 function lgamma(z) {
   const g = 7;
@@ -41,11 +42,13 @@ export default function BurstTrafficSimulator() {
   const [numDevices, setNumDevices] = useState(1000);
   const [burstDuration, setBurstDuration] = useState(100);
   const [alpha, setAlpha] = useState(2);
-  const [beta, setBeta] = useState(8);
-  const [N, setN] = useState(64);
+  const [speed, setSpeed] = useState(1);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSlot, setCurrentSlot] = useState(0);
-  const [speed, setSpeed] = useState(1);
+
+  // Constants for beta distribution and preamble count
+  const beta = 8;
+  const N = 64;
 
   // Generate slots data
   const slots = useMemo(() => {
@@ -89,7 +92,7 @@ export default function BurstTrafficSimulator() {
   );
 
   // Calculate recommended ACB
-  const recommendedACB = useMemo(() => {
+  const recommendedACB = (() => {
     for (let p = 0.01; p <= 1; p += 0.01) {
       const collisionAtPeak = (1 - Math.exp((-maxArrivals * p) / N)) * 100;
       if (collisionAtPeak < 20) {
@@ -97,7 +100,7 @@ export default function BurstTrafficSimulator() {
       }
     }
     return '1.00';
-  }, [maxArrivals, N]);
+  })();
 
   // Animation loop
   useEffect(() => {
@@ -121,17 +124,17 @@ export default function BurstTrafficSimulator() {
   }));
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-10 mb-16">
+    <div className="burst-container">
       {/* Title */}
-      <h2 className="text-3xl font-bold text-gray-900 mb-8">
+      <h2 className="burst-title">
         IoT Burst Trafik Simulyatsiyasi (Alarm Ssenariysi)
       </h2>
 
       {/* Controls */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+      <div className="burst-controls">
         {/* Devices slider */}
-        <div className="bg-blue-50 p-4 rounded-lg">
-          <label className="text-sm font-semibold text-gray-700 block mb-2">
+        <div className="control-box control-box-blue">
+          <label className="control-label">
             Qurilmalar soni: {numDevices}
           </label>
           <input
@@ -141,14 +144,14 @@ export default function BurstTrafficSimulator() {
             step="100"
             value={numDevices}
             onChange={(e) => setNumDevices(Number(e.target.value))}
-            className="w-full"
+            className="control-input"
           />
-          <p className="text-xs text-gray-600 mt-2">100-5000</p>
+          <p className="control-note">100-5000</p>
         </div>
 
         {/* Burst duration slider */}
-        <div className="bg-green-50 p-4 rounded-lg">
-          <label className="text-sm font-semibold text-gray-700 block mb-2">
+        <div className="control-box control-box-green">
+          <label className="control-label">
             Burst davomiyligi (ms): {burstDuration}
           </label>
           <input
@@ -158,14 +161,14 @@ export default function BurstTrafficSimulator() {
             step="10"
             value={burstDuration}
             onChange={(e) => setBurstDuration(Number(e.target.value))}
-            className="w-full"
+            className="control-input"
           />
-          <p className="text-xs text-gray-600 mt-2">10-500</p>
+          <p className="control-note">10-500</p>
         </div>
 
         {/* Alpha (intensity) slider */}
-        <div className="bg-purple-50 p-4 rounded-lg">
-          <label className="text-sm font-semibold text-gray-700 block mb-2">
+        <div className="control-box control-box-purple">
+          <label className="control-label">
             Burst intensivligi α: {alpha.toFixed(1)}
           </label>
           <input
@@ -175,20 +178,20 @@ export default function BurstTrafficSimulator() {
             step="0.5"
             value={alpha}
             onChange={(e) => setAlpha(Number(e.target.value))}
-            className="w-full"
+            className="control-input"
           />
-          <p className="text-xs text-gray-600 mt-2">1-10</p>
+          <p className="control-note">1-10</p>
         </div>
 
         {/* Speed select */}
-        <div className="bg-orange-50 p-4 rounded-lg">
-          <label className="text-sm font-semibold text-gray-700 block mb-2">
+        <div className="control-box control-box-orange">
+          <label className="control-label">
             Simulyatsiya tezligi
           </label>
           <select
             value={speed}
             onChange={(e) => setSpeed(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="select-field"
           >
             <option value={1}>1x (Normal)</option>
             <option value={2}>2x (Tez)</option>
@@ -197,14 +200,10 @@ export default function BurstTrafficSimulator() {
         </div>
 
         {/* Play/Pause button */}
-        <div className="flex items-end">
+        <div className="play-button-container">
           <button
             onClick={() => setIsPlaying(!isPlaying)}
-            className={`w-full px-4 py-3 rounded-lg font-semibold text-white transition-colors ${
-              isPlaying
-                ? 'bg-red-600 hover:bg-red-700'
-                : 'bg-blue-600 hover:bg-blue-700'
-            }`}
+            className={`play-btn ${isPlaying ? 'play-btn-active' : 'play-btn-inactive'}`}
           >
             {isPlaying ? 'Toxtash' : 'Boshlash'}
           </button>
@@ -212,37 +211,37 @@ export default function BurstTrafficSimulator() {
       </div>
 
       {/* Peak Info Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
-          <p className="text-xs text-gray-600 mb-1">Max qabul (slotda)</p>
-          <p className="text-2xl font-bold text-blue-600">{maxArrivals}</p>
-          <p className="text-xs text-gray-600 mt-2">Qurilma/slot</p>
+      <div className="metric-cards">
+        <div className="metric-card metric-card-blue">
+          <p className="metric-label">Max qabul (slotda)</p>
+          <p className="metric-value metric-value-blue">{maxArrivals}</p>
+          <p className="metric-unit">Qurilma/slot</p>
         </div>
 
-        <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded">
-          <p className="text-xs text-gray-600 mb-1">Max kolliziya %</p>
-          <p className="text-2xl font-bold text-red-600">
+        <div className="metric-card metric-card-red">
+          <p className="metric-label">Max kolliziya %</p>
+          <p className="metric-value metric-value-red">
             {maxCollision.toFixed(1)}%
           </p>
-          <p className="text-xs text-gray-600 mt-2">Pik qiymat</p>
+          <p className="metric-unit">Pik qiymat</p>
         </div>
 
-        <div className="bg-green-50 border-l-4 border-green-500 p-4 rounded">
-          <p className="text-xs text-gray-600 mb-1">Pik slot</p>
-          <p className="text-2xl font-bold text-green-600">{peakSlot}</p>
-          <p className="text-xs text-gray-600 mt-2">Slot raqami</p>
+        <div className="metric-card metric-card-green">
+          <p className="metric-label">Pik slot</p>
+          <p className="metric-value metric-value-green">{peakSlot}</p>
+          <p className="metric-unit">Slot raqami</p>
         </div>
 
-        <div className="bg-purple-50 border-l-4 border-purple-500 p-4 rounded">
-          <p className="text-xs text-gray-600 mb-1">Jami qurilmalar</p>
-          <p className="text-2xl font-bold text-purple-600">{numDevices}</p>
-          <p className="text-xs text-gray-600 mt-2">IoT cihazlar</p>
+        <div className="metric-card metric-card-purple">
+          <p className="metric-label">Jami qurilmalar</p>
+          <p className="metric-value metric-value-purple">{numDevices}</p>
+          <p className="metric-unit">IoT cihazlar</p>
         </div>
       </div>
 
       {/* Animated Chart */}
-      <div className="bg-gray-50 rounded-lg p-6 mb-8">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+      <div className="chart-section">
+        <h3 className="chart-title">
           Qabul va Kolliziya Dinamikasi
         </h3>
         <ResponsiveContainer width="100%" height={300}>
@@ -283,26 +282,26 @@ export default function BurstTrafficSimulator() {
       </div>
 
       {/* Summary Stats */}
-      <div className="bg-linear-to-r from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-200">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Tahlil Natijalari</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div>
-            <p className="text-sm text-gray-600 mb-1">Ortacha kolliziya:</p>
-            <p className="text-2xl font-bold text-blue-600">{avgCollision.toFixed(1)}%</p>
+      <div className="summary-section">
+        <h3 className="summary-title">Tahlil Natijalari</h3>
+        <div className="summary-stats">
+          <div className="summary-stat">
+            <p className="summary-stat-label">Ortacha kolliziya:</p>
+            <p className="summary-stat-value summary-stat-value-blue">{avgCollision.toFixed(1)}%</p>
           </div>
 
-          <div>
-            <p className="text-sm text-gray-600 mb-1">Kritik slotlar (&gt;50%):</p>
-            <p className="text-2xl font-bold text-orange-600">{highSlots} ta</p>
+          <div className="summary-stat">
+            <p className="summary-stat-label">Kritik slotlar (&gt;50%):</p>
+            <p className="summary-stat-value summary-stat-value-orange">{highSlots} ta</p>
           </div>
 
-          <div>
-            <p className="text-sm text-gray-600 mb-1">Tavsiya p_ACB (20% collision):</p>
-            <p className="text-2xl font-bold text-green-600">{recommendedACB}</p>
+          <div className="summary-stat">
+            <p className="summary-stat-label">Tavsiya p_ACB (20% collision):</p>
+            <p className="summary-stat-value summary-stat-value-green">{recommendedACB}</p>
           </div>
         </div>
 
-        <p className="text-sm text-gray-700 mt-4 leading-relaxed">
+        <p className="summary-text">
           <strong>Tafsir:</strong> Simulyatsiya shuni ko'rsatadiki, {numDevices} ta qurilmadan {highSlots} ta slot
           50% dan ortiq kolliziyaga ega. ACB mexanizmini {recommendedACB} qiymatiga o'rnatish orqali pik
           kolliziyani 20% ga qisqartirish mumkin.
